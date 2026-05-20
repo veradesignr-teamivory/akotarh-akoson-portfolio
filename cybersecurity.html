@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cybersecurity | Akotarh Akoson — Senior Cybersecurity Engineer</title>
+<meta name="description" content="Akotarh Akoson's cybersecurity career — Fortune 500 engineer, U.S. Federal Government contracts, threat detection, security operations, and enterprise security leadership."/>
+<meta name="author" content="Akotarh Akoson"/>
+<meta name="robots" content="index, follow"/>
+<meta name="keywords" content="Akotarh Akoson cybersecurity, senior cybersecurity engineer, Fortune 500, SOC, SIEM, threat detection, vulnerability management, zero trust, cloud security, FedRAMP"/>
+<link rel="canonical" href="https://akotarhakoson.com/cybersecurity"/>
+<meta property="og:title" content="Cybersecurity | Akotarh Akoson — Senior Cybersecurity Engineer"/>
+<meta property="og:description" content="Fortune 500 Senior Cybersecurity Engineer with U.S. Federal Government contract experience. Expert in threat detection, SOC, cloud security, and enterprise defense."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://akotarhakoson.com/cybersecurity"/>
+<meta property="og:site_name" content="Akotarh Akoson"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Cybersecurity — Akotarh Akoson"/>
+<meta name="twitter:description" content="Fortune 500 Senior Cybersecurity Engineer. Threat detection, SOC operations, cloud security, and enterprise vulnerability management."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300..600;1,9..40,300..600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#FFFFFF;color:#111827;font-family:'DM Sans',system-ui,sans-serif;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}ul{list-style:none}button{cursor:pointer;font-family:inherit;border:none;background:none}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#F0F0F0}::-webkit-scrollbar-thumb{background:linear-gradient(var(--c),var(--p));border-radius:4px}
+::selection{background:rgba(27,140,58,.18)}
+:root{
+  --c:#1B8C3A;--p:#166534;--g:#22C55E;--o:#15803D;
+  --bg0:#FFFFFF;--bg1:#F8FAF9;--bg2:#F0F5F1;--bg3:#E8F0EA;
+  --glass:rgba(255,255,255,.85);
+  --t1:#111827;--t2:#4B5563;--t3:#6B7280;
+  --border:rgba(0,0,0,.08);--border-c:rgba(27,140,58,0.25);--border-p:rgba(22,101,52,0.25);
+  --glow-c:0 0 40px rgba(27,140,58,.1);--glow-p:0 0 40px rgba(22,101,52,0.2);
+  --ease:cubic-bezier(0.4,0,0.2,1);--t:.35s;
+}
+.W{max-width:1200px;margin:0 auto;padding:0 32px}.S{padding:120px 0;position:relative}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:700;line-height:1.1;letter-spacing:-.03em}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--c);margin-bottom:20px}
+.eyebrow i{width:30px;height:1px;background:linear-gradient(90deg,var(--c),transparent)}
+.gt{background:linear-gradient(135deg,var(--c) 0%,#22C55E 40%,var(--p) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;letter-spacing:.04em;padding:15px 32px;border-radius:10px;transition:all var(--t) var(--ease)}
+.btn-prim{background:linear-gradient(135deg,var(--c),#22C55E);color:#FFF;box-shadow:0 4px 24px rgba(27,140,58,.28)}
+.btn-prim:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(27,140,58,.5)}
+.btn-sec{background:rgba(0,0,0,.02);border:1px solid rgba(0,0,0,.12);color:var(--t1)}
+.btn-sec:hover{background:rgba(27,140,58,.08);border-color:var(--border-c);color:var(--c)}
+.btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:100px}
+.chip-c{background:rgba(27,140,58,.1);border:1px solid rgba(27,140,58,.22);color:var(--c)}
+.chip-p{background:rgba(22,101,52,.1);border:1px solid rgba(22,101,52,.22);color:var(--p)}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:24px 0;transition:padding var(--t) var(--ease),background var(--t) var(--ease)}
+.nav.scrolled{padding:14px 0;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav .W{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.03em}
+.nav-logo em{color:var(--c);font-style:normal}
+.nav-logo span{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);display:block;margin-top:-4px}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--t2);letter-spacing:.02em;transition:color var(--t);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--c),var(--p));transition:width var(--t)}
+.nav-links a:hover,.nav-links a.active{color:var(--t1)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-r{display:flex;align-items:center;gap:16px}
+.nav-cta{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:10px 22px;border:1px solid var(--border-c);color:var(--c);border-radius:8px;letter-spacing:.04em;transition:all var(--t)}
+.nav-cta:hover{background:var(--c);color:#FFF}
+.hbg{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer;z-index:1001}
+.hbg span{width:22px;height:2px;background:#111827;border-radius:2px;display:block;transition:transform .4s var(--ease),opacity .3s}
+.hbg.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob{position:fixed;inset:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;clip-path:circle(0% at calc(100% - 40px) 36px);transition:clip-path .6s cubic-bezier(.4,0,.0,1);pointer-events:none}
+.mob.open{clip-path:circle(150% at calc(100% - 40px) 36px);pointer-events:auto}
+.mob-links{display:flex;flex-direction:column;align-items:center;gap:24px}
+.mob-links a{font-family:'Syne',sans-serif;font-size:32px;font-weight:700;color:var(--t3);transition:color .3s,transform .4s,opacity .4s;opacity:0;transform:translateY(20px)}
+.mob.open .mob-links a{opacity:1;transform:translateY(0)}
+.mob.open .mob-links a:nth-child(1){transition-delay:.15s}
+.mob.open .mob-links a:nth-child(2){transition-delay:.2s}
+.mob.open .mob-links a:nth-child(3){transition-delay:.25s}
+.mob.open .mob-links a:nth-child(4){transition-delay:.3s}
+.mob.open .mob-links a:nth-child(5){transition-delay:.35s}
+.mob.open .mob-links a:nth-child(6){transition-delay:.4s}
+.mob.open .mob-links a:nth-child(7){transition-delay:.45s}
+.mob-links a:hover{color:var(--c)}
+.mob-cta{margin-top:40px;opacity:0;transform:translateY(16px);transition:all .4s var(--ease);transition-delay:0s}
+.mob.open .mob-cta{opacity:1;transform:translateY(0);transition-delay:.5s}
+.mob-social{display:flex;gap:16px;margin-top:32px;opacity:0;transition:opacity .4s;transition-delay:0s}
+.mob.open .mob-social{opacity:1;transition-delay:.55s}
+.mob-social a{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all .3s}
+.mob-social a:hover{border-color:var(--c);color:var(--c);background:rgba(27,140,58,.06)}
+.mob-social svg{width:18px;height:18px}
+/* PAGE HERO */
+.page-hero{padding:160px 0 100px;position:relative;overflow:hidden}
+.ph-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(27,140,58,.08),transparent 60%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(22,101,52,.05),transparent 60%),#FFFFFF}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(27,140,58,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(27,140,58,.018) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,#000,transparent 100%)}
+.ph-orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--t3);margin-bottom:28px}
+.breadcrumb a{color:var(--t3);transition:color var(--t)}
+.breadcrumb a:hover{color:var(--c)}
+.page-hero .W{position:relative;z-index:2}
+.page-hero h1{font-size:clamp(44px,6vw,72px);color:var(--t1);margin-bottom:20px}
+.page-hero-desc{font-size:18px;color:var(--t2);max-width:640px;line-height:1.85;margin-bottom:36px}
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-item{padding:36px 24px;text-align:center;border-right:1px solid var(--border);transition:background var(--t)}
+.stat-item:last-child{border-right:none}
+.stat-item:hover{background:rgba(27,140,58,.03)}
+.stat-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;letter-spacing:-.03em;background:linear-gradient(135deg,var(--c),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.stat-lbl{font-size:12px;color:var(--t3);line-height:1.4}
+/* EXPERTISE CARDS */
+.expertise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ex-card{background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:36px 30px;position:relative;overflow:hidden;transition:all var(--t) var(--ease)}
+.ex-card::before{content:'';position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(27,140,58,.4),rgba(22,101,52,.2),transparent 60%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity var(--t)}
+.ex-card:hover::before{opacity:1}
+.ex-card:hover{transform:translateY(-6px);box-shadow:0 32px 80px rgba(0,0,0,.06);border-color:transparent}
+.ex-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c),var(--p));opacity:0;transition:opacity var(--t)}
+.ex-card:hover::after{opacity:1}
+.ex-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px}
+.ex-icon.cyan{background:rgba(27,140,58,.1);border:1px solid rgba(27,140,58,.2)}
+.ex-icon.purp{background:rgba(22,101,52,.1);border:1px solid rgba(22,101,52,.2)}
+.ex-icon.grn{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.18)}
+.ex-icon.org{background:rgba(22,101,52,.1);border:1px solid rgba(22,101,52,.18)}
+.ex-card h3{font-size:18px;font-weight:700;color:var(--t1);margin-bottom:12px;letter-spacing:-.02em}
+.ex-card p{font-size:14px;color:var(--t2);line-height:1.8;margin-bottom:20px}
+.ex-tags{display:flex;flex-wrap:wrap;gap:6px}
+.etag{font-size:11px;padding:4px 11px;background:rgba(27,140,58,.06);border:1px solid rgba(27,140,58,.1);border-radius:100px;color:var(--t2)}
+/* TECH STACK */
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tech-item{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:20px 16px;text-align:center;transition:all var(--t)}
+.tech-item:hover{border-color:var(--border-c);background:rgba(27,140,58,.04);transform:translateY(-3px)}
+.tech-icon{font-size:28px;margin-bottom:10px}
+.tech-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.tech-cat{font-size:11px;color:var(--t3)}
+/* APPROACH SECTION */
+.approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ap-item{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:28px;transition:all var(--t);display:flex;gap:20px;align-items:flex-start}
+.ap-item:hover{border-color:var(--border-c)}
+.ap-num{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--c);opacity:.5;flex-shrink:0;min-width:28px;padding-top:2px;letter-spacing:.06em}
+.ap-item h4{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.ap-item p{font-size:13px;color:var(--t2);line-height:1.75}
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,rgba(27,140,58,.06),rgba(22,101,52,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 0;text-align:center}
+.cta-band h2{font-size:clamp(26px,4vw,44px);color:var(--t1);margin-bottom:16px}
+.cta-band p{font-size:17px;color:var(--t2);max-width:520px;margin:0 auto 36px;line-height:1.8}
+/* SEC HEADER */
+.sec-hd{margin-bottom:64px}
+.sec-hd.center{text-align:center}
+.sec-hd.center .eyebrow{justify-content:center}
+.sec-hd h2{font-size:clamp(30px,4vw,50px);color:var(--t1);margin-bottom:16px}
+.sec-hd p{font-size:17px;color:var(--t2);max-width:580px;line-height:1.8}
+.sec-hd.center p{margin:0 auto}
+/* HIGHLIGHT BOX */
+.highlight-box{background:rgba(27,140,58,.04);border:1px solid rgba(27,140,58,.12);border-radius:16px;padding:32px}
+.highlight-box p{font-size:15px;color:var(--t2);line-height:1.9}
+.highlight-box strong{color:var(--t1)}
+/* FOOTER */
+.footer{background:var(--bg1);position:relative;overflow:hidden;padding:0 0 36px}
+.footer-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:1px;background:linear-gradient(90deg,transparent,var(--c),var(--p),transparent);opacity:.4}
+.footer-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(135deg,rgba(27,140,58,.05),rgba(22,101,52,.03));border:1px solid rgba(27,140,58,.15);border-radius:20px;padding:36px 40px;margin-bottom:64px;margin-top:72px;flex-wrap:wrap}
+.footer-cta h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--t1);margin-bottom:6px}
+.footer-cta p{font-size:14px;color:var(--t2)}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand-col{max-width:300px}
+.footer-brand{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:4px}
+.footer-brand em{color:var(--c);font-style:normal}
+.footer-tagline{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:16px;font-family:'Syne',sans-serif}
+.footer-desc{font-size:14px;color:var(--t3);line-height:1.85;margin-bottom:24px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all .3s var(--ease)}
+.footer-social a:hover{border-color:var(--c);color:var(--c);background:rgba(27,140,58,.06);transform:translateY(-2px)}
+.fcol h5{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:18px}
+.fcol ul li{margin-bottom:12px}
+.fcol a{font-size:14px;color:var(--t3);transition:color var(--t),padding-left var(--t)}
+.fcol a:hover{color:var(--c);padding-left:4px}
+.footer-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent);margin-bottom:24px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:13px;color:var(--t3)}
+.footer-legal{display:flex;align-items:center;gap:20px}
+.footer-legal a{font-size:12px;color:var(--t3);transition:color var(--t)}
+.footer-legal a:hover{color:var(--t2)}
+.footer-top{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--c) !important;font-weight:600;font-family:'Syne',sans-serif}
+.footer-top:hover{gap:6px}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:9999}
+@media(max-width:1000px){.expertise-grid{grid-template-columns:1fr 1fr}.tech-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.nav-links,.nav-cta{display:none}.hbg{display:flex}.stats-bar{grid-template-columns:1fr 1fr}.approach-grid{grid-template-columns:1fr}.S{padding:80px 0}}
+@media(max-width:640px){.S{padding:64px 0}.expertise-grid{grid-template-columns:1fr}.stats-bar{grid-template-columns:1fr}.footer-g{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:16px;text-align:center}.W{padding:0 20px}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="W">
+    <a href="index.html" class="nav-logo">Akotarh<em>.</em><span>Official Portfolio</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="cybersecurity.html" class="active">Cybersecurity</a></li>
+      <li><a href="civic-leadership.html">Civic Leadership</a></li>
+      <li><a href="ventures.html">Ventures</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="media.html">Media</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="contact.html" class="nav-cta">Contact</a>
+      <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <div class="mob-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="cybersecurity.html">Cybersecurity</a>
+    <a href="civic-leadership.html">Civic Leadership</a><a href="ventures.html">Ventures</a>
+    <a href="insights.html">Insights</a><a href="media.html">Media</a>
+  </div>
+  <a href="contact.html" class="btn btn-prim mob-cta">Book Consultation</a>
+  <div class="mob-social">
+    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg></a>
+    <a href="mailto:contact@akotarhakoson.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+  </div>
+</div>
+<section class="page-hero">
+  <div class="ph-bg"></div><div class="ph-grid"></div>
+  <div class="ph-orb" style="width:500px;height:500px;background:rgba(27,140,58,.05);top:-200px;right:-100px"></div>
+  <div class="ph-orb" style="width:300px;height:300px;background:rgba(22,101,52,.04);bottom:0;left:0"></div>
+  <div class="W">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span style="opacity:.4">/</span><span>Cybersecurity</span></nav>
+    <div class="chip chip-c" style="margin-bottom:20px">Security Operations · Enterprise Defense</div>
+    <h1>Cybersecurity <span class="gt">Expertise</span></h1>
+    <p class="page-hero-desc">Senior Cybersecurity Engineer protecting Fortune 500 infrastructure, with a track record spanning U.S. Federal Government contracts, enterprise security operations, and threat intelligence leadership.</p>
+    <div class="btns">
+      <a href="contact.html" class="btn btn-prim">Security Consultation</a>
+      <a href="ventures.html" class="btn btn-sec">America CyberSquad</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item reveal"><div class="stat-num">10+</div><div class="stat-lbl">Years in Cybersecurity</div></div>
+  <div class="stat-item reveal d1"><div class="stat-num">F500</div><div class="stat-lbl">Fortune 500 Experience</div></div>
+  <div class="stat-item reveal d2"><div class="stat-num">Fed</div><div class="stat-lbl">U.S. Federal Gov. Contracts</div></div>
+  <div class="stat-item reveal d3"><div class="stat-num">3</div><div class="stat-lbl">Ventures in Tech & Security</div></div>
+</div>
+
+<section class="S">
+  <div class="W">
+    <div class="sec-hd reveal">
+      <div class="eyebrow"><i></i>Core Competencies</div>
+      <h2>Areas of <span class="gt">Deep Expertise</span></h2>
+      <p>A comprehensive security practitioner with hands-on experience across the full enterprise security spectrum — from threat detection to governance.</p>
+    </div>
+    <div class="expertise-grid">
+      <div class="ex-card reveal">
+        <div class="ex-icon cyan"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Security Operations Center</h3>
+        <p>Leading 24/7 threat monitoring, alert triage, and incident response across enterprise environments. Proficient in SIEM platforms, threat hunting, and adversary behavior analysis using MITRE ATT&CK frameworks.</p>
+        <div class="ex-tags"><span class="etag">SIEM</span><span class="etag">SOC</span><span class="etag">Splunk</span><span class="etag">Threat Hunting</span><span class="etag">MITRE ATT&CK</span></div>
+      </div>
+      <div class="ex-card reveal d1">
+        <div class="ex-icon purp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <h3>Vulnerability Management</h3>
+        <p>End-to-end vulnerability lifecycle management: discovery, risk prioritization, remediation coordination, and continuous improvement. Experienced with enterprise-scale scanning and CVE analysis for complex hybrid environments.</p>
+        <div class="ex-tags"><span class="etag">Nessus</span><span class="etag">Qualys</span><span class="etag">CVE Analysis</span><span class="etag">Risk Scoring</span><span class="etag">Patch Management</span></div>
+      </div>
+      <div class="ex-card reveal d2">
+        <div class="ex-icon grn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div>
+        <h3>Cloud Security Architecture</h3>
+        <p>Securing cloud-native and hybrid infrastructure across AWS and Azure. Designing zero-trust architectures, managing IAM policies, enforcing cloud security posture, and ensuring compliance with CSP-specific frameworks.</p>
+        <div class="ex-tags"><span class="etag">AWS Security</span><span class="etag">Azure Defender</span><span class="etag">Zero Trust</span><span class="etag">IAM</span><span class="etag">CSPM</span></div>
+      </div>
+      <div class="ex-card reveal">
+        <div class="ex-icon org"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></div>
+        <h3>Governance, Risk & Compliance</h3>
+        <p>Building and maintaining security programs aligned with NIST CSF, ISO 27001, FedRAMP, HIPAA, and SOC 2. Conducting risk assessments, policy development, and audit preparation for regulated industries.</p>
+        <div class="ex-tags"><span class="etag">NIST CSF</span><span class="etag">ISO 27001</span><span class="etag">FedRAMP</span><span class="etag">SOC 2</span><span class="etag">HIPAA</span></div>
+      </div>
+      <div class="ex-card reveal d1">
+        <div class="ex-icon cyan"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
+        <h3>Identity & Access Management</h3>
+        <p>Designing and enforcing least-privilege access across enterprise environments. Implementing MFA, PAM solutions, SSO integration, and identity governance frameworks to reduce the attack surface.</p>
+        <div class="ex-tags"><span class="etag">PAM</span><span class="etag">MFA</span><span class="etag">SSO</span><span class="etag">CyberArk</span><span class="etag">Okta</span></div>
+      </div>
+      <div class="ex-card reveal d2">
+        <div class="ex-icon purp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3>Digital Forensics & IR</h3>
+        <p>Leading incident response investigations, conducting forensic analysis of compromised systems, and producing executive-level incident reports. Experience with both on-premises and cloud forensics in enterprise settings.</p>
+        <div class="ex-tags"><span class="etag">DFIR</span><span class="etag">Forensic Analysis</span><span class="etag">Malware Analysis</span><span class="etag">Chain of Custody</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="S" style="background:var(--bg1)">
+  <div class="W">
+    <div class="sec-hd center reveal">
+      <div class="eyebrow"><i></i>Tools & Technologies</div>
+      <h2>Technical <span class="gt">Stack</span></h2>
+      <p>Enterprise-grade tools and platforms deployed across Fortune 500 and Federal Government environments.</p>
+    </div>
+    <div class="tech-grid reveal">
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div><div class="tech-name">Splunk</div><div class="tech-cat">SIEM / Analytics</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></div><div class="tech-name">CrowdStrike</div><div class="tech-cat">EDR / Threat Intel</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="tech-name">Palo Alto</div><div class="tech-cat">Network Security</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div><div class="tech-name">Microsoft Sentinel</div><div class="tech-cat">Cloud SIEM</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="tech-name">Tenable / Nessus</div><div class="tech-cat">Vulnerability Mgmt</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg></div><div class="tech-name">CyberArk</div><div class="tech-cat">PAM</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg></div><div class="tech-name">Azure AD / Entra</div><div class="tech-cat">Identity</div></div>
+      <div class="tech-item"><div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><div class="tech-name">Zscaler</div><div class="tech-cat">Zero Trust / SASE</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="S">
+  <div class="W">
+    <div class="sec-hd reveal">
+      <div class="eyebrow"><i></i>Professional Experience</div>
+      <h2>Where He's <span class="gt">Done the Work</span></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px" class="reveal">
+      <div class="highlight-box">
+        <p style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg> Fortune 500 — Senior Cybersecurity Engineer (Current)</p>
+        <p>Currently serving as Senior Cybersecurity Engineer at a U.S. Fortune 500 company. Responsible for enterprise threat detection, security operations leadership, vulnerability management programs, and cloud security architecture across a complex hybrid infrastructure. Works closely with executive leadership on security strategy and regulatory compliance.</p>
+      </div>
+      <div class="highlight-box">
+        <p style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M10 10h4"/></svg> U.S. Federal Government — Contract Cybersecurity Support</p>
+        <p>Supported cybersecurity contracts involving U.S. Federal Government agencies, including work aligned with FedRAMP and FISMA compliance requirements. Gained deep exposure to federal security frameworks, classified environment protocols, and the operational demands of protecting critical national infrastructure.</p>
+      </div>
+      <div class="highlight-box">
+        <p style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> America CyberSquad — Founder & CEO</p>
+        <p>Founded America CyberSquad to bring enterprise-grade cybersecurity to organizations that mainstream providers overlook: small businesses, nonprofits, churches, and civic institutions. Providing managed security services, security assessments, awareness training, and secure digital transformation consulting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="S" style="background:var(--bg1)">
+  <div class="W">
+    <div class="sec-hd reveal">
+      <div class="eyebrow"><i></i>Security Philosophy</div>
+      <h2>How Akotarh <span class="gt">Approaches Security</span></h2>
+    </div>
+    <div class="approach-grid reveal">
+      <div class="ap-item"><div class="ap-num">01</div><div><h4>Assume Breach, Always</h4><p>Security posture begins from the assumption that adversaries are already present or will be. Defense-in-depth, lateral movement detection, and rapid containment are non-negotiable baseline practices.</p></div></div>
+      <div class="ap-item"><div class="ap-num">02</div><div><h4>Risk-Driven, Not Rule-Driven</h4><p>Compliance frameworks are a floor, not a ceiling. The real work is understanding an organization's specific threat landscape and building controls proportional to actual risk — not just checkbox requirements.</p></div></div>
+      <div class="ap-item"><div class="ap-num">03</div><div><h4>Security Enables, Not Blocks</h4><p>The best security programs are built as business enablers. When security friction is reduced through smart design, people follow the secure path naturally — making the organization more resilient without productivity loss.</p></div></div>
+      <div class="ap-item"><div class="ap-num">04</div><div><h4>People Are the Perimeter</h4><p>Technology controls matter, but the most effective security investment is in human awareness and culture. Social engineering remains the primary attack vector — training and phishing simulation are core program components.</p></div></div>
+      <div class="ap-item"><div class="ap-num">05</div><div><h4>Visibility Before Everything</h4><p>You cannot protect what you cannot see. Comprehensive asset inventory, logging, and centralized visibility through SIEM and EDR platforms form the foundation on which all other controls depend.</p></div></div>
+      <div class="ap-item"><div class="ap-num">06</div><div><h4>Security Is a Human Rights Issue</h4><p>Having lived through institutional failure and displacement, Akotarh brings a unique perspective: when security systems fail, real people suffer real harm. This conviction drives commitment to community-accessible cybersecurity.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="W">
+    <div class="eyebrow" style="justify-content:center"><i></i>Work With Akotarh</div>
+    <h2 class="reveal">Ready to Strengthen Your <span class="gt">Security Posture?</span></h2>
+    <p class="reveal">Whether you need enterprise security leadership, a focused consultation, or cybersecurity services through America CyberSquad — Akotarh is ready to help.</p>
+    <div class="btns reveal" style="justify-content:center">
+      <a href="contact.html" class="btn btn-prim">Start a Conversation</a>
+      <a href="ventures.html" class="btn btn-sec">America CyberSquad</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-glow"></div>
+  <div class="W">
+    <div class="footer-cta">
+      <div class="footer-cta-text">
+        <h3>Ready to Work Together?</h3>
+        <p>For consulting, speaking, media, or cybersecurity partnerships.</p>
+      </div>
+      <a href="contact.html" class="btn btn-prim">Get in Touch</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand">Akotarh<em>.</em></div>
+        <div class="footer-tagline">Senior Cybersecurity Engineer</div>
+        <p class="footer-desc">Building secure systems, strong institutions, and empowered communities through cybersecurity, civic leadership, and technology.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg></a>
+          <a href="mailto:contact@akotarhakoson.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+        </div>
+      </div>
+      <nav class="fcol"><h5>Navigate</h5><ul>
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="cybersecurity.html">Cybersecurity</a></li>
+        <li><a href="civic-leadership.html">Civic Leadership</a></li><li><a href="ventures.html">Ventures</a></li>
+        <li><a href="insights.html">Insights</a></li><li><a href="media.html">Media</a></li><li><a href="contact.html">Contact</a></li>
+      </ul></nav>
+      <nav class="fcol"><h5>Ventures</h5><ul>
+        <li><a href="ventures.html">America CyberSquad</a></li><li><a href="ventures.html">Scholarstika</a></li><li><a href="ventures.html">Mandem</a></li>
+      </ul><h5 style="margin-top:28px">Resources</h5><ul>
+        <li><a href="media.html">Media &amp; Press Kit</a></li><li><a href="insights.html">Articles &amp; Insights</a></li>
+      </ul></nav>
+      <nav class="fcol"><h5>Legal</h5><ul>
+        <li><a href="official-statement.html">Official Statement</a></li><li><a href="raymond-akoson.html">Name Clarification</a></li>
+      </ul><h5 style="margin-top:28px">Credentials</h5><ul>
+        <li><a href="cybersecurity.html">Fortune 500 Engineer</a></li><li><a href="about.html">Magna Cum Laude BSc</a></li>
+      </ul></nav>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 Akotarh Akoson. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="official-statement.html">Official Statement</a>
+        <a href="raymond-akoson.html">Name Clarification</a>
+        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" class="footer-top">Back to Top <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40),{passive:true});
+  /* Mobile nav */
+const mob=document.getElementById('mob');const hbg=document.getElementById('hbg');
+function toggleMob(){const open=mob.classList.toggle('open');hbg.classList.toggle('active');document.body.style.overflow=open?'hidden':''}
+hbg.onclick=toggleMob;
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');hbg.classList.remove('active');document.body.style.overflow=''}));
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:0.02,rootMargin:'0px 0px 60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.reveal:not(.visible)').forEach(el=>el.classList.add('visible')),2000);
+})();
+</script>
+</body>
+</html>

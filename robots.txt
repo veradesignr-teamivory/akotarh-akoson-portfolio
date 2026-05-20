@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akotarhakoson.com/sitemap.xml

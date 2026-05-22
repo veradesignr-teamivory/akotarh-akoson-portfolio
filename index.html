@@ -27,279 +27,269 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:#FFFFFF;color:#111827;font-family:'Inter',system-ui,sans-serif;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:#FFFFFF;color:#1a1a2e;font-family:'Inter',system-ui,sans-serif;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}ul{list-style:none}
 button{cursor:pointer;font-family:inherit;border:none;background:none}
 img{display:block;max-width:100%}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#F0F0F0}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(--c),var(--p));border-radius:3px}
-::selection{background:rgba(27,140,58,.15)}
+::selection{background:rgba(27,140,58,.2)}
 
 :root{
-  --c:#1B8C3A;--p:#166534;--g:#22C55E;--gold:#15803D;
-  --ink:#FFFFFF;--bg1:#F8FAF9;--bg2:#F0F5F1;--bg3:#E8F0EA;
-  --glass:rgba(255,255,255,.85);
-  --t1:#111827;--t2:#4B5563;--t3:#6B7280;
-  --border:rgba(0,0,0,.08);--border-c:rgba(27,140,58,.25);
-  --ease:cubic-bezier(.4,0,.2,1);--t:.3s;
+  --primary:#1B8C3A;--primary-dark:#14532d;--primary-light:#22C55E;
+  --dark:#14532d;--darker:#0a3618;
+  --text:#1a1a2e;--text-secondary:#4a5568;--text-light:#718096;
+  --bg-white:#ffffff;--bg-light:#f7faf8;--bg-alt:#edf5f0;
+  --border:#e2e8f0;--border-green:rgba(27,140,58,.2);
+  --shadow:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 12px 40px rgba(0,0,0,.12);
+  --radius:8px;--radius-lg:16px;
+  --ease:cubic-bezier(.4,0,.2,1);
 }
 
 /* ── LAYOUT ── */
-.W{max-width:1200px;margin:0 auto;padding:0 24px}
-.S{padding:100px 0;position:relative}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
 
 /* ── TYPOGRAPHY ── */
-h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.08;letter-spacing:-.02em}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--c);margin-bottom:18px}
-.eyebrow i{width:28px;height:1px;background:linear-gradient(90deg,var(--c),transparent)}
-.gt{background:linear-gradient(135deg,var(--c) 0%,#22C55E 50%,var(--p) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.gt-gold{background:linear-gradient(135deg,var(--gold),#F5D78E,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.gt-anim{background:linear-gradient(270deg,var(--c),var(--p),var(--gold),var(--c));background-size:600% 600%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gShift 7s ease infinite}
-@keyframes gShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.2;color:var(--text)}
+.section-header{text-align:center;margin-bottom:60px}
+.section-header h2{font-size:clamp(28px,4vw,42px);margin-bottom:16px}
+.section-header p{font-size:17px;color:var(--text-secondary);max-width:620px;margin:0 auto;line-height:1.8}
+.section-label{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
+.accent-line{width:60px;height:3px;background:var(--primary);margin:16px auto 0;border-radius:2px}
+.accent-line.left{margin:16px 0 0}
 
-/* ── GLASS ── */
-.glass{background:var(--glass);border:1px solid var(--border);border-radius:20px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:relative;overflow:hidden;transition:border-color var(--t),transform var(--t),box-shadow var(--t)}
-.glass:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(0,0,0,.06);border-color:rgba(27,140,58,.12)}
-
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;letter-spacing:.04em;padding:14px 30px;border-radius:12px;transition:all var(--t) var(--ease);white-space:nowrap}
-.btn-prim{background:linear-gradient(135deg,var(--c),#15803D);color:#FFF;box-shadow:0 4px 24px rgba(27,140,58,.25)}
-.btn-prim:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(27,140,58,.5)}
-.btn-sec{background:rgba(0,0,0,.02);border:1px solid rgba(0,0,0,.12);color:var(--t1)}
-.btn-sec:hover{background:rgba(27,140,58,.06);border-color:var(--border-c);color:var(--c)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--c);letter-spacing:.04em;transition:gap var(--t)}
-.btn-ghost:hover{gap:14px}
-.btn-ghost::after{content:'\2192'}
-.btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-
-/* ── CHIPS ── */
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:100px}
-.chip-c{background:rgba(27,140,58,.1);border:1px solid rgba(27,140,58,.22);color:var(--c)}
-.chip-p{background:rgba(22,101,52,.1);border:1px solid rgba(22,101,52,.22);color:#166534}
-.chip-g{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.18);color:var(--g)}
+/* ── TOP BAR ── */
+.top-bar{background:var(--darker);color:rgba(255,255,255,.8);font-size:13px;padding:8px 0}
+.top-bar .container{display:flex;align-items:center;justify-content:space-between}
+.top-bar-left{display:flex;align-items:center;gap:20px}
+.top-bar-left a{color:rgba(255,255,255,.8);display:flex;align-items:center;gap:6px;transition:color .3s}
+.top-bar-left a:hover{color:#fff}
+.top-bar-left svg{width:14px;height:14px;flex-shrink:0}
+.top-bar-right{display:flex;align-items:center;gap:14px}
+.top-bar-right a{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);border-radius:50%;transition:color .3s,background .3s}
+.top-bar-right a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.top-bar-right svg{width:14px;height:14px}
 
 /* ── NAV ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:padding var(--t),background var(--t)}
-.nav.scrolled{padding:12px 0;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);box-shadow:0 1px 0 var(--border)}
-.nav .W{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.02em}
-.nav-logo em{color:var(--c);font-style:normal}
-.nav-logo span{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);display:block;margin-top:-2px;font-family:'Inter',sans-serif}
-.nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{font-size:13px;font-weight:500;color:var(--t3);transition:color var(--t);position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--c);transition:width var(--t)}
-.nav-links a:hover,.nav-links a.active{color:var(--t1)}
-.nav-links a:hover::after,.nav-links a.active::after{width:100%}
-.nav-cta{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:9px 20px;border:1px solid var(--border-c);color:var(--c);border-radius:10px;transition:all var(--t)}
-.nav-cta:hover{background:var(--c);color:#FFF}
+.nav{background:var(--dark);padding:0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:#fff;padding:16px 0;letter-spacing:-.01em}
+.nav-logo span{color:var(--primary-light);font-weight:700}
+.nav-links{display:flex;align-items:center;gap:0}
+.nav-links a{display:block;padding:18px 16px;font-size:14px;font-weight:500;color:rgba(255,255,255,.85);transition:all .3s;border-bottom:3px solid transparent;font-family:'Inter',sans-serif}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,.06);border-bottom-color:var(--primary-light)}
+.nav-cta{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:10px 22px;background:var(--primary);color:#fff;border-radius:var(--radius);transition:all .3s}
+.nav-cta:hover{background:var(--primary-light);transform:translateY(-1px)}
 .hbg{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer;z-index:1001}
-.hbg span{width:22px;height:2px;background:var(--t1);border-radius:2px;display:block;transition:transform .4s var(--ease),opacity .3s}
-.hbg.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg span{width:24px;height:2.5px;background:#fff;border-radius:2px;display:block;transition:transform .4s var(--ease),opacity .3s}
+.hbg.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 .hbg.active span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hbg.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mob{position:fixed;inset:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;clip-path:circle(0% at calc(100% - 40px) 36px);transition:clip-path .6s cubic-bezier(.4,0,.0,1);pointer-events:none}
-.mob.open{clip-path:circle(150% at calc(100% - 40px) 36px);pointer-events:auto}
-.mob-links{display:flex;flex-direction:column;align-items:center;gap:24px}
-.mob-links a{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--t2);transition:color .3s,transform .4s,opacity .4s;opacity:0;transform:translateY(20px)}
+.hbg.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* ── MOBILE NAV ── */
+.mob{position:fixed;inset:0;z-index:999;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;clip-path:circle(0% at calc(100% - 36px) 72px);transition:clip-path .5s cubic-bezier(.4,0,.0,1);pointer-events:none}
+.mob.open{clip-path:circle(150% at calc(100% - 36px) 72px);pointer-events:auto}
+.mob-links{display:flex;flex-direction:column;align-items:center;gap:8px}
+.mob-links a{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:rgba(255,255,255,.8);transition:color .3s,transform .4s,opacity .4s;opacity:0;transform:translateY(20px)}
 .mob.open .mob-links a{opacity:1;transform:translateY(0)}
-.mob.open .mob-links a:nth-child(1){transition-delay:.15s}
-.mob.open .mob-links a:nth-child(2){transition-delay:.2s}
-.mob.open .mob-links a:nth-child(3){transition-delay:.25s}
-.mob.open .mob-links a:nth-child(4){transition-delay:.3s}
-.mob.open .mob-links a:nth-child(5){transition-delay:.35s}
-.mob.open .mob-links a:nth-child(6){transition-delay:.4s}
-.mob.open .mob-links a:nth-child(7){transition-delay:.45s}
-.mob-links a:hover{color:var(--c)}
-.mob-cta{margin-top:40px;opacity:0;transform:translateY(16px);transition:all .4s var(--ease);transition-delay:0s}
-.mob.open .mob-cta{opacity:1;transform:translateY(0);transition-delay:.5s}
-.mob-social{display:flex;gap:16px;margin-top:32px;opacity:0;transition:opacity .4s;transition-delay:0s}
-.mob.open .mob-social{opacity:1;transition-delay:.55s}
-.mob-social a{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all .3s}
-.mob-social a:hover{border-color:var(--c);color:var(--c);background:rgba(27,140,58,.06)}
-.mob-social svg{width:18px;height:18px}
+.mob.open .mob-links a:nth-child(1){transition-delay:.1s}
+.mob.open .mob-links a:nth-child(2){transition-delay:.15s}
+.mob.open .mob-links a:nth-child(3){transition-delay:.2s}
+.mob.open .mob-links a:nth-child(4){transition-delay:.25s}
+.mob.open .mob-links a:nth-child(5){transition-delay:.3s}
+.mob.open .mob-links a:nth-child(6){transition-delay:.35s}
+.mob.open .mob-links a:nth-child(7){transition-delay:.4s}
+.mob-links a:hover{color:var(--primary-light)}
+.mob-cta{margin-top:36px;opacity:0;transform:translateY(16px);transition:all .4s var(--ease);transition-delay:0s}
+.mob.open .mob-cta{opacity:1;transform:translateY(0);transition-delay:.45s}
+.mob-social{display:flex;gap:14px;margin-top:28px;opacity:0;transition:opacity .4s;transition-delay:0s}
+.mob.open .mob-social{opacity:1;transition-delay:.5s}
+.mob-social a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);transition:all .3s}
+.mob-social a:hover{border-color:var(--primary-light);color:var(--primary-light)}
+.mob-social svg{width:16px;height:16px}
 
 /* ══════════════════════════════════════
-   HERO — split grid, photo RIGHT
+   HERO — Full-width banner with overlay
 ══════════════════════════════════════ */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 0 60px}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 70% 30%,rgba(27,140,58,.04),transparent 60%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(22,101,52,.03),transparent 60%),#FFFFFF}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(27,140,58,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(27,140,58,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 30%,transparent)}
-.hero .W{position:relative;z-index:2;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:48px}
-
-/* ── Hero text ── */
-.hero-text{min-width:0}
-.status-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.18);border-radius:100px;padding:7px 18px;margin-bottom:28px}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
-.status-txt{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g)}
-.hero h1{font-size:clamp(36px,5.5vw,68px);color:var(--t1);margin-bottom:16px;font-weight:700}
-.hero h1 .pre{display:block;font-size:.38em;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
-.typing-row{display:flex;align-items:center;gap:8px;margin-bottom:20px}
-.typing-pre{font-size:15px;color:var(--t3)}
-.typing-txt{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--c);min-width:200px}
-.typing-cur{display:inline-block;width:2px;height:16px;background:var(--c);margin-left:2px;animation:blink 1s infinite;vertical-align:middle}
+.hero{position:relative;min-height:85vh;display:flex;align-items:center;overflow:hidden;padding:80px 0}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--darker) 0%,var(--dark) 40%,var(--primary-dark) 100%)}
+.hero-pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 400px;align-items:center;gap:60px}
+.hero-text{color:#fff}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:100px;padding:8px 20px;margin-bottom:28px}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--primary-light);box-shadow:0 0 12px var(--primary-light);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+.hero-badge-text{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-light)}
+.hero h1{font-size:clamp(36px,5vw,62px);color:#fff;margin-bottom:20px;line-height:1.1;font-weight:700}
+.hero h1 .highlight{color:var(--primary-light)}
+.hero-subtitle{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:12px;font-family:'Space Grotesk',sans-serif}
+.typing-row{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+.typing-pre{font-size:16px;color:rgba(255,255,255,.6)}
+.typing-txt{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--primary-light);min-width:200px}
+.typing-cur{display:inline-block;width:2px;height:18px;background:var(--primary-light);margin-left:2px;animation:blink 1s infinite;vertical-align:middle}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.hero-desc{font-size:16px;color:var(--t2);line-height:1.85;max-width:500px;margin-bottom:32px}
-.hero-desc strong{color:var(--t1);font-weight:500}
-.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
-.htag{font-size:11px;font-weight:500;letter-spacing:.04em;padding:6px 14px;border-radius:8px;border:1px solid var(--border);color:var(--t3);background:rgba(255,255,255,.02);transition:all var(--t)}
-.htag:hover{border-color:var(--border-c);color:var(--c)}
-.hero-stats{margin-top:44px;padding-top:28px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.hstat-num{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;line-height:1;background:linear-gradient(135deg,var(--c),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hstat-lbl{font-size:11px;color:var(--t3);margin-top:4px}
+.hero-desc{font-size:17px;color:rgba(255,255,255,.8);line-height:1.8;max-width:540px;margin-bottom:32px}
+.hero-desc strong{color:#fff;font-weight:600}
+.hero-btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
-/* ── Hero photo frame ── */
-.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
-.photo-rig{position:relative;width:100%;max-width:420px}
-.photo-frame{position:relative;border-radius:28px;overflow:hidden;border:1px solid rgba(27,140,58,.2);box-shadow:0 40px 80px rgba(0,0,0,.08),0 0 0 1px rgba(27,140,58,.06);background:var(--bg2);aspect-ratio:3/4}
-.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;transition:transform .8s var(--ease)}
-.photo-frame:hover img{transform:scale(1.03)}
-.photo-frame-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,10,20,.5) 0%,transparent 40%);pointer-events:none}
-.photo-frame-glow{position:absolute;inset:-2px;border-radius:30px;background:linear-gradient(135deg,rgba(27,140,58,.3),rgba(22,101,52,.2),transparent 60%);z-index:-1;filter:blur(1px)}
-/* Floating credential cards */
-.fc{position:absolute;background:rgba(248,250,249,.9);border:1px solid rgba(27,140,58,.18);border-radius:14px;padding:12px 16px;backdrop-filter:blur(16px);box-shadow:0 16px 40px rgba(0,0,0,.06);display:flex;align-items:center;gap:10px;z-index:3}
-.fc1{top:4%;right:-20px;animation:flt 4s ease-in-out infinite}
-.fc2{bottom:18%;left:-20px;animation:flt 4s ease-in-out infinite .6s}
-.fc3{bottom:-12%;right:-8%;animation:flt 5s ease-in-out infinite 1.2s}
-@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.fc-icon{font-size:20px;flex-shrink:0}
-.fc-val{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--c);line-height:1.2}
-.fc-sub{font-size:11px;color:var(--t3);margin-top:1px}
-/* Scroll cue */
-.scroll-cue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;animation:bob 2s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
-.scroll-cue span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);font-family:'Space Grotesk',sans-serif}
-.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,rgba(27,140,58,.5),transparent)}
+/* Hero photo */
+.hero-photo{position:relative}
+.hero-photo-frame{border-radius:var(--radius-lg);overflow:hidden;border:4px solid rgba(255,255,255,.15);box-shadow:0 30px 60px rgba(0,0,0,.3);aspect-ratio:3/4;max-width:400px}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.hero-photo-card{position:absolute;background:rgba(255,255,255,.95);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px}
+.hero-photo-card svg{width:20px;height:20px;color:var(--primary);flex-shrink:0}
+.hero-photo-card .card-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--primary)}
+.hero-photo-card .card-sub{font-size:12px;color:var(--text-light)}
+.hpc-1{top:8%;right:-16px;animation:float 4s ease-in-out infinite}
+.hpc-2{bottom:20%;left:-16px;animation:float 4s ease-in-out infinite .8s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Hero stats bar */
+.hero-stats{margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,.15);display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.hero-stat-num{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--primary-light)}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;padding:14px 28px;border-radius:var(--radius);transition:all .3s var(--ease);white-space:nowrap;letter-spacing:.02em}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 16px rgba(27,140,58,.3)}
+.btn-primary:hover{background:var(--primary-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,140,58,.4)}
+.btn-white{background:#fff;color:var(--primary-dark);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.15)}
+.btn-outline{border:2px solid var(--primary);color:var(--primary);background:transparent}
+.btn-outline:hover{background:var(--primary);color:#fff}
+.btn-outline-white{border:2px solid rgba(255,255,255,.4);color:#fff;background:transparent}
+.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--primary);transition:gap .3s}
+.btn-ghost:hover{gap:14px}
+.btn-ghost::after{content:'\2192'}
+.btn-arrow::after{content:'\2192';margin-left:4px}
 
 /* ── TICKER ── */
-.ticker-outer{background:rgba(248,250,249,.8);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:14px 0}
-.ticker-track{display:flex;width:max-content;animation:tickRoll 35s linear infinite}
+.ticker{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:16px 0}
+.ticker-track{display:flex;width:max-content;animation:tickerScroll 40s linear infinite}
 .ticker-track:hover{animation-play-state:paused}
-.ticker-item{display:flex;align-items:center;gap:10px;padding:0 32px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
-.ticker-item em{color:var(--c);font-style:normal}
-.ticker-sep{width:4px;height:4px;border-radius:50%;background:rgba(27,140,58,.3);flex-shrink:0}
-@keyframes tickRoll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{display:flex;align-items:center;gap:10px;padding:0 28px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-light)}
+.ticker-item em{color:var(--primary);font-style:normal;font-weight:700}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);opacity:.4;flex-shrink:0}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── ABOUT ── */
-.about-grid{display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:center}
-.portrait-wrap{position:relative}
-.portrait-frame{aspect-ratio:3/4;border-radius:24px;overflow:hidden;position:relative;background:var(--bg2);border:1px solid var(--border)}
-.portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:center 10%;transition:filter .8s var(--ease),transform .8s var(--ease)}
-.portrait-frame:hover img{transform:scale(1.03)}
-.portrait-corner-tl{position:absolute;top:-1px;left:-1px;width:50px;height:50px;border-top:2px solid rgba(27,140,58,.5);border-left:2px solid rgba(27,140,58,.5);border-radius:24px 0 0 0;z-index:2}
-.portrait-corner-br{position:absolute;bottom:-1px;right:-1px;width:50px;height:50px;border-bottom:2px solid rgba(22,101,52,.5);border-right:2px solid rgba(22,101,52,.5);border-radius:0 0 24px 0;z-index:2}
-.portrait-badge{position:absolute;bottom:-20px;right:-20px;background:var(--bg3);border:1px solid var(--border-c);border-radius:16px;padding:18px 22px;backdrop-filter:blur(12px);box-shadow:0 16px 48px rgba(0,0,0,.08);z-index:3}
-.portrait-badge-num{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;color:var(--c);line-height:1}
-.portrait-badge-lbl{font-size:11px;color:var(--t3);margin-top:3px}
-.about-text p{font-size:16px;color:var(--t2);line-height:1.9;margin-bottom:20px}
-.about-quote{border-left:3px solid var(--c);padding:18px 24px;margin:24px 0;background:rgba(27,140,58,.04);border-radius:0 12px 12px 0}
-.about-quote p{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;color:var(--t1);line-height:1.55;margin:0;font-style:italic}
-.about-pills{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 28px}
-.pill{font-size:12px;font-weight:500;padding:7px 16px;border-radius:100px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--t2);transition:all var(--t)}
-.pill:hover{border-color:var(--border-c);color:var(--c)}
-
-/* ── SECTION HEADER ── */
-.sec-hd{margin-bottom:56px}
-.sec-hd.center{text-align:center}
-.sec-hd.center .eyebrow{justify-content:center;display:flex}
-.sec-hd h2{font-size:clamp(28px,4vw,48px);color:var(--t1);margin-bottom:14px;font-weight:700}
-.sec-hd p{font-size:16px;color:var(--t2);max-width:560px;line-height:1.8}
-.sec-hd.center p{margin:0 auto}
+/* ── ABOUT SECTION ── */
+.about-grid{display:grid;grid-template-columns:380px 1fr;gap:60px;align-items:center}
+.about-photo-wrap{position:relative}
+.about-photo{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:3/4;border:3px solid var(--border);box-shadow:var(--shadow)}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center 10%;transition:transform .6s var(--ease)}
+.about-photo:hover img{transform:scale(1.03)}
+.about-badge{position:absolute;bottom:-16px;right:-16px;background:var(--primary);color:#fff;border-radius:var(--radius);padding:16px 22px;box-shadow:var(--shadow-lg)}
+.about-badge-num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;line-height:1}
+.about-badge-label{font-size:11px;opacity:.8;margin-top:2px}
+.about-text h2{font-size:clamp(26px,3.5vw,40px);margin-bottom:20px}
+.about-text h2 .highlight{color:var(--primary)}
+.about-text p{font-size:16px;color:var(--text-secondary);line-height:1.9;margin-bottom:16px}
+.about-quote{border-left:4px solid var(--primary);padding:20px 24px;margin:24px 0;background:var(--bg-alt);border-radius:0 var(--radius) var(--radius) 0}
+.about-quote p{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;color:var(--text);line-height:1.55;margin:0;font-style:italic}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+.about-tag{font-size:13px;font-weight:500;padding:8px 18px;border-radius:100px;background:var(--bg-alt);border:1px solid var(--border);color:var(--text-secondary);transition:all .3s}
+.about-tag:hover{border-color:var(--primary);color:var(--primary)}
 
 /* ── PILLARS ── */
-.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.pillar{padding:32px 24px;border-radius:20px;background:var(--glass);border:1px solid var(--border);position:relative;overflow:hidden;transition:transform var(--t),box-shadow var(--t),border-color var(--t)}
-.pillar::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c),var(--p));opacity:0;transition:opacity var(--t)}
-.pillar:hover{transform:translateY(-8px);box-shadow:0 32px 64px rgba(0,0,0,.06);border-color:rgba(27,140,58,.1)}
-.pillar:hover::after{opacity:1}
-.pillar-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:22px}
-.pi-c{background:rgba(27,140,58,.1);border:1px solid rgba(27,140,58,.18)}
-.pi-p{background:rgba(22,101,52,.1);border:1px solid rgba(22,101,52,.18)}
-.pi-g{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.16)}
-.pi-gold{background:rgba(21,128,61,.1);border:1px solid rgba(21,128,61,.18)}
-.pillar h3{font-size:17px;color:var(--t1);margin-bottom:10px;font-weight:700}
-.pillar p{font-size:13px;color:var(--t2);line-height:1.75}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.pillar-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 28px;transition:all .3s var(--ease);position:relative;overflow:hidden}
+.pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--primary);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.pillar-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-6px)}
+.pillar-card:hover::before{transform:scaleX(1)}
+.pillar-icon{width:56px;height:56px;border-radius:12px;background:var(--bg-alt);border:1px solid var(--border-green);display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:var(--primary)}
+.pillar-icon svg{width:24px;height:24px}
+.pillar-card h3{font-size:18px;margin-bottom:12px;font-weight:700}
+.pillar-card p{font-size:14px;color:var(--text-secondary);line-height:1.75}
 
 /* ── VENTURES ── */
-.ventures-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.vc{border-radius:22px;padding:34px 28px;background:var(--glass);border:1px solid var(--border);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform var(--t),box-shadow var(--t),border-color var(--t)}
-.vc:hover{transform:translateY(-8px);box-shadow:0 36px 70px rgba(0,0,0,.06);border-color:rgba(27,140,58,.1)}
-.vc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px}
-.vc-logo{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid var(--border)}
-.vc h3{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--t1);margin-bottom:10px}
-.vc-desc{font-size:14px;color:var(--t2);line-height:1.8;flex:1;margin-bottom:22px}
-.vc-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
-.vc-tag{font-size:11px;padding:4px 12px;background:rgba(27,140,58,.06);border:1px solid rgba(27,140,58,.1);border-radius:100px;color:var(--t3)}
-.vc-divider{height:1px;background:var(--border);margin-bottom:22px}
+.ventures-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.venture-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;display:flex;flex-direction:column;transition:all .3s var(--ease)}
+.venture-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-6px)}
+.venture-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.venture-logo{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid var(--border)}
+.venture-chip{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:100px;background:rgba(27,140,58,.08);border:1px solid rgba(27,140,58,.2);color:var(--primary)}
+.venture-card h3{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px}
+.venture-desc{font-size:14px;color:var(--text-secondary);line-height:1.8;flex:1;margin-bottom:20px}
+.venture-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.venture-tag{font-size:11px;padding:5px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:100px;color:var(--text-light)}
+.venture-divider{height:1px;background:var(--border);margin-bottom:20px}
 
-/* ── MISSION ── */
-.mission-sec{background:linear-gradient(135deg,rgba(27,140,58,.03),rgba(22,101,52,.02));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 0;text-align:center;position:relative;overflow:hidden}
-.mission-bg{position:absolute;top:-70px;left:50%;transform:translateX(-50%);font-size:340px;line-height:1;font-family:'Space Grotesk',sans-serif;font-weight:900;color:rgba(27,140,58,.02);pointer-events:none;user-select:none}
-.mission-sec blockquote{position:relative;z-index:1;font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,3.2vw,38px);font-weight:700;color:var(--t1);line-height:1.4;max-width:800px;margin:0 auto 28px}
-.mission-sec cite{font-style:normal;font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);font-family:'Inter',sans-serif}
-.mission-sub{display:block;font-family:'Inter',sans-serif;font-size:16px;font-weight:400;color:var(--t2);line-height:1.85;max-width:600px;margin:20px auto 0}
+/* ── MISSION BANNER ── */
+.mission{background:linear-gradient(135deg,var(--dark),var(--primary-dark));padding:100px 0;text-align:center;position:relative;overflow:hidden}
+.mission-bg-text{position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-size:280px;line-height:1;font-family:'Space Grotesk',sans-serif;font-weight:700;color:rgba(255,255,255,.03);pointer-events:none;user-select:none}
+.mission .container{position:relative;z-index:1}
+.mission blockquote{font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,3.2vw,38px);font-weight:700;color:#fff;line-height:1.35;max-width:800px;margin:0 auto 24px}
+.mission blockquote .highlight{color:var(--primary-light)}
+.mission cite{font-style:normal;font-size:13px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.mission-sub{display:block;font-size:16px;font-weight:400;color:rgba(255,255,255,.65);line-height:1.85;max-width:600px;margin:20px auto 0}
 
 /* ── CIVIC ── */
-.civic-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.principle{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);transition:padding-left var(--t)}
+.civic-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.civic-left h2{font-size:clamp(24px,3vw,38px);margin-bottom:20px}
+.civic-left h2 .highlight{color:var(--primary)}
+.civic-left p{font-size:15px;color:var(--text-secondary);line-height:1.9;margin-bottom:28px}
+.principle{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--border);transition:padding-left .3s}
 .principle:last-child{border-bottom:none}
 .principle:hover{padding-left:8px}
-.principle-num{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:var(--c);opacity:.5;min-width:22px;padding-top:3px}
-.principle h4{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:5px;font-family:'Space Grotesk',sans-serif}
-.principle p{font-size:13px;color:var(--t2);line-height:1.7}
+.principle-num{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--primary);min-width:30px;padding-top:2px}
+.principle h4{font-size:15px;font-weight:700;margin-bottom:4px;font-family:'Space Grotesk',sans-serif}
+.principle p{font-size:13px;color:var(--text-secondary);line-height:1.7}
 
 /* ── INSIGHTS ── */
-.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.ins-card{border-radius:20px;overflow:hidden;background:var(--glass);border:1px solid var(--border);display:flex;flex-direction:column;transition:transform var(--t),box-shadow var(--t),border-color var(--t)}
-.ins-card:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,.06);border-color:rgba(27,140,58,.1)}
-.ins-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
-.ins-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--bg2))}
-.ins-body{padding:26px;flex:1;display:flex;flex-direction:column}
-.ins-cat{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--c);margin-bottom:10px;font-family:'Space Grotesk',sans-serif}
-.ins-card h3{font-size:17px;color:var(--t1);margin-bottom:10px;line-height:1.35;font-weight:700}
-.ins-card p{font-size:13px;color:var(--t2);line-height:1.75;flex:1;margin-bottom:18px}
+.insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.insight-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:all .3s var(--ease)}
+.insight-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-6px)}
+.insight-img{height:180px;display:flex;align-items:center;justify-content:center;position:relative}
+.insight-img svg{position:relative;z-index:1}
+.insight-body{padding:28px;flex:1;display:flex;flex-direction:column}
+.insight-cat{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);margin-bottom:10px}
+.insight-card h3{font-size:17px;margin-bottom:12px;line-height:1.35;font-weight:700}
+.insight-card p{font-size:14px;color:var(--text-secondary);line-height:1.75;flex:1;margin-bottom:16px}
 
-/* ── CTA ── */
-.cta-sec{padding:120px 0;text-align:center;position:relative;overflow:hidden}
-.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(27,140,58,.04),transparent 65%)}
-.cta-sec .W{position:relative;z-index:2}
-.cta-sec h2{font-size:clamp(28px,5vw,52px);color:var(--t1);margin-bottom:18px;font-weight:700}
-.cta-sec p{font-size:17px;color:var(--t2);max-width:500px;margin:0 auto 40px;line-height:1.85}
+/* ── CTA SECTION ── */
+.cta-section{background:var(--bg-alt);padding:100px 0;text-align:center;position:relative}
+.cta-section h2{font-size:clamp(28px,4.5vw,48px);margin-bottom:18px}
+.cta-section h2 .highlight{color:var(--primary)}
+.cta-section p{font-size:17px;color:var(--text-secondary);max-width:500px;margin:0 auto 36px;line-height:1.8}
+.cta-btns{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
 
 /* ── FOOTER ── */
-.footer{background:var(--bg1);position:relative;overflow:hidden;padding:0 0 36px}
-.footer-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:1px;background:linear-gradient(90deg,transparent,var(--c),var(--p),transparent);opacity:.5}
-.footer-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(135deg,rgba(27,140,58,.06),rgba(22,101,52,.04));border:1px solid rgba(27,140,58,.12);border-radius:20px;padding:36px 40px;margin-bottom:64px;margin-top:72px;flex-wrap:wrap}
-.footer-cta h3{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--t1);margin-bottom:6px}
-.footer-cta p{font-size:14px;color:var(--t2)}
-.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-.footer-brand-col{max-width:300px}
-.footer-brand{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:4px}
-.footer-brand em{color:var(--c);font-style:normal}
-.footer-tagline{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:16px;font-family:'Space Grotesk',sans-serif}
-.footer-desc{font-size:14px;color:var(--t3);line-height:1.85;margin-bottom:24px}
+.footer{background:var(--darker);color:rgba(255,255,255,.7);padding:0;position:relative}
+.footer-cta-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--primary);border-radius:var(--radius-lg);padding:36px 40px;margin-bottom:60px;transform:translateY(-50%);flex-wrap:wrap}
+.footer-cta-bar h3{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.footer-cta-bar p{font-size:14px;color:rgba(255,255,255,.8)}
+.footer-cta-bar .btn{background:#fff;color:var(--primary-dark);font-weight:700}
+.footer-cta-bar .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px}
+.footer-brand{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#fff;margin-bottom:6px}
+.footer-brand span{color:var(--primary-light)}
+.footer-tagline{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.85;margin-bottom:24px;max-width:300px}
 .footer-social{display:flex;gap:10px}
-.footer-social a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all .3s var(--ease)}
-.footer-social a:hover{border-color:var(--c);color:var(--c);background:rgba(27,140,58,.06);transform:translateY(-2px)}
-.fcol h5{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:18px}
-.fcol ul li{margin-bottom:12px}
-.fcol a{font-size:14px;color:var(--t3);transition:color var(--t),padding-left var(--t)}
-.fcol a:hover{color:var(--c);padding-left:4px}
-.footer-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent);margin-bottom:24px}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.footer-copy{font-size:13px;color:var(--t3)}
+.footer-social a{width:36px;height:36px;border-radius:var(--radius);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .3s}
+.footer-social a:hover{border-color:var(--primary-light);color:var(--primary-light);background:rgba(255,255,255,.05)}
+.footer-col h5{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:20px}
+.footer-col ul li{margin-bottom:12px}
+.footer-col a{font-size:14px;color:rgba(255,255,255,.5);transition:color .3s,padding-left .3s}
+.footer-col a:hover{color:var(--primary-light);padding-left:4px}
+.footer-divider{height:1px;background:rgba(255,255,255,.1);margin-bottom:24px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:36px}
+.footer-copy{font-size:13px;color:rgba(255,255,255,.4)}
 .footer-legal{display:flex;align-items:center;gap:20px}
-.footer-legal a{font-size:12px;color:var(--t3);transition:color var(--t)}
-.footer-legal a:hover{color:var(--t2)}
-.footer-top{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--c) !important;font-weight:600;font-family:'Space Grotesk',sans-serif}
+.footer-legal a{font-size:12px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-legal a:hover{color:rgba(255,255,255,.7)}
+.footer-top{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--primary-light) !important;font-weight:600;font-family:'Space Grotesk',sans-serif}
 .footer-top:hover{gap:6px}
 
-/* ── DIVIDER / REVEAL ── */
-.div{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.015;pointer-events:none;z-index:9998}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}
+
+/* ── SECTION ROW HEADERS ── */
+.section-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:20px}
+.section-row h2{font-size:clamp(24px,3.5vw,40px)}
+.section-row h2 .highlight{color:var(--primary)}
 
 /* ══════════════════════════
    RESPONSIVE
@@ -307,71 +297,84 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 @media(max-width:1100px){
   .pillars-grid{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
-  .footer-brand-col{max-width:100%}
-  .footer-cta{padding:28px 32px}
-  .hero .W{grid-template-columns:1fr 360px;gap:36px}
-  .about-grid{grid-template-columns:320px 1fr;gap:48px}
+  .hero .container{grid-template-columns:1fr 340px;gap:40px}
+  .about-grid{grid-template-columns:320px 1fr;gap:44px}
 }
 @media(max-width:900px){
-  .S{padding:80px 0}
-  .hero{min-height:auto;padding:90px 0 48px}
-  .hero .W{grid-template-columns:1fr;gap:28px}
-  .hero-visual{order:-1;max-width:280px;margin:0 auto}
-  .hero h1{font-size:clamp(28px,7vw,44px)}
+  .section{padding:64px 0}
+  .top-bar{display:none}
+  .hero{min-height:auto;padding:60px 0}
+  .hero .container{grid-template-columns:1fr;gap:32px}
+  .hero-photo{order:-1;max-width:280px;margin:0 auto}
   .hero-text{text-align:center}
-  .hero-desc{margin:0 auto 24px;font-size:15px}
-  .hero-tags{justify-content:center}
-  .btns{justify-content:center;flex-direction:column;align-items:center;gap:10px}
-  .btns .btn{width:100%;max-width:280px;justify-content:center}
-  .hero-stats{grid-template-columns:repeat(2,1fr);text-align:center;margin-top:28px;padding-top:20px}
-  .hstat-num{font-size:20px}
-  /* Ensure hero children are visible on mobile — no scroll reveal for stacked hero */
+  .hero-desc{margin:0 auto 28px}
+  .hero-btns{justify-content:center}
+  .hero-stats{grid-template-columns:repeat(2,1fr);text-align:center}
   .hero .reveal{opacity:1;transform:translateY(0)}
   .about-grid{grid-template-columns:1fr}
-  .portrait-wrap{max-width:320px;margin:0 auto 32px}
+  .about-photo-wrap{max-width:320px;margin:0 auto 32px}
   .civic-grid{grid-template-columns:1fr}
-  .ventures-grid,.ins-grid{grid-template-columns:1fr}
+  .ventures-grid,.insights-grid{grid-template-columns:1fr}
   .nav-links,.nav-cta{display:none}
   .hbg{display:flex}
-  .fc1,.fc3{display:none}
-  .fc2{left:auto;right:8px;bottom:8px}
-  .scroll-cue{display:none}
+  .hpc-1{display:none}
+  .hpc-2{left:auto;right:8px;bottom:12px}
+  .pillars-grid{grid-template-columns:1fr 1fr}
+  .section-row{flex-direction:column;align-items:flex-start;gap:12px}
 }
 @media(max-width:640px){
-  .S{padding:60px 0}
-  .W{padding:0 16px}
+  .section{padding:48px 0}
+  .container{padding:0 16px}
+  .hero{padding:48px 0}
+  .hero h1{font-size:clamp(28px,7vw,40px)}
+  .hero-photo{max-width:220px}
+  .hero-stats{gap:12px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .hero-btns .btn{width:100%;max-width:280px;justify-content:center}
   .pillars-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
-  .footer-cta{flex-direction:column;text-align:center;padding:28px 20px}
-  .footer-cta .btn{width:100%}
+  .footer-cta-bar{flex-direction:column;text-align:center;padding:28px 20px;transform:translateY(-30px)}
+  .footer-cta-bar .btn{width:100%}
   .footer-bottom{flex-direction:column;gap:14px;text-align:center}
   .footer-legal{flex-wrap:wrap;justify-content:center}
-  .hero{padding:80px 0 36px}
-  .hero-visual{max-width:220px}
-  .hero-stats{gap:10px}
-  .hero h1{font-size:clamp(24px,6.5vw,36px)}
-  .mission-sec blockquote{font-size:20px}
-  .mission-sec{padding:72px 0}
-  .cta-sec{padding:80px 0}
+  .mission blockquote{font-size:22px}
+  .cta-section{padding:64px 0}
+  .cta-btns{flex-direction:column}
+  .cta-btns .btn{width:100%;max-width:280px}
 }
 </style>
 </head>
 <body>
 
+<!-- ████ TOP BAR ████ -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar-left">
+      <a href="mailto:contact@akotarhakoson.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg> contact@akotarhakoson.com</a>
+      <a href="tel:+1234567890"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Available for Consulting</a>
+    </div>
+    <div class="top-bar-right">
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg></a>
+      <a href="mailto:contact@akotarhakoson.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+    </div>
+  </div>
+</div>
+
 <!-- ████ NAV ████ -->
 <nav class="nav" id="nav" aria-label="Main navigation">
-  <div class="W">
-    <a href="index.html" class="nav-logo" aria-label="Home">Akotarh<em>.</em><span>Official Portfolio</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="cybersecurity.html">Cybersecurity</a></li>
-      <li><a href="civic-leadership.html">Civic Leadership</a></li>
-      <li><a href="ventures.html">Ventures</a></li>
-      <li><a href="insights.html">Insights</a></li>
-      <li><a href="media.html">Media</a></li>
-    </ul>
-    <div style="display:flex;align-items:center;gap:12px">
+  <div class="container">
+    <a href="index.html" class="nav-logo" aria-label="Home">Akotarh<span>.</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="cybersecurity.html">Cybersecurity</a>
+      <a href="civic-leadership.html">Civic Leadership</a>
+      <a href="ventures.html">Ventures</a>
+      <a href="insights.html">Insights</a>
+      <a href="media.html">Media</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
       <a href="contact.html" class="nav-cta">Book Consultation</a>
       <button class="hbg" id="hbg" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
@@ -383,7 +386,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <a href="civic-leadership.html">Civic Leadership</a><a href="ventures.html">Ventures</a>
     <a href="insights.html">Insights</a><a href="media.html">Media</a>
   </div>
-  <a href="contact.html" class="btn btn-prim mob-cta">Book Consultation</a>
+  <a href="contact.html" class="btn btn-primary mob-cta">Book Consultation</a>
   <div class="mob-social">
     <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
     <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg></a>
@@ -396,181 +399,168 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 <!-- ████ HERO ████ -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="W">
-    <!-- TEXT -->
+  <div class="hero-pattern"></div>
+  <div class="container">
     <div class="hero-text">
-      <div class="status-badge reveal"><span class="status-dot"></span><span class="status-txt">Available for Consulting &amp; Speaking</span></div>
-      <h1 class="reveal" style="transition-delay:.06s">
-        <span class="pre">Senior Cybersecurity Engineer</span>
-        Securing Digital<br/><span class="gt-anim">Systems.</span> Building<br/>Resilient Futures.
-      </h1>
+      <div class="hero-badge reveal"><span class="hero-badge-dot"></span><span class="hero-badge-text">Available for Consulting &amp; Speaking</span></div>
+      <div class="hero-subtitle reveal" style="transition-delay:.04s">Senior Cybersecurity Engineer</div>
+      <h1 class="reveal" style="transition-delay:.08s">Securing Digital<br/>Systems. Building<br/><span class="highlight">Resilient Futures.</span></h1>
       <div class="typing-row reveal" style="transition-delay:.12s">
         <span class="typing-pre">I am a</span>
         <span class="typing-txt" id="typed"></span><span class="typing-cur"></span>
       </div>
-      <p class="hero-desc reveal" style="transition-delay:.18s">Currently at a <strong>U.S. Fortune 500</strong> company. Former Secretary General. Founder of <strong>America CyberSquad</strong>, <strong>Scholarstika</strong> &amp; <strong>Mandem</strong> — driven by one mission: securing the systems that serve people.</p>
-      <div class="hero-tags reveal" style="transition-delay:.22s">
-        <span class="htag">Cybersecurity</span><span class="htag">Fortune 500</span><span class="htag">Civic Leader</span>
-        <span class="htag">Startup Founder</span><span class="htag">Activist</span><span class="htag">Public Advocate</span>
+      <p class="hero-desc reveal" style="transition-delay:.16s">Currently at a <strong>U.S. Fortune 500</strong> company. Former Secretary General. Founder of <strong>America CyberSquad</strong>, <strong>Scholarstika</strong> &amp; <strong>Mandem</strong> — driven by one mission: securing the systems that serve people.</p>
+      <div class="hero-btns reveal" style="transition-delay:.2s">
+        <a href="contact.html" class="btn btn-primary btn-arrow">Book a Consultation</a>
+        <a href="about.html" class="btn btn-outline-white">Read My Biography</a>
       </div>
-      <div class="btns reveal" style="transition-delay:.28s">
-        <a href="contact.html" class="btn btn-prim">Book a Consultation</a>
-        <a href="about.html" class="btn btn-sec">Read My Biography</a>
-        <a href="media.html" class="btn-ghost">Media &amp; Speaking</a>
-      </div>
-      <div class="hero-stats reveal" style="transition-delay:.34s">
-        <div><div class="hstat-num">Fortune</div><div class="hstat-lbl">500 Company</div></div>
-        <div><div class="hstat-num">10+</div><div class="hstat-lbl">Years Experience</div></div>
-        <div><div class="hstat-num">3&times;</div><div class="hstat-lbl">Venture Founder</div></div>
-        <div><div class="hstat-num">Magna</div><div class="hstat-lbl">Cum Laude BSc</div></div>
+      <div class="hero-stats reveal" style="transition-delay:.26s">
+        <div><div class="hero-stat-num">Fortune</div><div class="hero-stat-label">500 Company</div></div>
+        <div><div class="hero-stat-num">10+</div><div class="hero-stat-label">Years Experience</div></div>
+        <div><div class="hero-stat-num">3&times;</div><div class="hero-stat-label">Venture Founder</div></div>
+        <div><div class="hero-stat-num">Magna</div><div class="hero-stat-label">Cum Laude BSc</div></div>
       </div>
     </div>
-    <!-- PHOTO -->
-    <div class="hero-visual reveal" style="transition-delay:.1s">
-      <div class="photo-rig">
-        <div class="photo-frame-glow"></div>
-        <div class="photo-frame">
-          <img src="images/akotarh-executive.jpg" alt="Akotarh Akoson — Senior Cybersecurity Engineer" id="heroImg"/>
-          <div class="photo-frame-overlay"></div>
-        </div>
-        <div class="fc fc1"><span class="fc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg></span><div><div class="fc-val">Fortune 500</div><div class="fc-sub">Senior Engineer</div></div></div>
-        <div class="fc fc2"><span class="fc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="fc-val">Magna Cum Laude</div><div class="fc-sub">BSc Cybersecurity</div></div></div>
-        <div class="fc fc3"><span class="fc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><div><div class="fc-val">Federal Contracts</div><div class="fc-sub">US Govt Support</div></div></div>
+    <div class="hero-photo reveal" style="transition-delay:.06s">
+      <div class="hero-photo-frame">
+        <img src="images/akotarh-executive.jpg" alt="Akotarh Akoson — Senior Cybersecurity Engineer" id="heroImg"/>
       </div>
+      <div class="hero-photo-card hpc-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg><div><div class="card-title">Fortune 500</div><div class="card-sub">Senior Engineer</div></div></div>
+      <div class="hero-photo-card hpc-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg><div><div class="card-title">Magna Cum Laude</div><div class="card-sub">BSc Cybersecurity</div></div></div>
     </div>
   </div>
-  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
 <!-- ████ TICKER ████ -->
-<div class="ticker-outer">
+<div class="ticker">
   <div class="ticker-track">
-    <div class="ticker-item"><em>Fortune 500</em> Cybersecurity Engineer<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Federal Contract</em> Support<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Magna Cum Laude</em> BSc Cybersecurity<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>3&times;</em> Startup Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Secretary General</em> People Action Party<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Parliamentary</em> Candidate<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Ambazonia</em> Advocate<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>America CyberSquad</em> Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Scholarstika</em> Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Mandem</em> Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Fortune 500</em> Cybersecurity Engineer<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Federal Contract</em> Support<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Magna Cum Laude</em> BSc Cybersecurity<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>3&times;</em> Startup Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Secretary General</em> People Action Party<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Parliamentary</em> Candidate<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Ambazonia</em> Advocate<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>America CyberSquad</em> Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Scholarstika</em> Founder<div class="ticker-sep"></div></div>
-    <div class="ticker-item"><em>Mandem</em> Founder<div class="ticker-sep"></div></div>
+    <div class="ticker-item"><em>Fortune 500</em> Cybersecurity Engineer<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Federal Contract</em> Support<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Magna Cum Laude</em> BSc Cybersecurity<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>3&times;</em> Startup Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Secretary General</em> People Action Party<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Parliamentary</em> Candidate<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Ambazonia</em> Advocate<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>America CyberSquad</em> Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Scholarstika</em> Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Mandem</em> Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Fortune 500</em> Cybersecurity Engineer<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Federal Contract</em> Support<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Magna Cum Laude</em> BSc Cybersecurity<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>3&times;</em> Startup Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Secretary General</em> People Action Party<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Parliamentary</em> Candidate<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Ambazonia</em> Advocate<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>America CyberSquad</em> Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Scholarstika</em> Founder<div class="ticker-dot"></div></div>
+    <div class="ticker-item"><em>Mandem</em> Founder<div class="ticker-dot"></div></div>
   </div>
 </div>
 
 <!-- ████ ABOUT ████ -->
-<section class="S" id="about">
-  <div class="W">
+<section class="section" id="about">
+  <div class="container">
     <div class="about-grid">
-      <div class="portrait-wrap reveal">
-        <div class="portrait-frame">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo">
           <img src="images/akotarh-portrait.jpg" alt="Akotarh Akoson — professional portrait"/>
-          <div class="portrait-corner-tl"></div>
-          <div class="portrait-corner-br"></div>
         </div>
-        <div class="portrait-badge"><div class="portrait-badge-num">10+</div><div class="portrait-badge-lbl">Years of Experience</div></div>
+        <div class="about-badge"><div class="about-badge-num">10+</div><div class="about-badge-label">Years of Experience</div></div>
       </div>
-      <div class="reveal" style="transition-delay:.1s">
-        <p class="eyebrow"><i></i>About Akotarh</p>
-        <h2 style="font-size:clamp(26px,3.5vw,44px);margin-bottom:22px">A Life at the Intersection of<br/><span class="gt">Technology &amp; Impact</span></h2>
-        <p class="about-text" style="color:var(--t2);font-size:16px;line-height:1.9;margin-bottom:18px">Akotarh Akoson, formerly known publicly as Raymond Akoson / Akoson Raymond, is a Senior Cybersecurity Engineer, civic-tech leader, former politician, activist, and founder. His work sits at the intersection of cybersecurity, education, institutional management, civic advocacy, and secure digital transformation.</p>
+      <div class="about-text reveal" style="transition-delay:.1s">
+        <span class="section-label">About Akotarh</span>
+        <h2>A Life at the Intersection of<br/><span class="highlight">Technology &amp; Impact</span></h2>
+        <div class="accent-line left"></div>
+        <p style="margin-top:24px">Akotarh Akoson, formerly known publicly as Raymond Akoson / Akoson Raymond, is a Senior Cybersecurity Engineer, civic-tech leader, former politician, activist, and founder. His work sits at the intersection of cybersecurity, education, institutional management, civic advocacy, and secure digital transformation.</p>
         <div class="about-quote"><p>"Secure Systems. Strong Institutions. Empowered Communities — this is not a tagline. It is a life's work."</p></div>
-        <p style="font-size:15px;color:var(--t2);line-height:1.9;margin-bottom:22px">From teaching Biology in Cameroon to serving as Secretary General of a political party, from parliamentary candidacy to a Magna Cum Laude cybersecurity degree — every chapter has sharpened the same mission.</p>
-        <div class="about-pills">
-          <span class="pill">Senior Cybersecurity Engineer</span><span class="pill">Former Secretary General</span>
-          <span class="pill">Magna Cum Laude BSc</span><span class="pill">3&times; Founder</span><span class="pill">Ambazonia Advocate</span>
+        <p>From teaching Biology in Cameroon to serving as Secretary General of a political party, from parliamentary candidacy to a Magna Cum Laude cybersecurity degree — every chapter has sharpened the same mission.</p>
+        <div class="about-tags">
+          <span class="about-tag">Senior Cybersecurity Engineer</span><span class="about-tag">Former Secretary General</span>
+          <span class="about-tag">Magna Cum Laude BSc</span><span class="about-tag">3&times; Founder</span><span class="about-tag">Ambazonia Advocate</span>
         </div>
-        <div class="btns"><a href="about.html" class="btn btn-prim">Read Full Biography</a><a href="contact.html" class="btn btn-sec">Get in Touch</a></div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="about.html" class="btn btn-primary">Read Full Biography</a>
+          <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="div"></div>
-
 <!-- ████ PILLARS ████ -->
-<section class="S" style="background:var(--bg1)">
-  <div class="W">
-    <div class="sec-hd center reveal">
-      <p class="eyebrow"><i></i>Core Identity</p>
-      <h2>The Four Pillars of<br/><span class="gt">Akotarh's Mission</span></h2>
-      <p>Every initiative, platform, and public engagement is anchored in this foundation.</p>
+<section class="section" style="background:var(--bg-light)">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Core Identity</span>
+      <h2>The Four Pillars of<br/><span class="highlight" style="color:var(--primary)">Akotarh's Mission</span></h2>
+      <div class="accent-line"></div>
+      <p style="margin-top:20px">Every initiative, platform, and public engagement is anchored in this foundation.</p>
     </div>
     <div class="pillars-grid">
-      <div class="pillar reveal d1"><div class="pillar-icon pi-c"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Cybersecurity</h3><p>Senior Cybersecurity Engineer at a U.S. Fortune 500 company with federal government contract support. Specializing in security operations, threat analysis, and institutional protection.</p></div>
-      <div class="pillar reveal d2"><div class="pillar-icon pi-p"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M10 10h4"/></svg></div><h3>Civic Leadership</h3><p>Former Secretary General of the People Action Party. Parliamentary candidate for the Manyu Constituency — a record of democratic commitment and institutional reform.</p></div>
-      <div class="pillar reveal d3"><div class="pillar-icon pi-g"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8l3 3-3 3"/><path d="M13 14h3"/></svg></div><h3>Institutional Technology</h3><p>Founder and CEO of America CyberSquad, supporting IT training, cybersecurity staffing, managed security services, and secure platform development.</p></div>
-      <div class="pillar reveal d4"><div class="pillar-icon pi-gold"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Public Advocacy</h3><p>Active in Ambazonia diplomacy, documentation of alleged war crimes, and human-rights activism — using technology for accountability and community protection.</p></div>
+      <div class="pillar-card reveal d1"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Cybersecurity</h3><p>Senior Cybersecurity Engineer at a U.S. Fortune 500 company with federal government contract support. Specializing in security operations, threat analysis, and institutional protection.</p></div>
+      <div class="pillar-card reveal d2"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M10 10h4"/></svg></div><h3>Civic Leadership</h3><p>Former Secretary General of the People Action Party. Parliamentary candidate for the Manyu Constituency — a record of democratic commitment and institutional reform.</p></div>
+      <div class="pillar-card reveal d3"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8l3 3-3 3"/><path d="M13 14h3"/></svg></div><h3>Institutional Technology</h3><p>Founder and CEO of America CyberSquad, supporting IT training, cybersecurity staffing, managed security services, and secure platform development.</p></div>
+      <div class="pillar-card reveal d4"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Public Advocacy</h3><p>Active in Ambazonia diplomacy, documentation of alleged war crimes, and human-rights activism — using technology for accountability and community protection.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ████ VENTURES ████ -->
-<section class="S">
-  <div class="W">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:20px" class="reveal">
-      <div><p class="eyebrow"><i></i>Ventures &amp; Platforms</p><h2 style="font-size:clamp(24px,3.5vw,44px)">Technology Built for<br/><span class="gt">Real Institutional Impact</span></h2></div>
-      <a href="ventures.html" class="btn btn-sec">View All Ventures</a>
+<section class="section">
+  <div class="container">
+    <div class="section-row reveal">
+      <div><span class="section-label">Ventures &amp; Platforms</span><h2>Technology Built for<br/><span class="highlight">Real Institutional Impact</span></h2><div class="accent-line left"></div></div>
+      <a href="ventures.html" class="btn btn-outline">View All Ventures</a>
     </div>
     <div class="ventures-grid">
-      <div class="vc reveal d1">
-        <div class="vc-head"><div class="vc-logo" style="background:rgba(27,140,58,.07)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><span class="chip chip-c">Cybersecurity</span></div>
+      <div class="venture-card reveal d1">
+        <div class="venture-header"><div class="venture-logo" style="background:rgba(27,140,58,.07)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><span class="venture-chip">Cybersecurity</span></div>
         <h3>America CyberSquad</h3>
-        <div class="vc-desc">An IT and cybersecurity company focused on equipping individuals and institutions with the skills, staffing, services, and secure systems they need to thrive.</div>
-        <div class="vc-tags"><span class="vc-tag">IT Training</span><span class="vc-tag">IT Staffing</span><span class="vc-tag">Managed Security</span><span class="vc-tag">Secure Dev</span></div>
-        <div class="vc-divider"></div><a href="ventures.html" class="btn-ghost">Visit America CyberSquad</a>
+        <div class="venture-desc">An IT and cybersecurity company focused on equipping individuals and institutions with the skills, staffing, services, and secure systems they need to thrive.</div>
+        <div class="venture-tags"><span class="venture-tag">IT Training</span><span class="venture-tag">IT Staffing</span><span class="venture-tag">Managed Security</span><span class="venture-tag">Secure Dev</span></div>
+        <div class="venture-divider"></div><a href="ventures.html" class="btn-ghost">Visit America CyberSquad</a>
       </div>
-      <div class="vc reveal d2">
-        <div class="vc-head"><div class="vc-logo" style="background:#fff;padding:4px;border:1px solid rgba(27,140,58,.15)"><img src="images/scholarstika-logo.png" alt="Scholarstika" style="width:36px;height:36px;object-fit:contain;border-radius:6px"></div><span class="chip chip-p">EdTech</span></div>
+      <div class="venture-card reveal d2">
+        <div class="venture-header"><div class="venture-logo" style="background:#fff;padding:4px;border:1px solid rgba(27,140,58,.15)"><img src="images/scholarstika-logo.png" alt="Scholarstika" style="width:36px;height:36px;object-fit:contain;border-radius:6px"></div><span class="venture-chip">EdTech</span></div>
         <h3>Scholarstika</h3>
-        <div class="vc-desc">An education-management platform designed to help schools manage academic, administrative, communication, and institutional processes securely and effectively.</div>
-        <div class="vc-tags"><span class="vc-tag">Academic Mgmt</span><span class="vc-tag">Administration</span><span class="vc-tag">Data Security</span></div>
-        <div class="vc-divider"></div><a href="ventures.html" class="btn-ghost">Visit Scholarstika</a>
+        <div class="venture-desc">An education-management platform designed to help schools manage academic, administrative, communication, and institutional processes securely and effectively.</div>
+        <div class="venture-tags"><span class="venture-tag">Academic Mgmt</span><span class="venture-tag">Administration</span><span class="venture-tag">Data Security</span></div>
+        <div class="venture-divider"></div><a href="ventures.html" class="btn-ghost">Visit Scholarstika</a>
       </div>
-      <div class="vc reveal d3">
-        <div class="vc-head"><div class="vc-logo" style="background:rgba(34,197,94,.06)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><span class="chip chip-g">Faith Tech</span></div>
+      <div class="venture-card reveal d3">
+        <div class="venture-header"><div class="venture-logo" style="background:rgba(34,197,94,.06)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><span class="venture-chip">Faith Tech</span></div>
         <h3>Mandem</h3>
-        <div class="vc-desc">A church management platform to help faith-based organizations manage members, ministries, attendance, communication, events, and institutional data.</div>
-        <div class="vc-tags"><span class="vc-tag">Members</span><span class="vc-tag">Ministries</span><span class="vc-tag">Events</span><span class="vc-tag">Data Protection</span></div>
-        <div class="vc-divider"></div><a href="ventures.html" class="btn-ghost">Visit Mandem</a>
+        <div class="venture-desc">A church management platform to help faith-based organizations manage members, ministries, attendance, communication, events, and institutional data.</div>
+        <div class="venture-tags"><span class="venture-tag">Members</span><span class="venture-tag">Ministries</span><span class="venture-tag">Events</span><span class="venture-tag">Data Protection</span></div>
+        <div class="venture-divider"></div><a href="ventures.html" class="btn-ghost">Visit Mandem</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ████ MISSION ████ -->
-<div class="mission-sec reveal">
-  <div class="mission-bg">"</div>
-  <div class="W">
-    <blockquote>Secure Systems. Strong Institutions.<br/><span class="gt">Empowered Communities.</span>
-      <span class="mission-sub">Strong communities need strong institutions — and strong institutions need secure systems. My mission is to use cybersecurity, civic leadership, education, and technology to help institutions serve people better.</span>
-    </blockquote>
+<section class="mission reveal">
+  <div class="mission-bg-text">"</div>
+  <div class="container">
+    <blockquote>Secure Systems. Strong Institutions.<br/><span class="highlight">Empowered Communities.</span></blockquote>
+    <span class="mission-sub">Strong communities need strong institutions — and strong institutions need secure systems. My mission is to use cybersecurity, civic leadership, education, and technology to help institutions serve people better.</span>
     <cite>— Akotarh Akoson</cite>
   </div>
-</div>
-
-<div class="div"></div>
+</section>
 
 <!-- ████ CIVIC ████ -->
-<section class="S" style="background:var(--bg1)">
-  <div class="W">
+<section class="section" style="background:var(--bg-light)">
+  <div class="container">
     <div class="civic-grid">
-      <div class="reveal">
-        <p class="eyebrow"><i></i>Civic Leadership</p>
-        <h2 style="font-size:clamp(24px,3vw,40px);margin-bottom:18px">From Public Leadership to<br/><span class="gt">Civic Technology</span></h2>
-        <p style="font-size:15px;color:var(--t2);line-height:1.9;margin-bottom:30px">Akotarh's public journey began in education and expanded into politics, activism, human-rights advocacy, and technology. His civic experience continues to shape his approach to cybersecurity and product development.</p>
-        <div class="btns"><a href="civic-leadership.html" class="btn btn-prim">Explore Civic Leadership</a><a href="about.html" class="btn btn-sec">Read Full Bio</a></div>
+      <div class="civic-left reveal">
+        <span class="section-label">Civic Leadership</span>
+        <h2>From Public Leadership to<br/><span class="highlight">Civic Technology</span></h2>
+        <div class="accent-line left"></div>
+        <p style="margin-top:20px">Akotarh's public journey began in education and expanded into politics, activism, human-rights advocacy, and technology. His civic experience continues to shape his approach to cybersecurity and product development.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="civic-leadership.html" class="btn btn-primary">Explore Civic Leadership</a>
+          <a href="about.html" class="btn btn-outline">Read Full Bio</a>
+        </div>
       </div>
       <div class="reveal" style="transition-delay:.1s">
         <div class="principle"><div class="principle-num">01</div><div><h4>Human Dignity</h4><p>Every community deserves respect, protection, and the right to live with dignity.</p></div></div>
@@ -584,40 +574,40 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 </section>
 
 <!-- ████ INSIGHTS ████ -->
-<section class="S">
-  <div class="W">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:20px" class="reveal">
-      <div><p class="eyebrow"><i></i>Insights</p><h2 style="font-size:clamp(24px,3.5vw,44px)">Thoughts on Cybersecurity,<br/><span class="gt">Civic Tech &amp; Leadership</span></h2></div>
-      <a href="insights.html" class="btn btn-sec">Read All Insights</a>
+<section class="section">
+  <div class="container">
+    <div class="section-row reveal">
+      <div><span class="section-label">Insights</span><h2>Thoughts on Cybersecurity,<br/><span class="highlight">Civic Tech &amp; Leadership</span></h2><div class="accent-line left"></div></div>
+      <a href="insights.html" class="btn btn-outline">Read All Insights</a>
     </div>
-    <div class="ins-grid">
-      <article class="ins-card reveal d1">
-        <div class="ins-img" style="background:linear-gradient(135deg,rgba(27,140,58,.1),rgba(22,101,52,.08),var(--bg3))"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M10 10h4"/></svg></div>
-        <div class="ins-body"><p class="ins-cat">Civic Technology</p><h3>From Civic Leadership to Civic Technology</h3><p>Civic leadership taught me that communities need strong institutions. Cybersecurity taught me that institutions cannot be strong without trust and secure systems.</p><a href="insights.html" class="btn-ghost">Read More</a></div>
+    <div class="insights-grid">
+      <article class="insight-card reveal d1">
+        <div class="insight-img" style="background:linear-gradient(135deg,rgba(27,140,58,.1),rgba(22,101,52,.06),var(--bg-alt))"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M10 10h4"/></svg></div>
+        <div class="insight-body"><p class="insight-cat">Civic Technology</p><h3>From Civic Leadership to Civic Technology</h3><p>Civic leadership taught me that communities need strong institutions. Cybersecurity taught me that institutions cannot be strong without trust and secure systems.</p><a href="insights.html" class="btn-ghost">Read More</a></div>
       </article>
-      <article class="ins-card reveal d2">
-        <div class="ins-img" style="background:linear-gradient(135deg,rgba(22,101,52,.1),rgba(27,140,58,.05),var(--bg3))"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-        <div class="ins-body"><p class="ins-cat">Institutional Security</p><h3>Why Schools and Churches Need Secure Digital Systems</h3><p>Institutions that serve people also hold sensitive information. Their technology must be practical, secure, and trustworthy.</p><a href="insights.html" class="btn-ghost">Read More</a></div>
+      <article class="insight-card reveal d2">
+        <div class="insight-img" style="background:linear-gradient(135deg,rgba(22,101,52,.1),rgba(27,140,58,.05),var(--bg-alt))"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="insight-body"><p class="insight-cat">Institutional Security</p><h3>Why Schools and Churches Need Secure Digital Systems</h3><p>Institutions that serve people also hold sensitive information. Their technology must be practical, secure, and trustworthy.</p><a href="insights.html" class="btn-ghost">Read More</a></div>
       </article>
-      <article class="ins-card reveal d3">
-        <div class="ins-img" style="background:linear-gradient(135deg,rgba(34,197,94,.07),rgba(21,128,61,.06),var(--bg3))"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
-        <div class="ins-body"><p class="ins-cat">Career &amp; Leadership</p><h3>My Journey from Public Leadership to Cybersecurity</h3><p>A reflection on education, politics, displacement, rebuilding, and product leadership — every chapter strengthened the same mission.</p><a href="insights.html" class="btn-ghost">Read More</a></div>
+      <article class="insight-card reveal d3">
+        <div class="insight-img" style="background:linear-gradient(135deg,rgba(34,197,94,.07),rgba(21,128,61,.06),var(--bg-alt))"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
+        <div class="insight-body"><p class="insight-cat">Career &amp; Leadership</p><h3>My Journey from Public Leadership to Cybersecurity</h3><p>A reflection on education, politics, displacement, rebuilding, and product leadership — every chapter strengthened the same mission.</p><a href="insights.html" class="btn-ghost">Read More</a></div>
       </article>
     </div>
   </div>
 </section>
 
 <!-- ████ CTA ████ -->
-<section class="cta-sec">
-  <div class="cta-bg"></div>
-  <div class="W">
+<section class="cta-section">
+  <div class="container">
     <div class="reveal">
-      <p class="eyebrow" style="justify-content:center;display:flex"><i></i>Let's Connect</p>
-      <h2>Let's Secure Your Business<br/><span class="gt-anim">Before Hackers Test It First.</span></h2>
-      <p>For media inquiries, speaking invitations, cybersecurity discussions, civic leadership engagements, or professional collaboration.</p>
-      <div class="btns" style="justify-content:center">
-        <a href="contact.html" class="btn btn-prim">Book a Consultation</a>
-        <a href="media.html" class="btn btn-sec">Media &amp; Speaking Kit</a>
+      <span class="section-label">Let's Connect</span>
+      <h2>Let's Secure Your Business<br/><span class="highlight">Before Hackers Test It First.</span></h2>
+      <div class="accent-line"></div>
+      <p style="margin-top:20px">For media inquiries, speaking invitations, cybersecurity discussions, civic leadership engagements, or professional collaboration.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn btn-primary btn-arrow">Book a Consultation</a>
+        <a href="media.html" class="btn btn-outline">Media &amp; Speaking Kit</a>
       </div>
     </div>
   </div>
@@ -627,47 +617,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 <!-- ████ FOOTER ████ -->
 <footer class="footer">
-  <div class="footer-glow"></div>
-  <div class="W">
-    <!-- Top row: CTA banner -->
-    <div class="footer-cta">
-      <div class="footer-cta-text">
-        <h3>Ready to Work Together?</h3>
-        <p>For consulting, speaking, media, or cybersecurity partnerships.</p>
-      </div>
-      <a href="contact.html" class="btn btn-prim">Get in Touch</a>
+  <div class="container">
+    <div class="footer-cta-bar">
+      <div><h3>Ready to Work Together?</h3><p>For consulting, speaking, media, or cybersecurity partnerships.</p></div>
+      <a href="contact.html" class="btn">Get in Touch</a>
     </div>
 
     <div class="footer-grid">
-      <!-- Brand column -->
-      <div class="footer-brand-col">
-        <div class="footer-brand">Akotarh<em>.</em></div>
+      <div>
+        <div class="footer-brand">Akotarh<span>.</span></div>
         <div class="footer-tagline">Senior Cybersecurity Engineer</div>
         <p class="footer-desc">Building secure systems, strong institutions, and empowered communities through cybersecurity, civic leadership, and technology entrepreneurship.</p>
         <div class="footer-social">
-          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#" aria-label="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg></a>
-          <a href="mailto:contact@akotarhakoson.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="X / Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg></a>
+          <a href="mailto:contact@akotarhakoson.com" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
         </div>
       </div>
 
-      <!-- Navigation -->
-      <nav class="fcol"><h5>Navigate</h5><ul>
+      <nav class="footer-col"><h5>Navigate</h5><ul>
         <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="cybersecurity.html">Cybersecurity</a></li>
         <li><a href="civic-leadership.html">Civic Leadership</a></li><li><a href="ventures.html">Ventures</a></li>
         <li><a href="insights.html">Insights</a></li><li><a href="media.html">Media</a></li><li><a href="contact.html">Contact</a></li>
       </ul></nav>
 
-      <!-- Ventures -->
-      <nav class="fcol"><h5>Ventures</h5><ul>
+      <nav class="footer-col"><h5>Ventures</h5><ul>
         <li><a href="ventures.html">America CyberSquad</a></li><li><a href="ventures.html">Scholarstika</a></li><li><a href="ventures.html">Mandem</a></li>
       </ul><h5 style="margin-top:28px">Resources</h5><ul>
         <li><a href="media.html">Media &amp; Press Kit</a></li><li><a href="insights.html">Articles &amp; Insights</a></li>
         <li><a href="contact.html">Book Consultation</a></li>
       </ul></nav>
 
-      <!-- Legal -->
-      <nav class="fcol"><h5>Legal</h5><ul>
+      <nav class="footer-col"><h5>Legal</h5><ul>
         <li><a href="official-statement.html">Official Statement</a></li><li><a href="raymond-akoson.html">Name Clarification</a></li>
       </ul><h5 style="margin-top:28px">Credentials</h5><ul>
         <li><a href="cybersecurity.html">Fortune 500 Engineer</a></li><li><a href="about.html">Magna Cum Laude BSc</a></li>
@@ -689,10 +670,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 </footer>
 
 <script>
-/* Nav scroll */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
-/* Mobile nav — fluid toggle */
+/* Nav - already sticky via CSS */
+/* Mobile nav */
 const mob=document.getElementById('mob');const hbg=document.getElementById('hbg');
 function toggleMob(){const open=mob.classList.toggle('open');hbg.classList.toggle('active');document.body.style.overflow=open?'hidden':''}
 hbg.onclick=toggleMob;
@@ -705,10 +684,10 @@ function ts(){const w=roles[ri];if(!del){typed.textContent=w.slice(0,++ci);if(ci
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.02,rootMargin:'0px 0px 60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 setTimeout(()=>document.querySelectorAll('.reveal:not(.visible)').forEach(el=>el.classList.add('visible')),2000);
-/* 3D tilt */
-document.querySelectorAll('.pillar,.vc,.ins-card').forEach(el=>{
-  el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();const dx=(e.clientX-r.left-r.width/2)/r.width;const dy=(e.clientY-r.top-r.height/2)/r.height;el.style.transform=`perspective(800px) rotateX(${-dy*6}deg) rotateY(${dx*6}deg) translateY(-8px)`;el.style.transition='transform .06s'});
-  el.addEventListener('mouseleave',()=>{el.style.transition='transform .4s cubic-bezier(.4,0,.2,1)';el.style.transform='';setTimeout(()=>{el.style.transition=''},400)});
+/* Card hover lift */
+document.querySelectorAll('.pillar-card,.venture-card,.insight-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{el.style.transform='translateY(-6px)';el.style.boxShadow='0 12px 40px rgba(0,0,0,.12)'});
+  el.addEventListener('mouseleave',()=>{el.style.transform='';el.style.boxShadow=''});
 });
 </script>
 </body>

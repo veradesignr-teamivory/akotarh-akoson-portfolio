@@ -4,13 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>About Akotarh Akoson | Full Biography</title>
-<meta name="description" content="Full biography of Akotarh Akoson — Senior Cybersecurity Engineer, civic-tech leader, former politician, Ambazonia advocate, and founder of America CyberSquad, Scholarstika, and Mandem."/>
+<meta name="description" content="Full biography of Akotarh Akoson — Senior Cybersecurity Analyst, civic-tech leader, former politician, Ambazonia advocate, and founder of America CyberSquad, Scholarstika, and Mandem."/>
 <meta name="author" content="Akotarh Akoson"/>
 <meta name="robots" content="index, follow"/>
 <meta name="keywords" content="Akotarh Akoson biography, Raymond Akoson, cybersecurity career, Bellevue University, People Action Party, Ambazonia advocate, America CyberSquad founder"/>
 <link rel="canonical" href="https://akotarhakoson.com/about"/>
 <meta property="og:title" content="About Akotarh Akoson | Full Biography"/>
-<meta property="og:description" content="Full biography of Akotarh Akoson — Senior Cybersecurity Engineer, civic-tech leader, former politician, Ambazonia advocate, and serial founder."/>
+<meta property="og:description" content="Full biography of Akotarh Akoson — Senior Cybersecurity Analyst, civic-tech leader, former politician, Ambazonia advocate, and serial founder."/>
 <meta property="og:type" content="profile"/>
 <meta property="og:url" content="https://akotarhakoson.com/about"/>
 <meta property="og:site_name" content="Akotarh Akoson"/>
@@ -23,13 +23,13 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@akotarhakoson"/>
 <meta name="twitter:title" content="About Akotarh Akoson | Full Biography"/>
-<meta name="twitter:description" content="Senior Cybersecurity Engineer, civic-tech leader, former politician, Ambazonia advocate, and founder. Full biography."/>
+<meta name="twitter:description" content="Senior Cybersecurity Analyst, civic-tech leader, former politician, Ambazonia advocate, and founder. Full biography."/>
 <meta name="twitter:image" content="https://akotarhakoson.com/images/akotarh-executive.jpg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap" rel="stylesheet"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Akotarh Akoson","alternateName":["Raymond Akoson","Akoson Raymond"],"jobTitle":"Senior Cybersecurity Engineer","alumniOf":{"@type":"CollegeOrUniversity","name":"Bellevue University"},"url":"https://akotarhakoson.com/about","image":"https://akotarhakoson.com/images/akotarh-executive.jpg","sameAs":["https://www.linkedin.com/in/akotarhakoson","https://x.com/akotarhakoson"],"description":"Senior Cybersecurity Engineer, civic-tech leader, former politician, Ambazonia advocate, and serial founder."}}
+{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Akotarh Akoson","alternateName":["Raymond Akoson","Akoson Raymond"],"jobTitle":"Senior Cybersecurity Analyst","alumniOf":{"@type":"CollegeOrUniversity","name":"Bellevue University"},"url":"https://akotarhakoson.com/about","image":"https://akotarhakoson.com/images/akotarh-executive.jpg","sameAs":["https://www.linkedin.com/in/akotarhakoson","https://x.com/akotarhakoson"],"description":"Senior Cybersecurity Analyst, civic-tech leader, former politician, Ambazonia advocate, and serial founder."}}
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -233,10 +233,17 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
 }
 .profile-visual{position:sticky;top:100px}
-.profile-frame{aspect-ratio:3/4;border-radius:28px;background:linear-gradient(160deg,var(--bg-alt),var(--bg-light));border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:24px}
+.profile-frame{aspect-ratio:16/10;border-radius:20px;background:linear-gradient(160deg,var(--bg-alt),var(--bg-light));border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:24px}
 .profile-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,140,58,.07),transparent 50%,rgba(22,101,52,.06) 100%);z-index:2}
-.profile-photo{width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:grayscale(100%) contrast(1.1);transition:filter .8s var(--ease);position:absolute;inset:0;z-index:1}
-.profile-frame:hover .profile-photo{filter:grayscale(20%) contrast(1.04)}
+.profile-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:none;transition:filter .8s var(--ease);position:absolute;inset:0;z-index:1}
+/* POLITICAL GALLERY */
+.political-gallery{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0}
+.political-gallery-item{text-align:center}
+.political-gallery-item img{width:100%;border-radius:16px;border:1px solid var(--border);object-fit:cover;aspect-ratio:4/5;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.political-gallery-item img:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.political-gallery-item .img-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text);margin-top:12px;line-height:1.4}
+.political-gallery-item .img-subtitle{font-size:12px;color:var(--text-light);margin-top:4px}
+.profile-frame:hover .profile-photo{filter:none}
 .profile-scan{display:none}
 .profile-color-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(27,140,58,.12) 0%,transparent 55%);opacity:0;transition:opacity .5s var(--ease)}
 .profile-frame:hover .profile-color-overlay{opacity:1}
@@ -284,14 +291,16 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
 .edu-card h4{font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px}
 .edu-card-sub{font-size:13px;color:var(--primary);font-weight:500}
 .edu-card p{font-size:14px;color:var(--text-secondary);line-height:1.75}
+/* PROFILE GRID - DESKTOP */
+.profile-grid{display:grid;grid-template-columns:360px 1fr;gap:64px;align-items:start}
 @media(max-width:900px){.section{padding:64px 0} .section{padding:48px 0} /* PAGE-SPECIFIC */
-/* PROFILE GRID */
-.profile-grid{display:grid;grid-template-columns:360px 1fr;gap:64px;align-items:start} .profile-visual{position:sticky;top:100px} .profile-frame{aspect-ratio:3/4;border-radius:28px;background:linear-gradient(160deg,var(--bg-alt),var(--bg-light));border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:24px} .profile-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,140,58,.07),transparent 50%,rgba(22,101,52,.06) 100%);z-index:2} .profile-photo{width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:grayscale(100%) contrast(1.1);transition:filter .8s var(--ease);position:absolute;inset:0;z-index:1} .profile-frame:hover .profile-photo{filter:grayscale(20%) contrast(1.04)} .profile-scan{display:none} .profile-color-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(27,140,58,.12) 0%,transparent 55%);opacity:0;transition:opacity .5s var(--ease)} .profile-frame:hover .profile-color-overlay{opacity:1} .pf-tl{position:absolute;top:0;left:0;width:80px;height:80px;border-top:2px solid rgba(27,140,58,.35);border-left:2px solid rgba(27,140,58,.35);border-radius:28px 0 0 0} .pf-br{position:absolute;bottom:0;right:0;width:80px;height:80px;border-bottom:2px solid rgba(22,101,52,.35);border-right:2px solid rgba(22,101,52,.35);border-radius:0 0 28px 0} .pf-init{font-family:'Space Grotesk',sans-serif;font-size:96px;font-weight:700;color:rgba(27,140,58,.07);letter-spacing:-.04em;position:relative;z-index:1} .pf-badge{background:linear-gradient(135deg,var(--bg-alt),var(--bg-alt));border:1px solid var(--border-green);border-radius:16px;padding:20px 24px} .pf-badge-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)} .pf-badge-row:last-child{border-bottom:none;padding-bottom:0} .pf-badge-row:first-child{padding-top:0} .pf-badge-label{font-size:11px;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase} .pf-badge-val{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text)} /* BIO */
+/* PROFILE GRID MOBILE OVERRIDE */
+.profile-grid{grid-template-columns:360px 1fr;gap:64px;align-items:start} .profile-visual{position:sticky;top:100px} .profile-frame{aspect-ratio:3/4;border-radius:28px;background:linear-gradient(160deg,var(--bg-alt),var(--bg-light));border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:24px} .profile-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,140,58,.07),transparent 50%,rgba(22,101,52,.06) 100%);z-index:2} .profile-photo{width:100%;height:100%;object-fit:cover;object-position:center 10%;filter:grayscale(100%) contrast(1.1);transition:filter .8s var(--ease);position:absolute;inset:0;z-index:1} .profile-frame:hover .profile-photo{filter:none} .profile-scan{display:none} .profile-color-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(27,140,58,.12) 0%,transparent 55%);opacity:0;transition:opacity .5s var(--ease)} .profile-frame:hover .profile-color-overlay{opacity:1} .pf-tl{position:absolute;top:0;left:0;width:80px;height:80px;border-top:2px solid rgba(27,140,58,.35);border-left:2px solid rgba(27,140,58,.35);border-radius:28px 0 0 0} .pf-br{position:absolute;bottom:0;right:0;width:80px;height:80px;border-bottom:2px solid rgba(22,101,52,.35);border-right:2px solid rgba(22,101,52,.35);border-radius:0 0 28px 0} .pf-init{font-family:'Space Grotesk',sans-serif;font-size:96px;font-weight:700;color:rgba(27,140,58,.07);letter-spacing:-.04em;position:relative;z-index:1} .pf-badge{background:linear-gradient(135deg,var(--bg-alt),var(--bg-alt));border:1px solid var(--border-green);border-radius:16px;padding:20px 24px} .pf-badge-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)} .pf-badge-row:last-child{border-bottom:none;padding-bottom:0} .pf-badge-row:first-child{padding-top:0} .pf-badge-label{font-size:11px;color:var(--text-light);letter-spacing:.06em;text-transform:uppercase} .pf-badge-val{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--text)} /* BIO */
 .bio-text p{font-size:16px;color:var(--text-secondary);line-height:1.95;margin-bottom:22px} .bio-text h3{font-family:'Space Grotesk',sans-serif;font-size:22px;color:var(--text);margin:44px 0 16px;padding-top:44px;border-top:1px solid var(--border)} .bio-text h3.first{border-top:none;padding-top:0;margin-top:0} .bio-pullquote{border-left:3px solid var(--primary);padding:20px 28px;margin:32px 0;background:rgba(27,140,58,.04);border-radius:0 14px 14px 0} .bio-pullquote p{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:var(--text);line-height:1.55;margin:0;font-style:italic} /* TIMELINE */
 .timeline{margin:20px 0} .tl-item{display:flex;gap:24px;padding:28px 0;border-bottom:1px solid var(--border)} .tl-item:last-child{border-bottom:none} .tl-year{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--primary);min-width:84px;padding-top:3px;letter-spacing:.04em;flex-shrink:0} .tl-content h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px} .tl-content p{font-size:13px;color:var(--text-secondary);line-height:1.75} /* HIGHLIGHTS */
 .highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px} .hl-card{background:var(--bg-white);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;transition:all var(--ease) var(--ease)} .hl-card:hover{border-color:var(--border-green);transform:translateY(-4px);box-shadow:var(--shadow)} .hl-num{font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--primary-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;letter-spacing:-.03em} .hl-lbl{font-size:13px;color:var(--text-light);line-height:1.5} /* SKILLS GRID */
 .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px} .skill-card{background:var(--bg-white);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all var(--ease) var(--ease)} .skill-card:hover{border-color:var(--border-green);background:rgba(27,140,58,.04)} .skill-card-icon{font-size:24px;margin-bottom:12px} .skill-card-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px} .skill-card-tags{display:flex;flex-wrap:wrap;gap:6px} .stag{font-size:11px;padding:3px 10px;background:rgba(0,0,0,.03);border:1px solid var(--border);border-radius:100px;color:var(--text-light)} /* EDU */
-.edu-card{background:var(--bg-white);border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:16px;transition:all var(--ease) var(--ease)} .edu-card:hover{border-color:var(--border-green)} .edu-card-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px} .edu-icon{width:48px;height:48px;border-radius:12px;background:rgba(27,140,58,.08);border:1px solid rgba(27,140,58,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0} .edu-card h4{font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px} .edu-card-sub{font-size:13px;color:var(--primary);font-weight:500} .edu-card p{font-size:14px;color:var(--text-secondary);line-height:1.75} .profile-grid{grid-template-columns:1fr} .profile-visual{position:static} .highlights{grid-template-columns:1fr 1fr} .skills-grid{grid-template-columns:1fr} .S{padding:80px 0}}
+.edu-card{background:var(--bg-white);border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:16px;transition:all var(--ease) var(--ease)} .edu-card:hover{border-color:var(--border-green)} .edu-card-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px} .edu-icon{width:48px;height:48px;border-radius:12px;background:rgba(27,140,58,.08);border:1px solid rgba(27,140,58,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0} .edu-card h4{font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px} .edu-card-sub{font-size:13px;color:var(--primary);font-weight:500} .edu-card p{font-size:14px;color:var(--text-secondary);line-height:1.75} .profile-grid{grid-template-columns:1fr} .profile-visual{position:static} .highlights{grid-template-columns:1fr 1fr} .skills-grid{grid-template-columns:1fr} .political-gallery{grid-template-columns:1fr;gap:20px} .S{padding:80px 0}}
 @media(max-width:640px){.S{padding:64px 0} .highlights{grid-template-columns:1fr} .W{padding:0 20px}}
 </style>
 </head>
@@ -351,7 +360,7 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
     <nav class="breadcrumb"><a href="index.html">Home</a><span style="opacity:.4">/</span><span>About</span></nav>
     <div class="page-hero-chip">Full Biography</div>
     <h1>Akotarh <span class="highlight">Akoson</span></h1>
-    <p class="page-hero-desc">Senior Cybersecurity Engineer, civic-tech leader, former politician, Ambazonia advocate, and serial founder building technology that strengthens institutions and empowers communities.</p>
+    <p class="page-hero-desc">Senior Cybersecurity Analyst, civic-tech leader, former politician, Ambazonia advocate, and serial founder building technology that strengthens institutions and empowers communities.</p>
     <div class="btns">
       <a href="contact.html" class="btn btn-primary">Get In Touch</a>
       <a href="cybersecurity.html" class="btn btn-outline-white">Cybersecurity Work</a>
@@ -374,7 +383,7 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
     <div class="profile-grid">
       <div class="profile-visual reveal from-left">
         <div class="profile-frame" id="profileFrame">
-          <img src="images/akotarh-portrait.jpg" alt="Akotarh Akoson — professional portrait" class="profile-photo" id="profileImg" onerror="this.style.display='none';document.getElementById('pfInit').style.display='flex'"/>
+          <img src="images/akotarh-cybersecurity-lab.jpg" alt="Akotarh Akoson at ISSA Ohio Conference 2025 — hacking a smart bulb" class="profile-photo" id="profileImg" onerror="this.style.display='none';document.getElementById('pfInit').style.display='flex'"/>
           <div class="profile-scan" aria-hidden="true"></div>
           <div class="profile-color-overlay" aria-hidden="true"></div>
           <div class="pf-tl" aria-hidden="true"></div>
@@ -385,23 +394,35 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
           <div class="pf-badge-row"><span class="pf-badge-label">Based In</span><span class="pf-badge-val">United States</span></div>
           <div class="pf-badge-row"><span class="pf-badge-label">Sector</span><span class="pf-badge-val">Cybersecurity</span></div>
           <div class="pf-badge-row"><span class="pf-badge-label">Education</span><span class="pf-badge-val">BSc, Magna Cum Laude</span></div>
-          <div class="pf-badge-row"><span class="pf-badge-label">Origin</span><span class="pf-badge-val">English Cameroon</span></div>
+          <div class="pf-badge-row"><span class="pf-badge-label">Origin</span><span class="pf-badge-val">English Cameroon (Ambazonia)</span></div>
           <div class="pf-badge-row"><span class="pf-badge-label">Languages</span><span class="pf-badge-val">English · French</span></div>
         </div>
       </div>
       <div class="bio-text reveal">
         <div class="eyebrow"><i></i>Full Biography</div>
         <h3 class="first">The Beginning</h3>
-        <p>Akotarh Akoson — formerly known publicly as Raymond Akoson and Akoson Raymond — is a Senior Cybersecurity Engineer, civic-tech leader, entrepreneur, and human-rights advocate whose life has been shaped by an extraordinary intersection of technology, politics, displacement, and purpose.</p>
+        <p>Akotarh Akoson — formerly known publicly as Raymond Akoson and Akoson Raymond — is a Senior Cybersecurity Analyst, civic-tech leader, entrepreneur, and human-rights advocate whose life has been shaped by an extraordinary intersection of technology, politics, displacement, and purpose.</p>
         <p>Born in the Manyu Division of English Cameroon (Ambazonia), Akotarh grew up in a region defined by colonial tensions and the persistent resilience of its people. These formative experiences gave him a foundational perspective on the relationship between institutional power, technological access, and civic freedom — a perspective that would animate his entire career.</p>
         <div class="bio-pullquote"><p>"I didn't choose cybersecurity. Cybersecurity chose me the moment I understood that broken systems — whether digital or governmental — cause the same kind of harm to the same kind of people."</p></div>
         <h3>Political Career & Civic Leadership</h3>
         <p>Before establishing himself in cybersecurity, Akotarh was a prominent political figure in Cameroon. He served as National Secretary for Organization and later Secretary General of the People Action Party, placed at the center of Cameroonian political life during one of its most consequential periods.</p>
-        <p>He ran for Parliament representing the Manyu Constituency in English Cameroon, campaigning on digital development, institutional accountability, and the rights of marginalized communities. Following displacement from the Anglophone Crisis, he became an active advocate for the Ambazonia movement, documenting human-rights violations through formal channels and engaging international stakeholders.</p>
+        <p>He ran for Parliament representing the Manyu Constituency in English Cameroon (Ambazonia), campaigning on digital development, institutional accountability, and the rights of marginalized communities. Following displacement from the Anglophone Crisis, he became an active advocate for the Ambazonia movement, documenting human-rights violations through formal channels and engaging international stakeholders.</p>
+        <div class="political-gallery">
+          <div class="political-gallery-item">
+            <img src="images/pap-election-poster.jpg" alt="Akotarh Akoson (Raymond Akoson) — PAP Campaign Flyer for Mamfe Central & Upper Bayang"/>
+            <div class="img-title">PAP Campaign Flyer</div>
+            <div class="img-subtitle">Mamfe Central & Upper Bayang</div>
+          </div>
+          <div class="political-gallery-item">
+            <img src="images/pap-campaign-rally.jpg" alt="Akotarh Akoson campaigns for Member of Parliament in Manyu — 2013"/>
+            <div class="img-title">Campaign Rally in Manyu</div>
+            <div class="img-subtitle">Parliamentary Campaign, 2013</div>
+          </div>
+        </div>
         <h3>Cybersecurity Career in the United States</h3>
-        <p>After relocating to the United States, Akotarh earned a Bachelor of Science in Cybersecurity — Magna Cum Laude — from Bellevue University. He is currently a Senior Cybersecurity Engineer with a U.S. Fortune 500 company, with prior experience supporting U.S. Federal Government contracts. His expertise spans threat detection, security operations, vulnerability management, and secure digital transformation.</p>
+        <p>After relocating to the United States, Akotarh earned a Bachelor of Science in Cybersecurity — Magna Cum Laude — from Bellevue University. He is currently a Senior Cybersecurity Analyst with a U.S. Fortune 500 company, with prior experience supporting U.S. Federal Government contracts. His expertise spans threat detection, security operations, vulnerability management, and secure digital transformation.</p>
         <h3>Ventures & Entrepreneurship</h3>
-        <p>Akotarh has founded three companies — <strong style="color:var(--primary)">America CyberSquad</strong> (IT and cybersecurity), <strong style="color:var(--primary)">Scholarstika</strong> (education management platform), and <strong style="color:var(--primary)">Mandem</strong> (church management platform) — each solving real problems he personally encountered across two continents.</p>
+        <p>Akotarh has founded three companies — <a href="https://americacybersquad.com/" target="_blank" rel="noopener noreferrer" style="color:var(--primary);font-weight:700;text-decoration:underline">America CyberSquad</a> (IT and cybersecurity company), <strong style="color:var(--primary)">Scholarstika</strong> (education management platform), and <strong style="color:var(--primary)">Mandem</strong> (church management platform) — digital products of <a href="https://americacybersquad.com/" target="_blank" rel="noopener noreferrer" style="color:var(--primary);font-weight:600">America CyberSquad</a>, each solving real problems he personally encountered across two continents.</p>
         <div class="bio-pullquote"><p>"Every institution I have built, and every system I have secured, exists in service of the same goal: a world where people are not made vulnerable by the systems meant to protect them."</p></div>
         <div class="btns" style="margin-top:36px">
           <a href="cybersecurity.html" class="btn btn-primary">Cybersecurity Career</a>
@@ -421,12 +442,12 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
       <p>From political leadership in Cameroon to securing Fortune 500 infrastructure in the United States — a journey defined by conviction and impact.</p>
     </div>
     <div class="timeline reveal">
-      <div class="tl-item"><div class="tl-year">Present</div><div class="tl-content"><h4>Senior Cybersecurity Engineer — Fortune 500</h4><p>Leading threat detection, vulnerability management, and security operations across enterprise infrastructure at a U.S. Fortune 500 company.</p></div></div>
+      <div class="tl-item"><div class="tl-year">Present</div><div class="tl-content"><h4>Senior Cybersecurity Analyst — Fortune 500</h4><p>Leading threat detection, vulnerability management, and security operations across enterprise infrastructure at a U.S. Fortune 500 company.</p></div></div>
       <div class="tl-item"><div class="tl-year">2020+</div><div class="tl-content"><h4>Founder — America CyberSquad, Scholarstika, Mandem</h4><p>Founded three technology ventures addressing cybersecurity accessibility, education management, and church administration.</p></div></div>
       <div class="tl-item"><div class="tl-year">2019</div><div class="tl-content"><h4>BSc Cybersecurity — Magna Cum Laude, Bellevue University</h4><p>Graduated with Magna Cum Laude distinction from Bellevue University, Nebraska — one of the top-ranked cybersecurity programs in the US.</p></div></div>
       <div class="tl-item"><div class="tl-year">2016–18</div><div class="tl-content"><h4>U.S. Federal Government Contract Work</h4><p>Supported cybersecurity contracts involving U.S. Federal Government, gaining exposure to large-scale security frameworks and critical infrastructure protection.</p></div></div>
       <div class="tl-item"><div class="tl-year">2013–16</div><div class="tl-content"><h4>Secretary General — People Action Party, Cameroon</h4><p>Served as Secretary General, coordinating national operations during a critical period in Cameroonian political history. Previously National Secretary for Organization.</p></div></div>
-      <div class="tl-item"><div class="tl-year">2012</div><div class="tl-content"><h4>Parliamentary Candidate — Manyu Constituency, English Cameroon</h4><p>Ran for Parliament on a platform of digital development, institutional accountability, and rights for marginalized communities.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2012</div><div class="tl-content"><h4>Parliamentary Candidate — Manyu Constituency, English Cameroon (Ambazonia)</h4><p>Ran for Parliament on a platform of digital development, institutional accountability, and rights for marginalized communities.</p></div></div>
     </div>
   </div>
 </section>
@@ -480,7 +501,7 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
     <div class="footer-grid">
       <div>
         <div class="footer-brand">Akotarh<span>.</span></div>
-        <div class="footer-tagline">Senior Cybersecurity Engineer</div>
+        <div class="footer-tagline">Senior Cybersecurity Analyst</div>
         <p class="footer-desc">Building secure systems, strong institutions, and empowered communities through cybersecurity, civic leadership, and technology entrepreneurship.</p>
         <div class="footer-social">
           <a href="https://www.linkedin.com/in/akotarhakoson" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
@@ -496,7 +517,7 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
       </ul></nav>
 
       <nav class="footer-col"><h5>Ventures</h5><ul>
-        <li><a href="ventures.html">America CyberSquad</a></li><li><a href="ventures.html">Scholarstika</a></li><li><a href="ventures.html">Mandem</a></li>
+        <li><a href="https://americacybersquad.com/" target="_blank" rel="noopener noreferrer">America CyberSquad</a></li><li><a href="ventures.html">Scholarstika</a></li><li><a href="ventures.html">Mandem</a></li>
       </ul><h5 style="margin-top:28px">Resources</h5><ul>
         <li><a href="media.html">Media &amp; Press Kit</a></li><li><a href="insights.html">Articles &amp; Insights</a></li>
         <li><a href="contact.html">Book Consultation</a></li>

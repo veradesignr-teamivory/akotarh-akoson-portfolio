@@ -683,7 +683,7 @@ function toggleMob(){const open=mob.classList.toggle('open');hbg.classList.toggl
 hbg.onclick=toggleMob;
 mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');hbg.classList.remove('active');document.body.style.overflow=''}));
 /* Typing */
-const roles=['Cyber Security Analyst','Civic-Tech Leader','Startup Founder','Former Politician','Public Advocate','Fortune 500 Engineer'];
+const roles=['Senior Cybersecurity Analyst','Civic-Tech Leader','Startup Founder','Former Politician','Public Advocate','Fortune 500 Analyst'];
 let ri=0,ci=0,del=false;const typed=document.getElementById('typed');
 function ts(){const w=roles[ri];if(!del){typed.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(ts,2200);return}}else{typed.textContent=w.slice(0,--ci);if(ci===0){del=false;ri=(ri+1)%roles.length}}setTimeout(ts,del?50:90)}ts();
 /* Scroll reveal */

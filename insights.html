@@ -242,8 +242,48 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
 .nl-input:focus{border-color:var(--border-green)}
 .d4{transition-delay:.4s}
 .d5{transition-delay:.5s}
-@media(max-width:900px){.featured-post{grid-template-columns:1fr} .fp-visual{height:200px} .articles-grid{grid-template-columns:1fr 1fr} .S{padding:80px 0}}
-@media(max-width:640px){.S{padding:64px 0} .articles-grid{grid-template-columns:1fr} .W{padding:0 20px} .nl-form{flex-direction:column}}
+/* LOADING STATE */
+.loading-state{text-align:center;padding:80px 20px;color:var(--text-secondary)}
+.loading-state p{font-size:14px;margin-top:16px;font-family:'Space Grotesk',sans-serif}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;margin:0 auto;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:80px 20px}
+.empty-state svg{margin:0 auto 20px;opacity:.5}
+.empty-state h3{font-family:'Space Grotesk',sans-serif;font-size:22px;color:var(--text);margin-bottom:8px}
+.empty-state p{font-size:15px;color:var(--text-secondary);max-width:400px;margin:0 auto;line-height:1.8}
+/* ARTICLE MODAL */
+.article-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:flex-start;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s var(--ease);overflow-y:auto;padding:40px 20px}
+.article-modal.open{opacity:1;pointer-events:auto}
+.article-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.article-modal-content{position:relative;background:var(--bg-white);border-radius:24px;max-width:780px;width:100%;box-shadow:0 40px 100px rgba(0,0,0,.2);transform:translateY(30px) scale(.97);transition:transform .4s var(--ease);overflow:hidden}
+.article-modal.open .article-modal-content{transform:translateY(0) scale(1)}
+.article-modal-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.06);font-size:24px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all .3s;z-index:1;cursor:pointer;border:none}
+.article-modal-close:hover{background:rgba(0,0,0,.1);color:var(--text)}
+.article-modal-header{padding:40px 40px 0}
+.article-modal-topics{display:flex;gap:8px;margin-bottom:16px}
+.article-modal-topics span{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);padding:4px 12px;background:rgba(27,140,58,.08);border-radius:100px}
+.article-modal-header h1{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,36px);color:var(--text);line-height:1.2;margin-bottom:16px}
+.article-modal-meta{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--text-light);padding-bottom:24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.article-modal-meta span{display:flex;align-items:center;gap:5px}
+.article-modal-img{width:100%;max-height:400px;overflow:hidden}
+.article-modal-img img{width:100%;height:100%;object-fit:cover}
+.article-modal-body{padding:32px 40px 40px;font-size:16px;color:var(--text);line-height:1.9}
+.article-modal-body p{margin-bottom:20px}
+.article-modal-body h2,.article-modal-body h3{font-family:'Space Grotesk',sans-serif;margin:32px 0 16px;color:var(--text)}
+.article-modal-body h2{font-size:24px}
+.article-modal-body h3{font-size:20px}
+.article-modal-body ul,.article-modal-body ol{margin:16px 0;padding-left:24px}
+.article-modal-body li{margin-bottom:8px}
+.article-modal-body blockquote{border-left:3px solid var(--primary);padding:12px 24px;margin:24px 0;background:rgba(27,140,58,.03);border-radius:0 8px 8px 0;font-style:italic;color:var(--text-secondary)}
+.article-modal-body a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}
+.article-modal-body code{background:var(--bg-alt);padding:2px 6px;border-radius:4px;font-size:14px}
+.article-modal-body pre{background:var(--bg-alt);padding:20px;border-radius:12px;overflow-x:auto;margin:20px 0}
+.article-modal-body pre code{background:none;padding:0}
+/* ARTICLE CARD IMAGE */
+.article-img img{width:100%;height:100%;object-fit:cover;position:relative;z-index:0}
+@media(max-width:900px){.featured-post{grid-template-columns:1fr} .fp-visual{height:200px} .articles-grid{grid-template-columns:1fr 1fr} .article-modal-header{padding:32px 24px 0} .article-modal-body{padding:24px}}
+@media(max-width:640px){.articles-grid{grid-template-columns:1fr} .nl-form{flex-direction:column} .article-modal{padding:20px 12px} .article-modal-header{padding:28px 20px 0} .article-modal-body{padding:20px}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -363,218 +403,53 @@ h1,h2,h3,h4,h5{font-family:'Space Grotesk',sans-serif;font-weight:700;line-heigh
     </a>
 
     <!-- TOPICS -->
-    <div class="topics-bar reveal">
-      <button class="topic-btn active">All Topics</button>
-      <button class="topic-btn">Cybersecurity</button>
-      <button class="topic-btn">Civic Tech</button>
-      <button class="topic-btn">Leadership</button>
-      <button class="topic-btn">Ambazonia</button>
-      <button class="topic-btn">Entrepreneurship</button>
-      <button class="topic-btn">Digital Rights</button>
+    <div class="topics-bar reveal" id="topicsBar">
+      <button class="topic-btn active" data-topic="">All Topics</button>
+      <button class="topic-btn" data-topic="cybersecurity">Cybersecurity</button>
+      <button class="topic-btn" data-topic="civic-tech">Civic Tech</button>
+      <button class="topic-btn" data-topic="leadership">Leadership</button>
+      <button class="topic-btn" data-topic="ambazonia">Ambazonia</button>
+      <button class="topic-btn" data-topic="entrepreneurship">Entrepreneurship</button>
+      <button class="topic-btn" data-topic="digital-rights">Digital Rights</button>
     </div>
 
-    <!-- ARTICLES -->
-    <div class="articles-grid">
-      <!-- 1. Zero Trust -->
-      <div class="article-card reveal">
-        <div class="article-img" style="background:linear-gradient(135deg,rgba(27,140,58,.08),rgba(22,101,52,.04))">
-          <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="90" cy="70" r="45" fill="none" stroke="rgba(27,140,58,.2)" stroke-width="2" stroke-dasharray="6 4"/>
-            <circle cx="90" cy="70" r="28" fill="none" stroke="rgba(27,140,58,.35)" stroke-width="2"/>
-            <circle cx="90" cy="70" r="12" fill="rgba(27,140,58,.15)" stroke="rgba(27,140,58,.5)" stroke-width="2"/>
-            <path d="M90 58 L90 50 L82 44 L82 62 C82 68 90 74 90 74 C90 74 98 68 98 62 L98 44 L90 50Z" fill="rgba(27,140,58,.2)" stroke="rgba(27,140,58,.5)" stroke-width="1.5"/>
-            <circle cx="45" cy="35" r="5" fill="rgba(27,140,58,.1)" stroke="rgba(27,140,58,.25)" stroke-width="1"/>
-            <circle cx="135" cy="35" r="5" fill="rgba(27,140,58,.1)" stroke="rgba(27,140,58,.25)" stroke-width="1"/>
-            <circle cx="45" cy="105" r="5" fill="rgba(27,140,58,.1)" stroke="rgba(27,140,58,.25)" stroke-width="1"/>
-            <circle cx="135" cy="105" r="5" fill="rgba(27,140,58,.1)" stroke="rgba(27,140,58,.25)" stroke-width="1"/>
-            <line x1="50" y1="37" x2="62" y2="55" stroke="rgba(27,140,58,.15)" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="130" y1="37" x2="118" y2="55" stroke="rgba(27,140,58,.15)" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="50" y1="103" x2="62" y2="85" stroke="rgba(27,140,58,.15)" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="130" y1="103" x2="118" y2="85" stroke="rgba(27,140,58,.15)" stroke-width="1" stroke-dasharray="3 3"/>
-            <text x="90" y="73" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="700" fill="rgba(27,140,58,.6)">0</text>
-          </svg>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">Cybersecurity</div>
-          <h3>Zero Trust Is Not a Product — It's a Mindset Shift</h3>
-          <p>Vendors have commoditized the term, but organizations that deploy "zero trust" tools without rethinking their access philosophy miss the point entirely. Here's what the architectural principle actually demands.</p>
-          <div class="article-meta"><span>2025</span><span class="article-tag">Security Architecture</span></div>
-        </div>
-      </div>
-      <!-- 2. Civic Infrastructure -->
-      <div class="article-card reveal d1">
-        <div class="article-img" style="background:linear-gradient(135deg,rgba(22,101,52,.08),rgba(27,140,58,.04))">
-          <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- City building -->
-            <rect x="25" y="55" width="30" height="55" rx="3" fill="rgba(22,101,52,.1)" stroke="rgba(22,101,52,.3)" stroke-width="1.5"/>
-            <rect x="30" y="62" width="6" height="6" rx="1" fill="rgba(22,101,52,.15)"/>
-            <rect x="44" y="62" width="6" height="6" rx="1" fill="rgba(22,101,52,.15)"/>
-            <rect x="30" y="75" width="6" height="6" rx="1" fill="rgba(22,101,52,.15)"/>
-            <rect x="44" y="75" width="6" height="6" rx="1" fill="rgba(22,101,52,.15)"/>
-            <!-- Wifi/signal tower -->
-            <rect x="75" y="40" width="6" height="70" rx="2" fill="rgba(22,101,52,.12)" stroke="rgba(22,101,52,.3)" stroke-width="1"/>
-            <path d="M66 35 A15 15 0 0 1 96 35" fill="none" stroke="rgba(27,140,58,.25)" stroke-width="1.5"/>
-            <path d="M60 28 A22 22 0 0 1 102 28" fill="none" stroke="rgba(27,140,58,.15)" stroke-width="1.5"/>
-            <circle cx="78" cy="38" r="3" fill="rgba(27,140,58,.35)"/>
-            <!-- Network nodes -->
-            <circle cx="130" cy="45" r="8" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.3)" stroke-width="1.5"/>
-            <circle cx="155" cy="70" r="8" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.3)" stroke-width="1.5"/>
-            <circle cx="130" cy="95" r="8" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.3)" stroke-width="1.5"/>
-            <line x1="130" y1="53" x2="130" y2="87" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <line x1="137" y1="48" x2="148" y2="66" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <line x1="148" y1="74" x2="137" y2="92" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <!-- Connection from building to network -->
-            <line x1="55" y1="75" x2="122" y2="55" stroke="rgba(27,140,58,.1)" stroke-width="1" stroke-dasharray="4 4"/>
-            <line x1="20" y1="110" x2="160" y2="110" stroke="rgba(22,101,52,.1)" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="article-body">
-          <div class="article-cat" style="color:var(--primary-dark)">Civic Tech</div>
-          <h3>Digital Infrastructure Is Civic Infrastructure</h3>
-          <p>Roads and power grids have long been treated as public goods. The internet and digital systems now play an equivalent role in civic participation — and must be treated with the same policy seriousness.</p>
-          <div class="article-meta"><span>2025</span><span class="article-tag">Policy</span></div>
-        </div>
-      </div>
-      <!-- 3. Surveillance -->
-      <div class="article-card reveal d2">
-        <div class="article-img" style="background:linear-gradient(135deg,rgba(22,101,52,.06),rgba(27,140,58,.03))">
-          <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Eye -->
-            <ellipse cx="90" cy="65" rx="50" ry="30" fill="none" stroke="rgba(22,101,52,.3)" stroke-width="2"/>
-            <circle cx="90" cy="65" r="18" fill="rgba(27,140,58,.08)" stroke="rgba(22,101,52,.35)" stroke-width="2"/>
-            <circle cx="90" cy="65" r="8" fill="rgba(27,140,58,.15)"/>
-            <circle cx="87" cy="62" r="3" fill="rgba(255,255,255,.4)"/>
-            <!-- Scan lines -->
-            <line x1="40" y1="35" x2="140" y2="35" stroke="rgba(27,140,58,.08)" stroke-width="0.5"/>
-            <line x1="40" y1="50" x2="140" y2="50" stroke="rgba(27,140,58,.06)" stroke-width="0.5"/>
-            <line x1="40" y1="80" x2="140" y2="80" stroke="rgba(27,140,58,.06)" stroke-width="0.5"/>
-            <line x1="40" y1="95" x2="140" y2="95" stroke="rgba(27,140,58,.08)" stroke-width="0.5"/>
-            <!-- People silhouettes below -->
-            <circle cx="55" cy="112" r="4" fill="rgba(22,101,52,.12)"/>
-            <rect x="52" y="117" width="6" height="10" rx="2" fill="rgba(22,101,52,.1)"/>
-            <circle cx="90" cy="112" r="4" fill="rgba(22,101,52,.12)"/>
-            <rect x="87" y="117" width="6" height="10" rx="2" fill="rgba(22,101,52,.1)"/>
-            <circle cx="125" cy="112" r="4" fill="rgba(22,101,52,.12)"/>
-            <rect x="122" y="117" width="6" height="10" rx="2" fill="rgba(22,101,52,.1)"/>
-            <!-- Targeting brackets -->
-            <path d="M48 108 L48 104 L52 104" fill="none" stroke="rgba(220,38,38,.25)" stroke-width="1.2"/>
-            <path d="M62 108 L62 104 L58 104" fill="none" stroke="rgba(220,38,38,.25)" stroke-width="1.2"/>
-            <path d="M48 130 L48 134 L52 134" fill="none" stroke="rgba(220,38,38,.25)" stroke-width="1.2"/>
-            <path d="M62 130 L62 134 L58 134" fill="none" stroke="rgba(220,38,38,.25)" stroke-width="1.2"/>
-          </svg>
-        </div>
-        <div class="article-body">
-          <div class="article-cat" style="color:var(--primary-dark)">Human Rights</div>
-          <h3>When Surveillance Becomes a Weapon Against Its Own Citizens</h3>
-          <p>State-sponsored digital surveillance is not hypothetical — it is the lived experience of millions in conflict zones and authoritarian states. The cybersecurity community cannot stay silent on what its tools enable.</p>
-          <div class="article-meta"><span>2025</span><span class="article-tag">Digital Rights</span></div>
-        </div>
-      </div>
-      <!-- 4. Building Tech for Communities -->
-      <div class="article-card reveal">
-        <div class="article-img" style="background:linear-gradient(135deg,rgba(27,140,58,.06),rgba(34,197,94,.03))">
-          <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Hands holding device -->
-            <rect x="60" y="40" width="60" height="45" rx="6" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.3)" stroke-width="1.5"/>
-            <rect x="66" y="46" width="48" height="28" rx="2" fill="rgba(27,140,58,.05)"/>
-            <!-- Code/app lines on screen -->
-            <rect x="70" y="50" width="20" height="3" rx="1" fill="rgba(27,140,58,.2)"/>
-            <rect x="70" y="56" width="30" height="3" rx="1" fill="rgba(27,140,58,.12)"/>
-            <rect x="70" y="62" width="15" height="3" rx="1" fill="rgba(27,140,58,.15)"/>
-            <rect x="88" y="62" width="20" height="3" rx="1" fill="rgba(34,197,94,.2)"/>
-            <rect x="70" y="68" width="25" height="3" rx="1" fill="rgba(27,140,58,.1)"/>
-            <!-- Community circles -->
-            <circle cx="35" cy="95" r="10" fill="rgba(27,140,58,.06)" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <circle cx="55" cy="105" r="8" fill="rgba(27,140,58,.06)" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <circle cx="90" cy="108" r="12" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.25)" stroke-width="1.5"/>
-            <circle cx="125" cy="105" r="8" fill="rgba(27,140,58,.06)" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <circle cx="145" cy="95" r="10" fill="rgba(27,140,58,.06)" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <!-- Connection from device to communities -->
-            <line x1="75" y1="85" x2="55" y2="97" stroke="rgba(27,140,58,.12)" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="90" y1="85" x2="90" y2="96" stroke="rgba(27,140,58,.15)" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="105" y1="85" x2="125" y2="97" stroke="rgba(27,140,58,.12)" stroke-width="1" stroke-dasharray="3 3"/>
-            <!-- People icons in circles -->
-            <circle cx="90" cy="104" r="3" fill="rgba(27,140,58,.2)"/>
-            <rect x="88" y="108" width="4" height="5" rx="1.5" fill="rgba(27,140,58,.15)"/>
-          </svg>
-        </div>
-        <div class="article-body">
-          <div class="article-cat" style="color:var(--primary-dark)">Entrepreneurship</div>
-          <h3>Building Tech for Communities That Can't Afford to Wait</h3>
-          <p>Silicon Valley builds for Silicon Valley customers. The communities that need technology most — underserved nonprofits, diaspora organizations, faith communities — are building it themselves or going without. That has to change.</p>
-          <div class="article-meta"><span>2025</span><span class="article-tag">Ventures</span></div>
-        </div>
-      </div>
-      <!-- 5. Incident Response -->
-      <div class="article-card reveal d1">
-        <div class="article-img" style="background:linear-gradient(135deg,rgba(27,140,58,.08),rgba(22,101,52,.04))">
-          <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Terminal/monitor -->
-            <rect x="35" y="25" width="110" height="75" rx="6" fill="rgba(27,140,58,.06)" stroke="rgba(27,140,58,.3)" stroke-width="1.5"/>
-            <rect x="41" y="31" width="98" height="57" rx="3" fill="rgba(22,101,52,.04)"/>
-            <!-- Terminal content -->
-            <rect x="47" y="37" width="35" height="3" rx="1" fill="rgba(220,38,38,.3)"/>
-            <rect x="47" y="44" width="50" height="3" rx="1" fill="rgba(27,140,58,.2)"/>
-            <rect x="47" y="51" width="25" height="3" rx="1" fill="rgba(27,140,58,.15)"/>
-            <rect x="47" y="58" width="60" height="3" rx="1" fill="rgba(220,38,38,.2)"/>
-            <rect x="47" y="65" width="40" height="3" rx="1" fill="rgba(27,140,58,.12)"/>
-            <rect x="47" y="72" width="15" height="3" rx="1" fill="rgba(34,197,94,.3)"/>
-            <rect x="65" y="72" width="4" height="3" rx="1" fill="rgba(34,197,94,.5)"/>
-            <!-- Stand -->
-            <rect x="80" y="100" width="20" height="4" rx="1" fill="rgba(27,140,58,.15)"/>
-            <rect x="87" y="95" width="6" height="8" fill="rgba(27,140,58,.1)"/>
-            <!-- Clock showing 2:00 -->
-            <circle cx="150" cy="40" r="14" fill="rgba(27,140,58,.06)" stroke="rgba(27,140,58,.3)" stroke-width="1.5"/>
-            <line x1="150" y1="40" x2="150" y2="30" stroke="rgba(27,140,58,.5)" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="150" y1="40" x2="157" y2="40" stroke="rgba(27,140,58,.4)" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="150" cy="40" r="1.5" fill="rgba(27,140,58,.4)"/>
-            <!-- Alert pulse -->
-            <circle cx="150" cy="40" r="18" fill="none" stroke="rgba(220,38,38,.12)" stroke-width="1"/>
-            <circle cx="150" cy="40" r="22" fill="none" stroke="rgba(220,38,38,.06)" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="article-body">
-          <div class="article-cat">Cybersecurity</div>
-          <h3>Incident Response at 2AM: What Enterprise Security Teams Get Wrong</h3>
-          <p>The difference between a contained incident and a catastrophic breach is almost always preparation and process — not tools. The decisions made in the first sixty minutes are what determine the outcome.</p>
-          <div class="article-meta"><span>2025</span><span class="article-tag">IR</span></div>
-        </div>
-      </div>
-      <!-- 6. Displacement & Obligation -->
-      <div class="article-card reveal d2">
-        <div class="article-img" style="background:linear-gradient(135deg,rgba(22,101,52,.06),rgba(34,197,94,.03))">
-          <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Globe -->
-            <circle cx="70" cy="65" r="35" fill="none" stroke="rgba(22,101,52,.2)" stroke-width="1.5"/>
-            <ellipse cx="70" cy="65" rx="35" ry="15" fill="none" stroke="rgba(22,101,52,.12)" stroke-width="1"/>
-            <ellipse cx="70" cy="65" rx="15" ry="35" fill="none" stroke="rgba(22,101,52,.12)" stroke-width="1"/>
-            <line x1="35" y1="65" x2="105" y2="65" stroke="rgba(22,101,52,.1)" stroke-width="1"/>
-            <!-- Africa highlight -->
-            <circle cx="78" cy="60" r="8" fill="rgba(27,140,58,.1)" stroke="rgba(27,140,58,.3)" stroke-width="1"/>
-            <!-- Arrow arc from Africa to US -->
-            <path d="M72 52 Q60 20 40 30 Q20 40 30 55" fill="none" stroke="rgba(27,140,58,.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
-            <polygon points="28,52 30,58 34,53" fill="rgba(27,140,58,.3)"/>
-            <!-- Bridge/connection -->
-            <line x1="105" y1="65" x2="140" y2="50" stroke="rgba(27,140,58,.2)" stroke-width="1.5"/>
-            <line x1="140" y1="50" x2="160" y2="55" stroke="rgba(27,140,58,.2)" stroke-width="1.5"/>
-            <!-- Hands reaching -->
-            <circle cx="145" cy="80" r="6" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <circle cx="160" cy="90" r="6" fill="rgba(27,140,58,.08)" stroke="rgba(27,140,58,.2)" stroke-width="1"/>
-            <line x1="145" y1="86" x2="155" y2="85" stroke="rgba(27,140,58,.15)" stroke-width="1"/>
-            <!-- Heart/obligation symbol -->
-            <path d="M148 70 C148 67 152 65 152 68 C152 65 156 67 156 70 C156 74 152 77 152 77 C152 77 148 74 148 70Z" fill="rgba(27,140,58,.15)" stroke="rgba(27,140,58,.3)" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="article-body">
-          <div class="article-cat" style="color:var(--primary-dark)">Leadership</div>
-          <h3>Displacement Is Not the End of Your Civic Obligation</h3>
-          <p>Being forced from your country does not end your responsibility to the people you left behind. In many cases, it sharpens it — and gives you tools and perspectives that those still inside cannot access.</p>
-          <div class="article-meta"><span>2025</span><span class="article-tag">Ambazonia</span></div>
-        </div>
-      </div>
+    <!-- DYNAMIC ARTICLES (loaded from WordPress API) -->
+    <div class="articles-grid" id="articlesGrid"></div>
+
+    <!-- LOADING STATE -->
+    <div class="loading-state" id="loadingState" style="display:none">
+      <div class="loading-spinner"></div>
+      <p>Loading insights...</p>
+    </div>
+
+    <!-- LOAD MORE -->
+    <div style="text-align:center;margin-top:48px" id="loadMoreWrap" style="display:none">
+      <button class="btn btn-outline" id="loadMoreBtn" style="display:none">Load More Insights</button>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState" style="display:none">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <h3>No insights yet</h3>
+      <p>New perspectives on cybersecurity, civic tech, and leadership are coming soon.</p>
     </div>
   </div>
 </section>
+
+<!-- ARTICLE MODAL -->
+<div class="article-modal" id="articleModal">
+  <div class="article-modal-overlay" id="modalOverlay"></div>
+  <div class="article-modal-content">
+    <button class="article-modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <div class="article-modal-header">
+      <div class="article-modal-topics" id="modalTopics"></div>
+      <h1 id="modalTitle"></h1>
+      <div class="article-modal-meta" id="modalMeta"></div>
+    </div>
+    <div class="article-modal-img" id="modalImg"></div>
+    <div class="article-modal-body" id="modalBody"></div>
+  </div>
+</div>
 
 <section class="section" style="background:var(--bg-light)">
   <div class="container">
@@ -654,6 +529,291 @@ mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classLi
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:0.02,rootMargin:'0px 0px 60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 setTimeout(()=>document.querySelectorAll('.reveal:not(.visible)').forEach(el=>el.classList.add('visible')),2000);
+
+/* ═══════════════════════════════════════════════
+   INSIGHTS BLOG ENGINE
+   Fetches from WordPress REST API with static fallback
+   ═══════════════════════════════════════════════ */
+(function(){
+  const API_BASE = 'https://akotarhakoson.com/wp-json/akotarh/v1';
+  const PER_PAGE = 6;
+
+  const FALLBACK_ARTICLES = [
+    {
+      id: 1,
+      title: 'Why Small Organizations Are the Real Cybersecurity Crisis',
+      excerpt: 'Enterprise breaches make headlines, but the systemic vulnerability lies in millions of small organizations with no security program, no budget, and no one watching.',
+      date: '2025-01-15',
+      date_display: 'Jan 15, 2025',
+      topics: [{name:'Cybersecurity',slug:'cybersecurity'}],
+      reading_time: '7 min read',
+      thumbnail: '',
+      content: '<p>Enterprise breaches dominate the news cycle. When a Fortune 500 company loses millions of records, it triggers congressional hearings, regulatory investigations, and wall-to-wall media coverage.</p><p>But there is a far more dangerous and systemic vulnerability that almost nobody is talking about: the millions of small organizations — nonprofits, churches, small businesses, civic groups, and local governments — that have no security program, no dedicated IT staff, no budget for cybersecurity, and no one watching the perimeter.</p><p>These organizations hold sensitive data — donor records, financial information, medical details, personal addresses — and they are connected to the same digital ecosystem as every enterprise. A compromised church database can be the entry point into a hospital network. A breached small-town municipal system can cascade into critical infrastructure.</p><p>Until we solve cybersecurity for the smallest organizations, every enterprise connected to them remains exposed. The solution requires rethinking how we deliver security — making it accessible, affordable, and embedded into the tools these organizations already use.</p>'
+    },
+    {
+      id: 2,
+      title: 'Digital Authoritarianism and the Fight for Civic Space in Africa',
+      excerpt: 'As governments weaponize technology against citizens, the intersection of cybersecurity and human rights becomes an active battleground — not an academic one.',
+      date: '2025-02-10',
+      date_display: 'Feb 10, 2025',
+      topics: [{name:'Digital Rights',slug:'digital-rights'},{name:'Civic Tech',slug:'civic-tech'}],
+      reading_time: '9 min read',
+      thumbnail: '',
+      content: '<p>Across the African continent, a troubling pattern has emerged: governments are deploying sophisticated surveillance technology, internet shutdowns, and digital censorship not to protect citizens, but to silence them.</p><p>From Cameroon to Ethiopia, from Uganda to Tanzania, the tools of digital authoritarianism — spyware, deep packet inspection, social media monitoring — are being turned against journalists, activists, opposition leaders, and ordinary citizens who dare to speak truth to power.</p><p>For those of us who work at the intersection of cybersecurity and human rights, this is not an academic discussion. It is an active battleground where technical skills have life-or-death consequences.</p><p>The fight for civic space in Africa is increasingly a fight for digital rights. Encryption is not just a technical feature — it is a human rights tool. Secure communications platforms are not luxuries — they are necessities for survival.</p>'
+    },
+    {
+      id: 3,
+      title: 'From Manyu to the Fortune 500: Lessons in Resilience',
+      excerpt: 'The journey from a small village in English Cameroon (Ambazonia) to working at a U.S. Fortune 500 company taught me that resilience is a practiced discipline, not an inherited trait.',
+      date: '2025-03-05',
+      date_display: 'Mar 5, 2025',
+      topics: [{name:'Leadership',slug:'leadership'}],
+      reading_time: '6 min read',
+      thumbnail: '',
+      content: '<p>I grew up in Manyu Division, a rural community in English Cameroon (Ambazonia), where the nearest city felt like a different world and the idea of working at a Fortune 500 company in America seemed like a fantasy from another universe.</p><p>But the journey from that small village to the corporate halls of one of America\'s largest companies taught me something profound about resilience: it is not an inherited trait or a personality type. It is a practiced discipline — something you build through repeated encounters with difficulty, failure, and the decision to keep going anyway.</p><p>Every setback — from navigating the Anglophone Crisis to building a career from scratch in a new country — became a lesson in adaptability. Every closed door became practice in finding windows.</p><p>The most important lesson: resilience is not about never falling. It is about how quickly and thoughtfully you get back up, and what you build while you are standing.</p>'
+    },
+    {
+      id: 4,
+      title: 'Building Scholarstika: A SaaS Platform for African Schools',
+      excerpt: 'Why I built a multi-tenant school management system for institutions across Africa — and what it taught me about product-market fit in emerging economies.',
+      date: '2025-04-12',
+      date_display: 'Apr 12, 2025',
+      topics: [{name:'Entrepreneurship',slug:'entrepreneurship'},{name:'Civic Tech',slug:'civic-tech'}],
+      reading_time: '8 min read',
+      thumbnail: '',
+      content: '<p>When I set out to build Scholarstika, the challenge was clear: schools across Africa — from small primary schools to growing universities — were drowning in paper-based administrative processes that wasted time, lost data, and prevented them from focusing on what matters most: education.</p><p>But building a SaaS platform for African schools is not the same as building one for American or European institutions. The constraints are different: intermittent internet connectivity, mobile-first users, extremely price-sensitive customers, and diverse regulatory environments across different countries.</p><p>Scholarstika had to be lightweight, offline-capable, mobile-responsive, and affordable enough that even a small community school could adopt it. It also had to be powerful enough to manage everything from student enrollment to fee collection to academic reporting.</p><p>The lessons I learned about product-market fit in emerging economies have shaped everything I build: start with the constraint, not the feature set. Build for the worst network conditions, not the best. And never assume that what works in Silicon Valley will work in Sub-Saharan Africa.</p>'
+    },
+    {
+      id: 5,
+      title: 'The Anglophone Crisis: Technology as Witness and Shield',
+      excerpt: 'In the ongoing conflict in English Cameroon (Ambazonia), technology has become both a tool of documentation and a lifeline for those caught in the crossfire.',
+      date: '2025-05-01',
+      date_display: 'May 1, 2025',
+      topics: [{name:'Ambazonia',slug:'ambazonia'},{name:'Digital Rights',slug:'digital-rights'}],
+      reading_time: '10 min read',
+      thumbnail: '',
+      content: '<p>The Anglophone Crisis in Cameroon — the ongoing conflict in the English-speaking regions of the country, known to many as Ambazonia — has displaced hundreds of thousands of people, destroyed communities, and created one of the most underreported humanitarian emergencies in the world.</p><p>In this conflict, technology has played a dual role. On one hand, it has been weaponized: internet shutdowns have been used to silence dissent, surveillance has been deployed against activists, and disinformation campaigns have muddied the truth.</p><p>On the other hand, technology has become a tool of witness and resilience. Smartphones have documented atrocities that would otherwise go unseen. Encrypted messaging platforms have kept communities connected when all other channels were cut. Digital archives have preserved evidence for future accountability.</p><p>For those of us in the diaspora who have lived through this crisis — who have family still in the affected regions — the intersection of technology and human rights is deeply personal. It is not a policy position. It is a survival strategy.</p>'
+    },
+    {
+      id: 6,
+      title: 'Cloud Security in the Age of AI: What CISOs Need to Know',
+      excerpt: 'As AI workloads flood into cloud environments, the attack surface is expanding faster than most security teams can adapt. Here is a framework for staying ahead.',
+      date: '2025-05-20',
+      date_display: 'May 20, 2025',
+      topics: [{name:'Cybersecurity',slug:'cybersecurity'}],
+      reading_time: '8 min read',
+      thumbnail: '',
+      content: '<p>The rapid adoption of AI and machine learning workloads in cloud environments has created a security challenge that most organizations are not prepared for. AI models require massive data pipelines, GPU-intensive compute clusters, and complex orchestration layers — each one introducing new attack vectors that traditional cloud security frameworks were not designed to address.</p><p>CISOs and security leaders need to rethink their approach to cloud security in this new landscape. The old model of perimeter defense and static access controls is insufficient when AI workloads are dynamically scaling, consuming data from dozens of sources, and generating outputs that may themselves become attack vectors.</p><p>A modern cloud security framework for AI workloads must address four key areas: data pipeline security, model integrity, compute isolation, and output validation. Each requires a different set of tools, processes, and expertise.</p><p>The organizations that get this right will have a significant competitive advantage. Those that do not will find themselves exposed in ways they never anticipated.</p>'
+    }
+  ];
+
+  const grid = document.getElementById('articlesGrid');
+  const loadingEl = document.getElementById('loadingState');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const emptyEl = document.getElementById('emptyState');
+  const modal = document.getElementById('articleModal');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalTopics = document.getElementById('modalTopics');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalImg = document.getElementById('modalImg');
+  const modalBody = document.getElementById('modalBody');
+
+  let allArticles = [];
+  let filteredArticles = [];
+  let currentPage = 1;
+  let totalPages = 1;
+  let activeTopic = '';
+  let usingAPI = false;
+
+  const topicColors = {
+    'cybersecurity': 'linear-gradient(135deg,rgba(27,140,58,.12),rgba(22,101,52,.08))',
+    'civic-tech': 'linear-gradient(135deg,rgba(59,130,246,.12),rgba(37,99,235,.08))',
+    'leadership': 'linear-gradient(135deg,rgba(168,85,247,.12),rgba(139,92,246,.08))',
+    'ambazonia': 'linear-gradient(135deg,rgba(234,179,8,.12),rgba(202,138,4,.08))',
+    'entrepreneurship': 'linear-gradient(135deg,rgba(249,115,22,.12),rgba(234,88,12,.08))',
+    'digital-rights': 'linear-gradient(135deg,rgba(236,72,153,.12),rgba(219,39,119,.08))'
+  };
+
+  const topicIcons = {
+    'cybersecurity': '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(27,140,58,.4)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    'civic-tech': '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,.4)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
+    'leadership': '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(168,85,247,.4)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
+    'ambazonia': '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(234,179,8,.4)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+    'entrepreneurship': '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(249,115,22,.4)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
+    'digital-rights': '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(236,72,153,.4)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>'
+  };
+
+  function showLoading(){ loadingEl.style.display='block'; grid.style.display='none'; emptyEl.style.display='none'; }
+  function hideLoading(){ loadingEl.style.display='none'; grid.style.display='grid'; }
+
+  function createCard(article){
+    const slug = (article.topics && article.topics[0]) ? article.topics[0].slug : 'cybersecurity';
+    const bg = topicColors[slug] || topicColors['cybersecurity'];
+    const icon = topicIcons[slug] || topicIcons['cybersecurity'];
+    const topicName = (article.topics && article.topics[0]) ? article.topics[0].name : '';
+    const thumbHTML = article.thumbnail
+      ? '<img src="'+article.thumbnail+'" alt="'+article.title.replace(/"/g,'&quot;')+'"/>'
+      : icon;
+
+    const card = document.createElement('div');
+    card.className = 'article-card reveal visible';
+    card.innerHTML =
+      '<div class="article-img" style="background:'+bg+'">'+thumbHTML+'</div>'+
+      '<div class="article-body">'+
+        '<div class="article-cat">'+topicName+'</div>'+
+        '<h3>'+article.title+'</h3>'+
+        '<p>'+article.excerpt+'</p>'+
+        '<div class="article-meta">'+
+          '<span>'+(article.date_display || article.date)+'</span>'+
+          '<span>'+(article.reading_time || '')+'</span>'+
+        '</div>'+
+      '</div>';
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(){ openModal(article); });
+    return card;
+  }
+
+  function renderArticles(articles, append){
+    if(!append) grid.innerHTML = '';
+    if(articles.length === 0 && !append){
+      emptyEl.style.display = 'block';
+      grid.style.display = 'none';
+      loadMoreBtn.style.display = 'none';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    grid.style.display = 'grid';
+    articles.forEach(function(a){ grid.appendChild(createCard(a)); });
+  }
+
+  function openModal(article){
+    modalTitle.textContent = article.title;
+    modalTopics.innerHTML = '';
+    if(article.topics){
+      article.topics.forEach(function(t){
+        var s = document.createElement('span');
+        s.textContent = t.name;
+        modalTopics.appendChild(s);
+      });
+    }
+    modalMeta.innerHTML =
+      '<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg> '+(article.date_display || article.date)+'</span>'+
+      '<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> '+(article.reading_time || '')+'</span>';
+
+    if(article.thumbnail){
+      modalImg.innerHTML = '<img src="'+article.thumbnail+'" alt="'+article.title.replace(/"/g,'&quot;')+'"/>';
+      modalImg.style.display = 'block';
+    } else {
+      modalImg.innerHTML = '';
+      modalImg.style.display = 'none';
+    }
+
+    if(article.content){
+      modalBody.innerHTML = article.content;
+    } else if(usingAPI && article.id){
+      modalBody.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading full article...</p></div>';
+      fetch(API_BASE+'/insights/'+article.id)
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          modalBody.innerHTML = data.content || '<p>'+article.excerpt+'</p>';
+        })
+        .catch(function(){
+          modalBody.innerHTML = '<p>'+article.excerpt+'</p>';
+        });
+    } else {
+      modalBody.innerHTML = '<p>'+article.excerpt+'</p>';
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  modalOverlay.addEventListener('click', closeModal);
+  modalClose.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  function filterByTopic(topic){
+    activeTopic = topic;
+    currentPage = 1;
+    document.querySelectorAll('.topic-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-topic') === topic);
+    });
+
+    if(usingAPI){
+      loadFromAPI(topic, 1, false);
+    } else {
+      if(topic){
+        filteredArticles = allArticles.filter(function(a){
+          return a.topics && a.topics.some(function(t){ return t.slug === topic; });
+        });
+      } else {
+        filteredArticles = allArticles.slice();
+      }
+      renderArticles(filteredArticles, false);
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+
+  document.querySelectorAll('.topic-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterByTopic(this.getAttribute('data-topic'));
+    });
+  });
+
+  function loadFromAPI(topic, page, append){
+    showLoading();
+    var url = API_BASE+'/insights?per_page='+PER_PAGE+'&page='+page;
+    if(topic) url += '&topic='+encodeURIComponent(topic);
+
+    fetch(url)
+      .then(function(r){
+        if(!r.ok) throw new Error('API error');
+        return r.json();
+      })
+      .then(function(data){
+        hideLoading();
+        usingAPI = true;
+        totalPages = data.total_pages || 1;
+        currentPage = data.page || page;
+
+        renderArticles(data.posts || [], append);
+
+        if(currentPage < totalPages){
+          loadMoreBtn.style.display = 'inline-flex';
+        } else {
+          loadMoreBtn.style.display = 'none';
+        }
+      })
+      .catch(function(){
+        hideLoading();
+        loadFallback();
+      });
+  }
+
+  function loadFallback(){
+    usingAPI = false;
+    allArticles = FALLBACK_ARTICLES;
+    filteredArticles = allArticles.slice();
+    renderArticles(filteredArticles, false);
+    loadMoreBtn.style.display = 'none';
+  }
+
+  loadMoreBtn.addEventListener('click', function(){
+    if(usingAPI && currentPage < totalPages){
+      loadFromAPI(activeTopic, currentPage + 1, true);
+    }
+  });
+
+  loadFromAPI('', 1, false);
+
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dashboard | Akotarh Akoson</title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#f8faf9;color:#1a1a2e;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+img{display:block;max-width:100%}
+input,textarea,select{font-family:inherit;font-size:inherit}
+::selection{background:rgba(27,140,58,.15)}
+
+:root{
+  --primary:#1B8C3A;--primary-dark:#14532d;--primary-light:#22C55E;--primary-bg:rgba(27,140,58,.06);
+  --darker:#0a3618;--text:#1a1a2e;--text-secondary:#4a5568;--text-light:#94a3b8;
+  --bg:#f8faf9;--bg-white:#ffffff;--bg-card:#ffffff;--bg-sidebar:#0f2b1a;
+  --border:#e2e8f0;--border-light:#f1f5f9;
+  --danger:#ef4444;--danger-bg:rgba(239,68,68,.08);
+  --warning:#f59e0b;--warning-bg:rgba(245,158,11,.08);
+  --info:#3b82f6;--info-bg:rgba(59,130,246,.08);
+  --success:#22c55e;--success-bg:rgba(34,197,94,.08);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow:0 4px 16px rgba(0,0,0,.06);--shadow-lg:0 12px 40px rgba(0,0,0,.1);
+  --radius:10px;--radius-lg:16px;--radius-xl:20px;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --sidebar-w:260px;
+}
+
+/* ═══════════════════════════════════
+   LOGIN SCREEN
+   ═══════════════════════════════════ */
+.login-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--darker) 0%,var(--primary-dark) 40%,#1B8C3A 100%);transition:opacity .5s,visibility .5s}
+.login-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-bg-pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.login-card{position:relative;background:var(--bg-white);border-radius:24px;padding:48px 40px;width:420px;max-width:calc(100% - 32px);box-shadow:0 40px 100px rgba(0,0,0,.25);text-align:center}
+.login-logo{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--text);margin-bottom:4px}
+.login-logo span{color:var(--primary)}
+.login-sub{font-size:13px;color:var(--text-light);margin-bottom:36px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.login-field{position:relative;margin-bottom:16px;text-align:left}
+.login-field label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+.login-field input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;color:var(--text);outline:none;transition:border-color .3s,box-shadow .3s;background:var(--bg)}
+.login-field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(27,140,58,.1)}
+.login-field input::placeholder{color:var(--text-light)}
+.login-error{background:var(--danger-bg);color:var(--danger);font-size:13px;font-weight:500;padding:10px 16px;border-radius:var(--radius);margin-bottom:16px;display:none;text-align:left}
+.login-btn{width:100%;padding:14px;background:var(--primary);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;transition:all .3s;margin-top:8px;letter-spacing:.02em}
+.login-btn:hover{background:var(--primary-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(27,140,58,.3)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* ═══════════════════════════════════
+   APP LAYOUT
+   ═══════════════════════════════════ */
+.app{display:none;min-height:100vh}
+.app.visible{display:flex}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);color:#fff;position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column;transition:transform .3s var(--ease);overflow-y:auto}
+.sidebar-brand{padding:24px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sidebar-brand-name{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff}
+.sidebar-brand-name span{color:var(--primary-light)}
+.sidebar-brand-tag{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:2px}
+.sidebar-nav{flex:1;padding:16px 12px}
+.sidebar-section{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:16px 12px 8px}
+.sidebar-link{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius);font-size:13px;font-weight:500;color:rgba(255,255,255,.6);transition:all .2s;margin-bottom:2px;cursor:pointer}
+.sidebar-link:hover{color:#fff;background:rgba(255,255,255,.06)}
+.sidebar-link.active{color:#fff;background:rgba(34,197,94,.15);font-weight:600}
+.sidebar-link svg{width:18px;height:18px;flex-shrink:0;opacity:.7}
+.sidebar-link.active svg{opacity:1;color:var(--primary-light)}
+.sidebar-link .badge{margin-left:auto;background:var(--primary);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;min-width:20px;text-align:center}
+.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.08)}
+.sidebar-user{display:flex;align-items:center;gap:10px}
+.sidebar-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--primary-light);overflow:hidden}
+.sidebar-avatar img{width:100%;height:100%;object-fit:cover}
+.sidebar-user-info{flex:1;min-width:0}
+.sidebar-user-name{font-size:13px;font-weight:600;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-user-role{font-size:11px;color:rgba(255,255,255,.4)}
+.sidebar-logout{padding:6px;border-radius:6px;color:rgba(255,255,255,.4);transition:all .2s;cursor:pointer;background:none;border:none}
+.sidebar-logout:hover{color:#fff;background:rgba(255,255,255,.08)}
+
+/* MAIN CONTENT */
+.main{flex:1;margin-left:var(--sidebar-w);min-height:100vh}
+.topbar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.topbar-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:var(--text)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.mobile-toggle{display:none;padding:8px;border-radius:var(--radius);color:var(--text-secondary);background:none;border:none;cursor:pointer}
+.content{padding:28px 32px}
+
+/* ═══════════════════════════════════
+   CARDS & COMPONENTS
+   ═══════════════════════════════════ */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .3s var(--ease)}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.stat-icon svg{width:22px;height:22px}
+.stat-icon.green{background:var(--success-bg);color:var(--primary)}
+.stat-icon.blue{background:var(--info-bg);color:var(--info)}
+.stat-icon.orange{background:var(--warning-bg);color:var(--warning)}
+.stat-icon.purple{background:rgba(168,85,247,.08);color:#a855f7}
+.stat-value{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--text);line-height:1}
+.stat-label{font-size:13px;color:var(--text-light);margin-top:4px;font-weight:500}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.card-header{padding:20px 24px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--text)}
+.card-body{padding:24px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;padding:10px 20px;border-radius:var(--radius);border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em;white-space:nowrap}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-light);transform:translateY(-1px);box-shadow:0 4px 16px rgba(27,140,58,.25)}
+.btn-secondary{background:var(--bg);color:var(--text-secondary);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary)}
+.btn-danger{background:var(--danger-bg);color:var(--danger)}
+.btn-danger:hover{background:var(--danger);color:#fff}
+.btn-sm{padding:7px 14px;font-size:12px}
+.btn-icon{padding:8px;border-radius:8px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* TABLE */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+thead th{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);background:var(--bg)}
+tbody td{padding:14px 16px;border-bottom:1px solid var(--border-light);font-size:14px;color:var(--text);vertical-align:middle}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:rgba(27,140,58,.02)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;text-transform:capitalize}
+.status-badge.publish{background:var(--success-bg);color:var(--primary)}
+.status-badge.draft{background:var(--warning-bg);color:var(--warning)}
+.status-badge.trash{background:var(--danger-bg);color:var(--danger)}
+.actions-cell{display:flex;gap:6px}
+.actions-cell button{padding:6px 10px;border-radius:6px;font-size:12px;font-weight:500;border:1px solid var(--border);background:var(--bg-white);color:var(--text-secondary);cursor:pointer;transition:all .2s}
+.actions-cell button:hover{border-color:var(--primary);color:var(--primary)}
+.actions-cell button.del:hover{border-color:var(--danger);color:var(--danger)}
+
+/* FORM */
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
+.form-input{width:100%;padding:11px 16px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;color:var(--text);outline:none;background:var(--bg);transition:border-color .3s,box-shadow .3s}
+.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(27,140,58,.08)}
+textarea.form-input{min-height:200px;resize:vertical;line-height:1.7}
+select.form-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-help{font-size:12px;color:var(--text-light);margin-top:4px}
+.topic-checkboxes{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.topic-check{position:relative}
+.topic-check input{position:absolute;opacity:0;pointer-events:none}
+.topic-check label{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);font-size:12px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all .2s;user-select:none}
+.topic-check input:checked + label{border-color:var(--primary);background:var(--primary-bg);color:var(--primary)}
+
+/* MEDIA GRID */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.media-item{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:2px solid transparent;cursor:pointer;transition:all .2s;aspect-ratio:1;background:var(--bg)}
+.media-item:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow)}
+.media-item.selected{border-color:var(--primary);box-shadow:0 0 0 3px rgba(27,140,58,.15)}
+.media-item img{width:100%;height:100%;object-fit:cover}
+.media-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 50%);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;padding:10px}
+.media-item:hover .media-item-overlay{opacity:1}
+.media-item-name{font-size:11px;color:#fff;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.media-upload-zone{border:2px dashed var(--border);border-radius:var(--radius-lg);padding:48px 24px;text-align:center;cursor:pointer;transition:all .3s;background:var(--bg)}
+.media-upload-zone:hover,.media-upload-zone.dragover{border-color:var(--primary);background:var(--primary-bg)}
+.media-upload-zone svg{margin:0 auto 12px;color:var(--text-light)}
+.media-upload-zone p{font-size:14px;color:var(--text-secondary);font-weight:500}
+.media-upload-zone span{font-size:12px;color:var(--text-light)}
+
+/* PORTFOLIO SECTIONS */
+.portfolio-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;transition:all .3s}
+.portfolio-section:hover{box-shadow:var(--shadow-sm)}
+.portfolio-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;cursor:pointer}
+.portfolio-section-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.portfolio-section-title .page-tag{font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;background:var(--primary-bg);color:var(--primary);letter-spacing:.06em;text-transform:uppercase}
+.portfolio-section-chevron{transition:transform .3s;color:var(--text-light)}
+.portfolio-section.collapsed .portfolio-section-body{display:none}
+.portfolio-section.collapsed .portfolio-section-chevron{transform:rotate(-90deg)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;opacity:0;visibility:hidden;transition:all .3s}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal-box{background:var(--bg-white);border-radius:var(--radius-xl);width:720px;max-width:100%;box-shadow:var(--shadow-lg);transform:translateY(20px) scale(.97);transition:transform .3s var(--ease)}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:24px 28px;border-bottom:1px solid var(--border)}
+.modal-head h2{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.modal-close{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text-light);background:none;border:none;cursor:pointer;transition:all .2s;font-size:20px}
+.modal-close:hover{background:var(--bg);color:var(--text)}
+.modal-body{padding:28px}
+.modal-foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:16px 28px;border-top:1px solid var(--border)}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{padding:14px 20px;border-radius:var(--radius);font-size:13px;font-weight:500;color:#fff;box-shadow:var(--shadow-lg);animation:toastIn .3s var(--ease);max-width:360px;display:flex;align-items:center;gap:10px}
+.toast.success{background:#16a34a}
+.toast.error{background:#dc2626}
+.toast.info{background:#2563eb}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:60px 20px}
+.empty svg{margin:0 auto 16px;color:var(--text-light);opacity:.4}
+.empty h3{font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--text);margin-bottom:6px}
+.empty p{font-size:14px;color:var(--text-light);max-width:360px;margin:0 auto 20px}
+
+/* LOADING */
+.spinner{width:24px;height:24px;border:2.5px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-full{display:flex;align-items:center;justify-content:center;padding:80px 20px;flex-direction:column;gap:12px}
+.loading-full p{font-size:13px;color:var(--text-light)}
+
+/* ═══════════════════════════════════
+   PAGES (toggle via JS)
+   ═══════════════════════════════════ */
+.page{display:none}
+.page.active{display:block}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
+@media(max-width:1024px){
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .mobile-toggle{display:block}
+  .topbar{padding:12px 16px}
+  .content{padding:20px 16px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .modal-body{padding:20px}
+  .media-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+}
+@media(max-width:480px){
+  .stat-grid{grid-template-columns:1fr}
+  .login-card{padding:32px 24px}
+}
+
+/* SIDEBAR MOBILE OVERLAY */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:99}
+@media(max-width:768px){.sidebar-overlay.open{display:block}}
+
+/* Rich text toolbar */
+.editor-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px;background:var(--bg);border:1.5px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0}
+.editor-toolbar button{padding:6px 10px;border-radius:6px;font-size:13px;color:var(--text-secondary);background:none;border:none;cursor:pointer;transition:all .15s;font-weight:600}
+.editor-toolbar button:hover{background:var(--primary-bg);color:var(--primary)}
+.editor-toolbar button.active{background:var(--primary-bg);color:var(--primary)}
+.editor-area{min-height:280px;padding:16px;border:1.5px solid var(--border);border-radius:0 0 var(--radius) var(--radius);outline:none;font-size:14px;line-height:1.8;color:var(--text);background:var(--bg-white)}
+.editor-area:focus{border-color:var(--primary)}
+.editor-area h2{font-size:20px;margin:16px 0 8px;font-weight:700}
+.editor-area h3{font-size:17px;margin:12px 0 6px;font-weight:700}
+.editor-area p{margin-bottom:12px}
+.editor-area ul,.editor-area ol{margin:8px 0;padding-left:24px}
+.editor-area blockquote{border-left:3px solid var(--primary);padding:8px 16px;margin:12px 0;background:var(--primary-bg);border-radius:0 8px 8px 0;font-style:italic}
+.editor-area a{color:var(--primary);text-decoration:underline}
+
+/* Thumbnail preview in form */
+.thumb-preview{width:100%;max-height:200px;object-fit:cover;border-radius:var(--radius);margin-top:8px;border:1px solid var(--border)}
+.thumb-select-btn{margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- ═══════ LOGIN ═══════ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-bg-pattern"></div>
+  <div class="login-card">
+    <div class="login-logo">Akotarh<span>.</span></div>
+    <div class="login-sub">Admin Dashboard</div>
+    <div class="login-error" id="loginError"></div>
+    <form id="loginForm" autocomplete="on">
+      <div class="login-field">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="WordPress username" autocomplete="username" required/>
+      </div>
+      <div class="login-field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" required/>
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════ APP SHELL ═══════ -->
+<div class="app" id="app">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">Akotarh<span>.</span></div>
+      <div class="sidebar-brand-tag">Content Dashboard</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <a class="sidebar-link active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <div class="sidebar-section">Content</div>
+      <a class="sidebar-link" data-page="insights">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Insights
+        <span class="badge" id="insightCount">0</span>
+      </a>
+      <a class="sidebar-link" data-page="media">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Media Library
+      </a>
+      <div class="sidebar-section">Portfolio</div>
+      <a class="sidebar-link" data-page="portfolio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Portfolio Sections
+      </a>
+      <div class="sidebar-section">Settings</div>
+      <a class="sidebar-link" onclick="window.open('https://akotarhakoson.com','_blank')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Live Site
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebarAvatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="sidebarName">Admin</div>
+          <div class="sidebar-user-role">Administrator</div>
+        </div>
+        <button class="sidebar-logout" id="logoutBtn" title="Sign out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" id="mobileToggle">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h1 class="topbar-title" id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-primary" id="newInsightTopBtn" style="display:none" onclick="openInsightEditor()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Insight
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- ═══ DASHBOARD PAGE ═══ -->
+      <div class="page active" id="page-dashboard">
+        <div class="stat-grid" id="statsGrid">
+          <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><div class="stat-value" id="statPublished">-</div><div class="stat-label">Published Insights</div></div>
+          <div class="stat-card"><div class="stat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="stat-value" id="statDrafts">-</div><div class="stat-label">Drafts</div></div>
+          <div class="stat-card"><div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div><div class="stat-value" id="statTopics">-</div><div class="stat-label">Topics</div></div>
+          <div class="stat-card"><div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div><div class="stat-value" id="statMedia">-</div><div class="stat-label">Media Files</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Recent Insights</span>
+            <button class="btn btn-sm btn-primary" onclick="navigateTo('insights')">View All</button>
+          </div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Title</th><th>Date</th><th>Status</th></tr></thead>
+                <tbody id="recentTable"><tr><td colspan="3" style="text-align:center;padding:40px;color:var(--text-light)">Loading...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ INSIGHTS PAGE ═══ -->
+      <div class="page" id="page-insights">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input type="text" class="form-input" id="insightSearch" placeholder="Search insights..." style="width:280px;padding:9px 16px"/>
+            <select class="form-input" id="insightStatusFilter" style="width:160px;padding:9px 16px">
+              <option value="any">All Status</option>
+              <option value="publish">Published</option>
+              <option value="draft">Drafts</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="openInsightEditor()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Insight
+          </button>
+        </div>
+        <div class="card">
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Title</th><th>Topics</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="insightsTable"><tr><td colspan="5"><div class="loading-full"><div class="spinner"></div><p>Loading insights...</p></div></td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:between;margin-top:16px;gap:12px" id="insightsPagination"></div>
+      </div>
+
+      <!-- ═══ MEDIA PAGE ═══ -->
+      <div class="page" id="page-media">
+        <div class="media-upload-zone" id="uploadZone">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p>Drop images here or click to upload</p>
+          <span>PNG, JPG, GIF, WebP up to 10MB</span>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="media-grid" id="mediaGrid"></div>
+        </div>
+      </div>
+
+      <!-- ═══ PORTFOLIO PAGE ═══ -->
+      <div class="page" id="page-portfolio">
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px">Edit content sections across your portfolio pages. Changes are saved to WordPress and served via the API.</p>
+        <div id="portfolioSections">
+          <!-- Hero Section -->
+          <div class="portfolio-section" data-section="hero">
+            <div class="portfolio-section-header" onclick="this.parentElement.classList.toggle('collapsed')">
+              <div class="portfolio-section-title">
+                <span class="page-tag">Homepage</span> Hero Section
+              </div>
+              <svg class="portfolio-section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="portfolio-section-body">
+              <div class="form-group"><label>Hero Title</label><input type="text" class="form-input portfolio-field" data-section="hero" data-key="title" placeholder="e.g. Akotarh Akoson"/></div>
+              <div class="form-group"><label>Hero Subtitle</label><input type="text" class="form-input portfolio-field" data-section="hero" data-key="subtitle" placeholder="e.g. Senior Cybersecurity Analyst"/></div>
+              <div class="form-group"><label>Hero Description</label><textarea class="form-input portfolio-field" data-section="hero" data-key="description" rows="3" placeholder="Main hero paragraph..."></textarea></div>
+              <div class="form-group"><label>Typing Animation Roles (comma-separated)</label><input type="text" class="form-input portfolio-field" data-section="hero" data-key="roles" placeholder="Senior Cybersecurity Analyst, Civic-Tech Leader, ..."/></div>
+              <button class="btn btn-primary btn-sm" onclick="savePortfolioSection('hero')">Save Hero</button>
+            </div>
+          </div>
+
+          <!-- About Section -->
+          <div class="portfolio-section" data-section="about">
+            <div class="portfolio-section-header" onclick="this.parentElement.classList.toggle('collapsed')">
+              <div class="portfolio-section-title">
+                <span class="page-tag">About</span> About Page Content
+              </div>
+              <svg class="portfolio-section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="portfolio-section-body">
+              <div class="form-group"><label>Professional Bio</label><textarea class="form-input portfolio-field" data-section="about" data-key="bio" rows="4" placeholder="Professional biography text..."></textarea></div>
+              <div class="form-group"><label>Ventures Description</label><textarea class="form-input portfolio-field" data-section="about" data-key="ventures" rows="3" placeholder="ACS / Scholarstika / Mandem description..."></textarea></div>
+              <div class="form-group"><label>Political Background</label><textarea class="form-input portfolio-field" data-section="about" data-key="political" rows="3" placeholder="Political career text..."></textarea></div>
+              <button class="btn btn-primary btn-sm" onclick="savePortfolioSection('about')">Save About</button>
+            </div>
+          </div>
+
+          <!-- Cybersecurity Section -->
+          <div class="portfolio-section collapsed" data-section="cybersecurity">
+            <div class="portfolio-section-header" onclick="this.parentElement.classList.toggle('collapsed')">
+              <div class="portfolio-section-title">
+                <span class="page-tag">Cybersecurity</span> Cybersecurity Page
+              </div>
+              <svg class="portfolio-section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="portfolio-section-body">
+              <div class="form-group"><label>Role & Description</label><textarea class="form-input portfolio-field" data-section="cybersecurity" data-key="description" rows="4" placeholder="Current role and cybersecurity expertise..."></textarea></div>
+              <div class="form-group"><label>Certifications (one per line)</label><textarea class="form-input portfolio-field" data-section="cybersecurity" data-key="certifications" rows="3" placeholder="CompTIA Security+&#10;CISSP&#10;..."></textarea></div>
+              <button class="btn btn-primary btn-sm" onclick="savePortfolioSection('cybersecurity')">Save</button>
+            </div>
+          </div>
+
+          <!-- Ventures Section -->
+          <div class="portfolio-section collapsed" data-section="ventures">
+            <div class="portfolio-section-header" onclick="this.parentElement.classList.toggle('collapsed')">
+              <div class="portfolio-section-title">
+                <span class="page-tag">Ventures</span> Ventures Page
+              </div>
+              <svg class="portfolio-section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="portfolio-section-body">
+              <div class="form-group"><label>ACS Description</label><textarea class="form-input portfolio-field" data-section="ventures" data-key="acs" rows="3"></textarea></div>
+              <div class="form-group"><label>Scholarstika Description</label><textarea class="form-input portfolio-field" data-section="ventures" data-key="scholarstika" rows="3"></textarea></div>
+              <div class="form-group"><label>Mandem Description</label><textarea class="form-input portfolio-field" data-section="ventures" data-key="mandem" rows="3"></textarea></div>
+              <button class="btn btn-primary btn-sm" onclick="savePortfolioSection('ventures')">Save</button>
+            </div>
+          </div>
+
+          <!-- Contact Section -->
+          <div class="portfolio-section collapsed" data-section="contact">
+            <div class="portfolio-section-header" onclick="this.parentElement.classList.toggle('collapsed')">
+              <div class="portfolio-section-title">
+                <span class="page-tag">Contact</span> Contact Info
+              </div>
+              <svg class="portfolio-section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="portfolio-section-body">
+              <div class="form-row">
+                <div class="form-group"><label>Email</label><input type="email" class="form-input portfolio-field" data-section="contact" data-key="email"/></div>
+                <div class="form-group"><label>Phone</label><input type="text" class="form-input portfolio-field" data-section="contact" data-key="phone"/></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>LinkedIn URL</label><input type="url" class="form-input portfolio-field" data-section="contact" data-key="linkedin"/></div>
+                <div class="form-group"><label>Twitter/X URL</label><input type="url" class="form-input portfolio-field" data-section="contact" data-key="twitter"/></div>
+              </div>
+              <div class="form-group"><label>Facebook URL</label><input type="url" class="form-input portfolio-field" data-section="contact" data-key="facebook"/></div>
+              <button class="btn btn-primary btn-sm" onclick="savePortfolioSection('contact')">Save Contact</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INSIGHT EDITOR MODAL ═══ -->
+<div class="modal-overlay" id="editorModal">
+  <div class="modal-box" style="width:860px">
+    <div class="modal-head">
+      <h2 id="editorTitle">New Insight</h2>
+      <button class="modal-close" onclick="closeEditorModal()">&times;</button>
+    </div>
+    <div class="modal-body" style="max-height:calc(100vh - 240px);overflow-y:auto">
+      <input type="hidden" id="editId"/>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-input" id="editTitleField" placeholder="Enter insight title..."/>
+      </div>
+      <div class="form-group">
+        <label>Excerpt / Summary</label>
+        <textarea class="form-input" id="editExcerpt" rows="2" placeholder="Short summary for cards and previews..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <div class="editor-toolbar">
+          <button onclick="execCmd('bold')" title="Bold"><b>B</b></button>
+          <button onclick="execCmd('italic')" title="Italic"><i>I</i></button>
+          <button onclick="execCmd('underline')" title="Underline"><u>U</u></button>
+          <button onclick="execCmd('formatBlock','H2')" title="Heading 2">H2</button>
+          <button onclick="execCmd('formatBlock','H3')" title="Heading 3">H3</button>
+          <button onclick="execCmd('formatBlock','P')" title="Paragraph">P</button>
+          <button onclick="execCmd('insertUnorderedList')" title="Bullet List">&bull; List</button>
+          <button onclick="execCmd('insertOrderedList')" title="Numbered List">1. List</button>
+          <button onclick="execCmd('formatBlock','BLOCKQUOTE')" title="Blockquote">" Quote</button>
+          <button onclick="insertLink()" title="Insert Link">Link</button>
+        </div>
+        <div class="editor-area" id="editContent" contenteditable="true"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Topics</label>
+          <div class="topic-checkboxes" id="topicCheckboxes"></div>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select class="form-input" id="editStatus">
+            <option value="draft">Draft</option>
+            <option value="publish">Published</option>
+          </select>
+          <div style="margin-top:12px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500;font-size:13px;color:var(--text-secondary)">
+              <input type="checkbox" id="editFeatured" style="width:16px;height:16px;accent-color:var(--primary)"/> Mark as Featured
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Featured Image</label>
+        <div id="thumbPreviewWrap"></div>
+        <input type="hidden" id="editThumbId"/>
+        <button class="btn btn-secondary btn-sm thumb-select-btn" onclick="openMediaPicker()">Choose Image</button>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeEditorModal()">Cancel</button>
+      <button class="btn btn-primary" id="saveInsightBtn" onclick="saveInsight()">Publish Insight</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MEDIA PICKER MODAL ═══ -->
+<div class="modal-overlay" id="mediaPickerModal">
+  <div class="modal-box" style="width:700px">
+    <div class="modal-head">
+      <h2>Select Image</h2>
+      <button class="modal-close" onclick="closeMediaPicker()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="media-grid" id="pickerGrid"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeMediaPicker()">Cancel</button>
+      <button class="btn btn-primary" id="pickMediaBtn" onclick="confirmMediaPick()" disabled>Select Image</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   CONFIGURATION
+   ═══════════════════════════════════════════════ */
+const API_BASE = 'https://akotarhakoson.com/wp-json/akotarh/v1';
+
+/* ═══════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════ */
+let token = localStorage.getItem('ako_token') || '';
+let currentUser = JSON.parse(localStorage.getItem('ako_user') || 'null');
+let allTopics = [];
+let insightsPage = 1;
+let mediaList = [];
+let pickedMediaId = null;
+let pickedMediaUrl = '';
+
+/* ═══════════════════════════════════════════════
+   UTILITY
+   ═══════════════════════════════════════════════ */
+function toast(msg, type){
+  type = type || 'success';
+  var c = document.getElementById('toastContainer');
+  var t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = (type==='success'?'&#10003;':type==='error'?'&#10007;':'&#8505;') + '&nbsp;&nbsp;' + msg;
+  c.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0'; setTimeout(function(){ t.remove(); },300); },3500);
+}
+
+async function api(path, opts){
+  opts = opts || {};
+  var headers = opts.headers || {};
+  if(token) headers['Authorization'] = 'Bearer ' + token;
+  if(opts.body && !(opts.body instanceof FormData)){
+    headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(opts.body);
+  }
+  opts.headers = headers;
+  var res = await fetch(API_BASE + path, opts);
+  if(res.status === 401){
+    logout();
+    throw new Error('Session expired');
+  }
+  var data = await res.json();
+  if(!res.ok) throw new Error(data.message || 'API error');
+  return data;
+}
+
+/* ═══════════════════════════════════════════════
+   AUTH
+   ═══════════════════════════════════════════════ */
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var btn = document.getElementById('loginBtn');
+  var errEl = document.getElementById('loginError');
+  btn.disabled = true;
+  btn.textContent = 'Signing in...';
+  errEl.style.display = 'none';
+
+  try {
+    var data = await api('/auth/login', {
+      method: 'POST',
+      body: { username: document.getElementById('loginUser').value, password: document.getElementById('loginPass').value }
+    });
+    token = data.token;
+    currentUser = data.user;
+    localStorage.setItem('ako_token', token);
+    localStorage.setItem('ako_user', JSON.stringify(currentUser));
+    showApp();
+  } catch(err) {
+    errEl.textContent = err.message || 'Login failed. Check your credentials.';
+    errEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Sign In';
+});
+
+function logout(){
+  token = '';
+  currentUser = null;
+  localStorage.removeItem('ako_token');
+  localStorage.removeItem('ako_user');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('app').classList.remove('visible');
+}
+
+async function checkAuth(){
+  if(!token){
+    document.getElementById('loginScreen').classList.remove('hidden');
+    return;
+  }
+  try {
+    var data = await api('/auth/verify');
+    currentUser = data.user;
+    localStorage.setItem('ako_user', JSON.stringify(currentUser));
+    showApp();
+  } catch(e){
+    document.getElementById('loginScreen').classList.remove('hidden');
+  }
+}
+
+function showApp(){
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  updateUserUI();
+  loadDashboard();
+  loadTopics();
+}
+
+function updateUserUI(){
+  if(!currentUser) return;
+  document.getElementById('sidebarName').textContent = currentUser.display_name || currentUser.username;
+  var av = document.getElementById('sidebarAvatar');
+  if(currentUser.avatar){
+    av.innerHTML = '<img src="'+currentUser.avatar+'" alt=""/>';
+  } else {
+    av.textContent = (currentUser.display_name||'A').charAt(0).toUpperCase();
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', function(){
+  if(confirm('Sign out of the dashboard?')) logout();
+});
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+var pageTitles = { dashboard:'Dashboard', insights:'Insights', media:'Media Library', portfolio:'Portfolio Sections' };
+
+function navigateTo(page){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.sidebar-link[data-page]').forEach(function(l){ l.classList.remove('active'); });
+  var el = document.getElementById('page-'+page);
+  if(el) el.classList.add('active');
+  var link = document.querySelector('.sidebar-link[data-page="'+page+'"]');
+  if(link) link.classList.add('active');
+  document.getElementById('pageTitle').textContent = pageTitles[page] || page;
+  document.getElementById('newInsightTopBtn').style.display = page==='insights'?'inline-flex':'none';
+
+  // Load data for the page
+  if(page==='dashboard') loadDashboard();
+  if(page==='insights') loadInsights();
+  if(page==='media') loadMedia();
+  if(page==='portfolio') loadPortfolio();
+
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+document.querySelectorAll('.sidebar-link[data-page]').forEach(function(link){
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    navigateTo(this.getAttribute('data-page'));
+  });
+});
+
+/* Mobile sidebar */
+document.getElementById('mobileToggle').addEventListener('click', function(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+});
+document.getElementById('sidebarOverlay').addEventListener('click', function(){
+  document.getElementById('sidebar').classList.remove('open');
+  this.classList.remove('open');
+});
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD
+   ═══════════════════════════════════════════════ */
+async function loadDashboard(){
+  try {
+    var data = await api('/admin/stats');
+    document.getElementById('statPublished').textContent = data.total_published;
+    document.getElementById('statDrafts').textContent = data.total_drafts;
+    document.getElementById('statTopics').textContent = data.total_topics;
+    document.getElementById('statMedia').textContent = data.total_media;
+    document.getElementById('insightCount').textContent = data.total_published;
+
+    var tb = document.getElementById('recentTable');
+    if(!data.recent_posts || data.recent_posts.length === 0){
+      tb.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:40px;color:var(--text-light)">No insights yet. Create your first one!</td></tr>';
+    } else {
+      tb.innerHTML = data.recent_posts.map(function(p){
+        return '<tr><td style="font-weight:600">'+p.title+'</td><td style="color:var(--text-light)">'+p.date_display+'</td><td><span class="status-badge '+p.status+'">'+p.status+'</span></td></tr>';
+      }).join('');
+    }
+  } catch(e){
+    // If API unreachable show placeholder
+    document.getElementById('statPublished').textContent = '0';
+    document.getElementById('statDrafts').textContent = '0';
+    document.getElementById('statTopics').textContent = '6';
+    document.getElementById('statMedia').textContent = '0';
+    document.getElementById('recentTable').innerHTML = '<tr><td colspan="3" style="text-align:center;padding:40px;color:var(--text-light)">Connect your WordPress site to see data here.</td></tr>';
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   TOPICS
+   ═══════════════════════════════════════════════ */
+async function loadTopics(){
+  try {
+    allTopics = await api('/topics');
+  } catch(e){
+    allTopics = [
+      {id:1,name:'Cybersecurity',slug:'cybersecurity'},
+      {id:2,name:'Civic Tech',slug:'civic-tech'},
+      {id:3,name:'Leadership',slug:'leadership'},
+      {id:4,name:'Ambazonia',slug:'ambazonia'},
+      {id:5,name:'Entrepreneurship',slug:'entrepreneurship'},
+      {id:6,name:'Digital Rights',slug:'digital-rights'}
+    ];
+  }
+}
+
+function renderTopicCheckboxes(selected){
+  selected = selected || [];
+  var wrap = document.getElementById('topicCheckboxes');
+  wrap.innerHTML = allTopics.map(function(t){
+    var checked = selected.indexOf(t.id) !== -1 ? 'checked' : '';
+    return '<div class="topic-check"><input type="checkbox" id="topic_'+t.id+'" value="'+t.id+'" '+checked+'/><label for="topic_'+t.id+'">'+t.name+'</label></div>';
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   INSIGHTS LIST
+   ═══════════════════════════════════════════════ */
+var searchTimer;
+document.getElementById('insightSearch').addEventListener('input', function(){
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(function(){ insightsPage=1; loadInsights(); }, 400);
+});
+document.getElementById('insightStatusFilter').addEventListener('change', function(){
+  insightsPage=1; loadInsights();
+});
+
+async function loadInsights(){
+  var search = document.getElementById('insightSearch').value;
+  var status = document.getElementById('insightStatusFilter').value;
+  var tb = document.getElementById('insightsTable');
+  tb.innerHTML = '<tr><td colspan="5"><div class="loading-full"><div class="spinner"></div><p>Loading...</p></div></td></tr>';
+
+  try {
+    var data = await api('/admin/insights?page='+insightsPage+'&per_page=15&status='+status+(search?'&search='+encodeURIComponent(search):''));
+    if(!data.posts || data.posts.length===0){
+      tb.innerHTML = '<tr><td colspan="5"><div class="empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><h3>No insights found</h3><p>Create your first insight to get started.</p></div></td></tr>';
+    } else {
+      tb.innerHTML = data.posts.map(function(p){
+        var topics = (p.topics||[]).map(function(t){ return '<span style="background:var(--primary-bg);color:var(--primary);font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-right:4px">'+t.name+'</span>'; }).join('');
+        return '<tr>'+
+          '<td style="font-weight:600;max-width:280px"><span style="cursor:pointer" onclick="editInsight('+p.id+')">'+p.title+'</span></td>'+
+          '<td>'+topics+'</td>'+
+          '<td style="color:var(--text-light);white-space:nowrap">'+(p.date_display||'')+'</td>'+
+          '<td><span class="status-badge '+p.status+'">'+p.status+'</span></td>'+
+          '<td><div class="actions-cell">'+
+            '<button onclick="editInsight('+p.id+')">Edit</button>'+
+            '<button class="del" onclick="deleteInsight('+p.id+',\''+p.title.replace(/'/g,"\\'")+'\')">Delete</button>'+
+          '</div></td>'+
+        '</tr>';
+      }).join('');
+    }
+
+    // Pagination
+    var pag = document.getElementById('insightsPagination');
+    if(data.total_pages > 1){
+      var btns = '';
+      for(var i=1; i<=data.total_pages; i++){
+        btns += '<button class="btn btn-sm '+(i===insightsPage?'btn-primary':'btn-secondary')+'" onclick="insightsPage='+i+';loadInsights()">'+i+'</button>';
+      }
+      pag.innerHTML = '<span style="font-size:13px;color:var(--text-light)">'+data.total+' total</span><div style="display:flex;gap:6px;margin-left:auto">'+btns+'</div>';
+    } else {
+      pag.innerHTML = '';
+    }
+  } catch(e){
+    tb.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-light)">Could not load insights. Check your API connection.</td></tr>';
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   INSIGHT EDITOR
+   ═══════════════════════════════════════════════ */
+function openInsightEditor(data){
+  document.getElementById('editId').value = '';
+  document.getElementById('editTitleField').value = '';
+  document.getElementById('editExcerpt').value = '';
+  document.getElementById('editContent').innerHTML = '';
+  document.getElementById('editStatus').value = 'draft';
+  document.getElementById('editFeatured').checked = false;
+  document.getElementById('editThumbId').value = '';
+  document.getElementById('thumbPreviewWrap').innerHTML = '';
+  document.getElementById('editorTitle').textContent = 'New Insight';
+  document.getElementById('saveInsightBtn').textContent = 'Publish Insight';
+  renderTopicCheckboxes([]);
+  document.getElementById('editorModal').classList.add('open');
+}
+
+async function editInsight(id){
+  try {
+    var data = await api('/admin/insights?page=1&per_page=1&search=');
+    // Fetch single by getting all and finding — or call single endpoint
+    var all = await api('/admin/insights?per_page=100');
+    var post = null;
+    (all.posts||[]).forEach(function(p){ if(p.id===id) post=p; });
+    if(!post){ toast('Insight not found','error'); return; }
+
+    document.getElementById('editId').value = post.id;
+    document.getElementById('editTitleField').value = post.title;
+    document.getElementById('editExcerpt').value = post.excerpt || '';
+    document.getElementById('editContent').innerHTML = post.content || post.raw_content || '';
+    document.getElementById('editStatus').value = post.status || 'draft';
+    document.getElementById('editFeatured').checked = post.featured || false;
+    document.getElementById('editThumbId').value = post.thumbnail_id || '';
+    document.getElementById('editorTitle').textContent = 'Edit Insight';
+    document.getElementById('saveInsightBtn').textContent = 'Update Insight';
+
+    if(post.thumbnail){
+      document.getElementById('thumbPreviewWrap').innerHTML = '<img src="'+post.thumbnail+'" class="thumb-preview"/>';
+    } else {
+      document.getElementById('thumbPreviewWrap').innerHTML = '';
+    }
+
+    renderTopicCheckboxes(post.topic_ids || []);
+    document.getElementById('editorModal').classList.add('open');
+  } catch(e){
+    toast('Failed to load insight: '+e.message, 'error');
+  }
+}
+
+function closeEditorModal(){
+  document.getElementById('editorModal').classList.remove('open');
+}
+
+async function saveInsight(){
+  var id = document.getElementById('editId').value;
+  var title = document.getElementById('editTitleField').value.trim();
+  if(!title){ toast('Title is required','error'); return; }
+
+  var topicIds = [];
+  document.querySelectorAll('#topicCheckboxes input:checked').forEach(function(cb){ topicIds.push(parseInt(cb.value)); });
+
+  var payload = {
+    title: title,
+    content: document.getElementById('editContent').innerHTML,
+    excerpt: document.getElementById('editExcerpt').value.trim(),
+    status: document.getElementById('editStatus').value,
+    featured: document.getElementById('editFeatured').checked,
+    topics: topicIds,
+    thumbnail_id: parseInt(document.getElementById('editThumbId').value) || null
+  };
+
+  var btn = document.getElementById('saveInsightBtn');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+
+  try {
+    if(id){
+      await api('/admin/insights/'+id, { method:'PUT', body:payload });
+      toast('Insight updated successfully!');
+    } else {
+      await api('/admin/insights', { method:'POST', body:payload });
+      toast('Insight created successfully!');
+    }
+    closeEditorModal();
+    loadInsights();
+    loadDashboard();
+  } catch(e){
+    toast('Save failed: '+e.message, 'error');
+  }
+  btn.disabled = false;
+  btn.textContent = id ? 'Update Insight' : 'Publish Insight';
+}
+
+async function deleteInsight(id, title){
+  if(!confirm('Delete "'+title+'"? This will move it to trash.')) return;
+  try {
+    await api('/admin/insights/'+id, { method:'DELETE' });
+    toast('Insight deleted');
+    loadInsights();
+    loadDashboard();
+  } catch(e){
+    toast('Delete failed: '+e.message, 'error');
+  }
+}
+
+/* Rich text commands */
+function execCmd(cmd, val){
+  if(cmd === 'formatBlock') val = '<'+val+'>';
+  document.execCommand(cmd, false, val || null);
+  document.getElementById('editContent').focus();
+}
+function insertLink(){
+  var url = prompt('Enter URL:');
+  if(url) document.execCommand('createLink', false, url);
+}
+
+/* ═══════════════════════════════════════════════
+   MEDIA
+   ═══════════════════════════════════════════════ */
+async function loadMedia(){
+  var grid = document.getElementById('mediaGrid');
+  grid.innerHTML = '<div class="loading-full"><div class="spinner"></div><p>Loading media...</p></div>';
+  try {
+    var data = await api('/admin/media?per_page=50');
+    mediaList = data.media || [];
+    renderMediaGrid(grid, mediaList, false);
+  } catch(e){
+    grid.innerHTML = '<div class="empty"><h3>Could not load media</h3><p>Check your API connection.</p></div>';
+  }
+}
+
+function renderMediaGrid(container, items, selectable){
+  if(!items || items.length===0){
+    container.innerHTML = '<div class="empty" style="grid-column:1/-1"><h3>No images yet</h3><p>Upload your first image above.</p></div>';
+    return;
+  }
+  container.innerHTML = items.map(function(m){
+    var thumb = (m.sizes && m.sizes.thumbnail) ? m.sizes.thumbnail.url : m.url;
+    return '<div class="media-item" data-id="'+m.id+'" data-url="'+m.url+'" '+(selectable?'onclick="toggleMediaPick(this)"':'')+'>' +
+      '<img src="'+thumb+'" alt="'+m.title+'" loading="lazy"/>' +
+      '<div class="media-item-overlay"><span class="media-item-name">'+m.filename+'</span></div>' +
+    '</div>';
+  }).join('');
+}
+
+/* Upload */
+var uploadZone = document.getElementById('uploadZone');
+var fileInput = document.getElementById('fileInput');
+
+uploadZone.addEventListener('click', function(){ fileInput.click(); });
+uploadZone.addEventListener('dragover', function(e){ e.preventDefault(); this.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', function(){ this.classList.remove('dragover'); });
+uploadZone.addEventListener('drop', function(e){
+  e.preventDefault();
+  this.classList.remove('dragover');
+  if(e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', function(){
+  if(this.files.length) uploadFiles(this.files);
+  this.value = '';
+});
+
+async function uploadFiles(files){
+  for(var i=0; i<files.length; i++){
+    var fd = new FormData();
+    fd.append('file', files[i]);
+    try {
+      toast('Uploading '+files[i].name+'...', 'info');
+      await api('/admin/media', { method:'POST', body:fd });
+      toast(files[i].name + ' uploaded!');
+    } catch(e){
+      toast('Upload failed: '+e.message, 'error');
+    }
+  }
+  loadMedia();
+}
+
+/* Media Picker (for thumbnail) */
+function openMediaPicker(){
+  document.getElementById('mediaPickerModal').classList.add('open');
+  document.getElementById('pickMediaBtn').disabled = true;
+  pickedMediaId = null;
+  pickedMediaUrl = '';
+  var grid = document.getElementById('pickerGrid');
+  renderMediaGrid(grid, mediaList, true);
+  // If mediaList is empty, load it
+  if(mediaList.length===0){
+    api('/admin/media?per_page=50').then(function(data){
+      mediaList = data.media || [];
+      renderMediaGrid(grid, mediaList, true);
+    }).catch(function(){});
+  }
+}
+
+function closeMediaPicker(){
+  document.getElementById('mediaPickerModal').classList.remove('open');
+}
+
+function toggleMediaPick(el){
+  document.querySelectorAll('#pickerGrid .media-item').forEach(function(i){ i.classList.remove('selected'); });
+  el.classList.add('selected');
+  pickedMediaId = el.getAttribute('data-id');
+  pickedMediaUrl = el.getAttribute('data-url');
+  document.getElementById('pickMediaBtn').disabled = false;
+}
+
+function confirmMediaPick(){
+  if(pickedMediaId){
+    document.getElementById('editThumbId').value = pickedMediaId;
+    document.getElementById('thumbPreviewWrap').innerHTML = '<img src="'+pickedMediaUrl+'" class="thumb-preview"/>';
+  }
+  closeMediaPicker();
+}
+
+/* ═══════════════════════════════════════════════
+   PORTFOLIO CONTENT
+   ═══════════════════════════════════════════════ */
+async function loadPortfolio(){
+  try {
+    var content = await api('/portfolio');
+    if(content && typeof content === 'object'){
+      Object.keys(content).forEach(function(section){
+        var data = content[section];
+        if(typeof data === 'object'){
+          Object.keys(data).forEach(function(key){
+            var field = document.querySelector('.portfolio-field[data-section="'+section+'"][data-key="'+key+'"]');
+            if(field){
+              if(field.tagName==='TEXTAREA') field.value = data[key] || '';
+              else field.value = data[key] || '';
+            }
+          });
+        }
+      });
+    }
+  } catch(e){
+    // Portfolio content not yet configured
+  }
+}
+
+async function savePortfolioSection(section){
+  var fields = document.querySelectorAll('.portfolio-field[data-section="'+section+'"]');
+  var data = {};
+  fields.forEach(function(f){ data[f.getAttribute('data-key')] = f.value; });
+
+  try {
+    await api('/admin/portfolio', { method:'PUT', body:{ section:section, data:data } });
+    toast('Portfolio section saved!');
+  } catch(e){
+    toast('Save failed: '+e.message, 'error');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════ */
+checkAuth();
+</script>
+</body>
+</html>

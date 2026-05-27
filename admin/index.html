@@ -273,6 +273,7 @@ select.form-input{cursor:pointer;appearance:none;background-image:url("data:imag
     <div class="login-logo">Akotarh<span>.</span></div>
     <div class="login-sub">Admin Dashboard</div>
     <div class="login-error" id="loginError"></div>
+    <!-- LOGIN FORM -->
     <form id="loginForm" autocomplete="on">
       <div class="login-field">
         <label>Username</label>
@@ -283,7 +284,22 @@ select.form-input{cursor:pointer;appearance:none;background-image:url("data:imag
         <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password" required/>
       </div>
       <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+      <p style="margin-top:16px"><a href="#" id="showForgot" style="font-size:13px;color:var(--primary);font-weight:500">Forgot Password?</a></p>
     </form>
+    <!-- FORGOT PASSWORD FORM -->
+    <form id="forgotForm" style="display:none" autocomplete="off">
+      <div class="login-field">
+        <label>Email Address</label>
+        <input type="email" id="forgotEmail" placeholder="Enter your admin email" required/>
+      </div>
+      <button type="submit" class="login-btn" id="forgotBtn">Send Reset Link</button>
+      <p style="margin-top:16px"><a href="#" id="showLogin" style="font-size:13px;color:var(--primary);font-weight:500">Back to Sign In</a></p>
+    </form>
+    <div id="forgotSuccess" style="display:none;padding:16px;background:var(--success-bg);border-radius:var(--radius);margin-top:0">
+      <p style="font-size:14px;color:var(--primary);font-weight:500;margin-bottom:8px">Check your email</p>
+      <p style="font-size:13px;color:var(--text-secondary)">If an account exists with that email, a password reset link has been sent. Check your inbox and spam folder.</p>
+      <p style="margin-top:16px"><a href="#" id="showLoginAfterReset" style="font-size:13px;color:var(--primary);font-weight:500">Back to Sign In</a></p>
+    </div>
   </div>
 </div>
 
@@ -319,6 +335,10 @@ select.form-input{cursor:pointer;appearance:none;background-image:url("data:imag
         Portfolio Sections
       </a>
       <div class="sidebar-section">Settings</div>
+      <a class="sidebar-link" data-page="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Account Settings
+      </a>
       <a class="sidebar-link" onclick="window.open('https://akotarhakoson.com','_blank')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         View Live Site
@@ -420,6 +440,66 @@ select.form-input{cursor:pointer;appearance:none;background-image:url("data:imag
         </div>
         <div style="margin-top:24px">
           <div class="media-grid" id="mediaGrid"></div>
+        </div>
+      </div>
+
+      <!-- ═══ SETTINGS PAGE ═══ -->
+      <div class="page" id="page-settings">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <!-- PROFILE -->
+          <div class="card">
+            <div class="card-header"><span class="card-title">Profile</span></div>
+            <div class="card-body">
+              <div class="form-group"><label>Display Name</label><input type="text" class="form-input" id="settDisplayName"/></div>
+              <div class="form-row">
+                <div class="form-group"><label>First Name</label><input type="text" class="form-input" id="settFirstName"/></div>
+                <div class="form-group"><label>Last Name</label><input type="text" class="form-input" id="settLastName"/></div>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="saveProfile()">Save Profile</button>
+            </div>
+          </div>
+
+          <!-- CHANGE EMAIL -->
+          <div class="card">
+            <div class="card-header"><span class="card-title">Change Email</span></div>
+            <div class="card-body">
+              <div class="form-group"><label>Current Email</label><input type="email" class="form-input" id="settCurrentEmail" disabled style="opacity:.6"/></div>
+              <div class="form-group"><label>New Email</label><input type="email" class="form-input" id="settNewEmail" placeholder="new@example.com"/></div>
+              <div class="form-group"><label>Confirm Password</label><input type="password" class="form-input" id="settEmailPass" placeholder="Enter password to confirm"/></div>
+              <button class="btn btn-primary btn-sm" onclick="changeEmail()">Update Email</button>
+            </div>
+          </div>
+
+          <!-- CHANGE PASSWORD -->
+          <div class="card">
+            <div class="card-header"><span class="card-title">Change Password</span></div>
+            <div class="card-body">
+              <div class="form-group"><label>Current Password</label><input type="password" class="form-input" id="settCurrentPass" placeholder="Current password"/></div>
+              <div class="form-group"><label>New Password</label><input type="password" class="form-input" id="settNewPass" placeholder="New password (min. 8 characters)"/></div>
+              <div class="form-group"><label>Confirm New Password</label><input type="password" class="form-input" id="settConfirmPass" placeholder="Repeat new password"/></div>
+              <button class="btn btn-primary btn-sm" onclick="changePassword()">Update Password</button>
+            </div>
+          </div>
+
+          <!-- API INFO -->
+          <div class="card">
+            <div class="card-header"><span class="card-title">API Configuration</span></div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>API Base URL</label>
+                <input type="text" class="form-input" id="settApiBase" value="" disabled style="opacity:.6"/>
+                <p class="form-help">This is where the dashboard connects to WordPress. Change this in the source code.</p>
+              </div>
+              <div class="form-group">
+                <label>Account Info</label>
+                <div style="font-size:13px;color:var(--text-secondary);line-height:1.8">
+                  <div>Username: <strong id="settUsername" style="color:var(--text)">—</strong></div>
+                  <div>Role: <strong id="settRole" style="color:var(--text)">—</strong></div>
+                  <div>Registered: <strong id="settRegistered" style="color:var(--text)">—</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -729,9 +809,57 @@ document.getElementById('logoutBtn').addEventListener('click', function(){
 });
 
 /* ═══════════════════════════════════════════════
+   FORGOT PASSWORD FLOW
+   ═══════════════════════════════════════════════ */
+function showForgotForm(){
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('forgotForm').style.display = 'block';
+  document.getElementById('forgotSuccess').style.display = 'none';
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('loginSub') && (document.getElementById('loginSub').textContent = 'PASSWORD RECOVERY');
+}
+function showLoginForm(){
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('forgotForm').style.display = 'none';
+  document.getElementById('forgotSuccess').style.display = 'none';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+document.getElementById('showForgot').addEventListener('click', function(e){ e.preventDefault(); showForgotForm(); });
+document.getElementById('showLogin').addEventListener('click', function(e){ e.preventDefault(); showLoginForm(); });
+document.getElementById('showLoginAfterReset').addEventListener('click', function(e){ e.preventDefault(); showLoginForm(); });
+
+document.getElementById('forgotForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var btn = document.getElementById('forgotBtn');
+  var email = document.getElementById('forgotEmail').value.trim();
+  if(!email) return;
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    await api('/auth/forgot-password', { method:'POST', body:{ email: email } });
+  } catch(err) {
+    // Still show success to prevent email enumeration
+  }
+  btn.disabled = false;
+  btn.textContent = 'Send Reset Link';
+  document.getElementById('forgotForm').style.display = 'none';
+  document.getElementById('forgotSuccess').style.display = 'block';
+});
+
+/* Browser back/forward handling */
+window.addEventListener('popstate', function(){
+  if(!token){
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('app').classList.remove('visible');
+  }
+});
+
+/* ═══════════════════════════════════════════════
    NAVIGATION
    ═══════════════════════════════════════════════ */
-var pageTitles = { dashboard:'Dashboard', insights:'Insights', media:'Media Library', portfolio:'Portfolio Sections' };
+var pageTitles = { dashboard:'Dashboard', insights:'Insights', media:'Media Library', portfolio:'Portfolio Sections', settings:'Account Settings' };
 
 function navigateTo(page){
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
@@ -748,6 +876,7 @@ function navigateTo(page){
   if(page==='insights') loadInsights();
   if(page==='media') loadMedia();
   if(page==='portfolio') loadPortfolio();
+  if(page==='settings') loadSettings();
 
   // Close mobile sidebar
   document.getElementById('sidebar').classList.remove('open');
@@ -1132,6 +1261,103 @@ async function savePortfolioSection(section){
     toast('Portfolio section saved!');
   } catch(e){
     toast('Save failed: '+e.message, 'error');
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SETTINGS / ACCOUNT
+   ═══════════════════════════════════════════════ */
+async function loadSettings(){
+  document.getElementById('settApiBase').value = API_BASE;
+  try {
+    var data = await api('/admin/account');
+    document.getElementById('settDisplayName').value = data.display_name || '';
+    document.getElementById('settFirstName').value = data.first_name || '';
+    document.getElementById('settLastName').value = data.last_name || '';
+    document.getElementById('settCurrentEmail').value = data.email || '';
+    document.getElementById('settUsername').textContent = data.username || '—';
+    document.getElementById('settRole').textContent = data.role || '—';
+    document.getElementById('settRegistered').textContent = data.registered ? new Date(data.registered).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) : '—';
+  } catch(e){
+    // Use cached user data
+    if(currentUser){
+      document.getElementById('settDisplayName').value = currentUser.display_name || '';
+      document.getElementById('settCurrentEmail').value = currentUser.email || '';
+      document.getElementById('settUsername').textContent = currentUser.username || '—';
+    }
+  }
+}
+
+async function saveProfile(){
+  var displayName = document.getElementById('settDisplayName').value.trim();
+  var firstName = document.getElementById('settFirstName').value.trim();
+  var lastName = document.getElementById('settLastName').value.trim();
+
+  if(!displayName){ toast('Display name is required','error'); return; }
+
+  try {
+    var data = await api('/admin/account/profile', {
+      method:'PUT',
+      body:{ display_name:displayName, first_name:firstName, last_name:lastName }
+    });
+    toast('Profile updated!');
+    // Update sidebar
+    currentUser.display_name = displayName;
+    localStorage.setItem('ako_user', JSON.stringify(currentUser));
+    updateUserUI();
+  } catch(e){
+    toast('Failed: '+e.message, 'error');
+  }
+}
+
+async function changeEmail(){
+  var newEmail = document.getElementById('settNewEmail').value.trim();
+  var password = document.getElementById('settEmailPass').value;
+
+  if(!newEmail){ toast('Enter a new email address','error'); return; }
+  if(!password){ toast('Password is required to change email','error'); return; }
+
+  try {
+    var data = await api('/admin/account/email', {
+      method:'PUT',
+      body:{ email:newEmail, password:password }
+    });
+    toast('Email updated to '+newEmail);
+    document.getElementById('settCurrentEmail').value = newEmail;
+    document.getElementById('settNewEmail').value = '';
+    document.getElementById('settEmailPass').value = '';
+    currentUser.email = newEmail;
+    localStorage.setItem('ako_user', JSON.stringify(currentUser));
+  } catch(e){
+    toast(e.message || 'Email change failed', 'error');
+  }
+}
+
+async function changePassword(){
+  var currentPass = document.getElementById('settCurrentPass').value;
+  var newPass = document.getElementById('settNewPass').value;
+  var confirmPass = document.getElementById('settConfirmPass').value;
+
+  if(!currentPass){ toast('Enter your current password','error'); return; }
+  if(!newPass || newPass.length < 8){ toast('New password must be at least 8 characters','error'); return; }
+  if(newPass !== confirmPass){ toast('New passwords do not match','error'); return; }
+
+  try {
+    var data = await api('/admin/account/password', {
+      method:'PUT',
+      body:{ current_password:currentPass, new_password:newPass }
+    });
+    toast('Password updated successfully!');
+    // Save the new token (old one invalidated by password change)
+    if(data.token){
+      token = data.token;
+      localStorage.setItem('ako_token', token);
+    }
+    document.getElementById('settCurrentPass').value = '';
+    document.getElementById('settNewPass').value = '';
+    document.getElementById('settConfirmPass').value = '';
+  } catch(e){
+    toast(e.message || 'Password change failed', 'error');
   }
 }
 

